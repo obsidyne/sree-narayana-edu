@@ -7,11 +7,16 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
-export default function MissionSection() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  // Create memoized event handlers with useCallback
-  const handleMouseEnter = useCallback((index) => {
+type Mission = {
+  title: string;
+  description: string;
+};
+
+export default function MissionSection() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const handleMouseEnter = useCallback((index: number) => {
     setHoveredIndex(index);
   }, []);
 
@@ -19,7 +24,7 @@ export default function MissionSection() {
     setHoveredIndex(null);
   }, []);
 
-  const missions = [
+  const missions: Mission[] = [
     {
       title: "Mission",
       description:
