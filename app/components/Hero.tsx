@@ -39,26 +39,40 @@ export default function HeroSection() {
         </h2>
 
         {/* Button */}
-        <Link
-          href="/institutions"
-          className="flex items-center bg-white text-gray-800 rounded-full py-2 px-5 sm:py-3 sm:px-6 text-lg sm:text-xl font-medium transition-all duration-300 hover:bg-gray-100 hover:scale-105 group"
-        >
-          Our Institutions
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4 sm:h-5 sm:w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+        <div className="flex justify-center py-12 bg-transparent">
+          <Link
+            href="/institutions"
+            className="group relative inline-flex items-center rounded-full overflow-hidden bg-white shadow-lg"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M14 5l7 7m0 0l-7 7m7-7H3"
-            />
-          </svg>
-        </Link>
+            {/* Text container */}
+            <div className="relative z-10 py-3 pl-8 pr-6">
+              <span className="text-xl font-medium block transition-colors duration-500 text-[#444444] group-hover:text-[#EEDC82]">
+                Our Institutions
+              </span>
+            </div>
+
+            {/* Dark circle that expands on hover */}
+            <div className="absolute top-0 right-0 bottom-0 rounded-full bg-[#333333] w-[54px] group-hover:w-full transition-all duration-500 ease-out"></div>
+
+            {/* Circle with arrow (smaller radius) */}
+            <div className="relative z-10 bg-[#333333] text-white rounded-full h-[54px] w-[54px] flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );
