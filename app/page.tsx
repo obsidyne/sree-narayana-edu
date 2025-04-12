@@ -2,7 +2,7 @@ import Image from "next/image";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/Hero";
 import MissionSection from "./components/MissionSection";
-import Link from "next/link";
+//import Link from "next/link";
 import FoundersSection from "./components/FounderSection";
 import { Raleway } from "next/font/google";
 
