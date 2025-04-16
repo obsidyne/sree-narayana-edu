@@ -57,7 +57,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`w-full bg-white border-b border-gray-300 shadow-sm ${raleway.className}`}
+      className={`w-full bg-white border-b border-gray-300 shadow-sm ${raleway.className} font-semibold`}
     >
       <style jsx>{customStyles}</style>
       {/* Desktop Navigation */}

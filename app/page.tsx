@@ -5,7 +5,9 @@ import MissionSection from "./components/MissionSection";
 //import Link from "next/link";
 import FoundersSection from "./components/FounderSection";
 import { Raleway } from "next/font/google";
-
+import OfficeSection from "./components/OfficeSection";
+import OfficeBearers from "./components/OfficeBearers";
+import InstitutionsSection from "./components/InstitutionSection";
 const raleway = Raleway({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -28,7 +30,7 @@ export default function Home() {
               Our Initiatives
             </h2>
 
-            <div className="space-y-4">
+            <div className="space-y-4 font-light text-[#3A3A3A]">
               <p className="text-sm sm:text-base">
                 Sree Narayana Educational Society, Kollam was established in the
                 year 1986. The founding fathers envisaged quality education to
@@ -47,18 +49,20 @@ export default function Home() {
               <p className="text-sm sm:text-base">
                 The teaching of Sree Narayana Guru viz One Caste, One Religion,
                 One God for man is the guiding spirit of this organization.
+                <br />
                 Prof.S Sivaprasad was designated as President, Prof K Sasikumar
-                as Secretary and Mr. M L Andharan as Treasurer. The Committee
-                consisted of 21 members. Members were enrolled by membership fee
-                collected in the following denominations: Rs.1000, Rs.3000 and
-                Rs.5000/-. The Sree Narayana Samskariка Samithi, Kollam was
-                enrolled as an institutional member with 5 membership in the
-                Executive Committee. The first venture was to establish a School
-                with affiliation to the Central Board of Secondary Education .
+                as Secretary and
+                <br /> Mr. M L Andharan as Treasurer. The Committee consisted of
+                21 members. Members were enrolled by membership fee collected in
+                the following denominations: Rs.1000, Rs.3000 and Rs.5000/-. The
+                Sree Narayana Samskariка Samithi, Kollam was enrolled as an
+                institutional member with 5 membership in the Executive
+                Committee. The first venture was to establish a School with
+                affiliation to the Central Board of Secondary Education .
               </p>
             </div>
 
-            <div className="flex justify-center mt-8 mb-8">
+            <div className="flex mt-8 mb-8">
               <div className="relative w-[582px] h-[328px] rounded-xl overflow-hidden max-w-full">
                 <Image
                   src="/students.jpg"
@@ -73,6 +77,9 @@ export default function Home() {
         </div>
       </div>
       <FoundersSection />
+      <OfficeSection />
+      <OfficeBearers />
+      <InstitutionsSection />
     </>
   );
 }

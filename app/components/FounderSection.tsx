@@ -1,4 +1,4 @@
-// FoundersSection.tsx
+"use client";
 import React from "react";
 import Image from "next/image";
 import { Unbounded, Raleway } from "next/font/google";
@@ -25,14 +25,14 @@ const FoundersSection: React.FC = () => {
       name: "Name Goes Here",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg", // Replace with your actual image path
+      imageUrl: "/anidharan.jpg",
     },
     {
       id: 2,
       name: "Name Goes Here",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg", // Replace with your actual image path
+      imageUrl: "/sasikumar.jpg",
     },
     {
       id: 3,
@@ -55,7 +55,7 @@ const FoundersSection: React.FC = () => {
     >
       <div className="max-w-6xl mx-auto">
         <h2
-          className={`text-5xl font-bold text-gray-800 mb-8 uppercase text-center ${unbounded.className}`}
+          className={`text-5xl font-bold text-gray-800 mb-8 uppercase ${unbounded.className}`}
         >
           Our Founders
         </h2>
@@ -121,14 +121,14 @@ const FoundersSection: React.FC = () => {
         </div>
 
         {/* Description Paragraph */}
-        <div className="mb-6 max-w-4xl mx-auto">
+        <div className="mb-6 max-w-4xl mx-auto font-bold">
           <p className="text-gray-800 text-lg">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet,
+            aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet,
             consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad
+            labore et dolore magna aliqua. Ut enim ad minim veniam.
           </p>
         </div>
       </div>
