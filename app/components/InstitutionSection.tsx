@@ -10,7 +10,7 @@ interface InstitutionCardProps {
 const InstitutionCard: React.FC<InstitutionCardProps> = ({
   title,
   subtitle,
-  location,
+  //location,
 }) => {
   return (
     <div className="flex bg-white rounded-lg w-full h-56 overflow-hidden relative">
@@ -41,9 +41,11 @@ interface InstitutionsSectionProps {
   className?: string;
 }
 
-const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
-  className = "",
-}) => {
+const InstitutionsSection: React.FC<InstitutionsSectionProps> = (
+  {
+    //className = "",
+  }
+) => {
   return (
     <div
       className="relative w-full py-20 px-8 overflow-hidden"
