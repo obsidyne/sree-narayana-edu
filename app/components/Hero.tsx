@@ -39,18 +39,8 @@ export default function HeroSection() {
           className={`relative z-10 flex flex-col items-center justify-center h-full text-white text-center ${unbounded.className}`}
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-wider mb-2 sm:mb-4">
-            <span
-              className="block font-semibold
-"
-            >
-              SREE
-            </span>
-            <span
-              className="block font-semibold
-"
-            >
-              NARAYANA
-            </span>
+            <span className="block font-semibold">SREE</span>
+            <span className="block font-semibold">NARAYANA</span>
           </h1>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-wider mb-8 sm:mb-12">
             <span className="block">EDUCATIONAL</span>
@@ -63,8 +53,14 @@ export default function HeroSection() {
               href="/institutions"
               className="group relative inline-flex items-center rounded-[46px] overflow-hidden bg-white shadow-lg w-[250px] h-[60px] sm:w-[300px] sm:h-[70px] md:w-[350px] md:h-[75px] lg:w-[417px] lg:h-[82px]"
             >
+              {/* Yellow background that expands from left */}
+              <div className="absolute left-0 top-0 bg-[#FFE601] w-0 h-full group-hover:w-full transition-all duration-500 ease-out z-10"></div>
+
+              {/* Dark background that expands from circle */}
+              <div className="absolute right-[5px] top-[5px] sm:right-[6px] sm:top-[6px] md:right-[7px] md:top-[7px] lg:right-[7.5px] lg:top-[7.5px] bg-[#3A3A3A] rounded-full w-[50px] h-[50px] sm:w-[58px] sm:h-[58px] md:w-[62px] md:h-[62px] lg:w-[67px] lg:h-[67px] group-hover:w-[calc(100%+1px)] group-hover:h-[calc(100%+1px)] group-hover:right-0 group-hover:top-0 group-hover:rounded-[46px] transition-all duration-500 ease-out z-20"></div>
+
               {/* Text container */}
-              <div className="relative z-20 flex-1 flex justify-center pr-14 sm:pr-16 md:pr-16 lg:pr-20 md:justify-start md:pl-8">
+              <div className="relative z-30 flex-1 flex justify-center pr-14 sm:pr-16 md:pr-16 lg:pr-20 md:justify-start md:pl-8">
                 <span
                   className={`text-xl sm:text-2xl md:text-3xl lg:text-[40px] font-semibold leading-tight block transition-colors duration-500 text-[#3A3A3A] group-hover:text-[#FFE601] ${raleway.className} pl-0 md:pl-0`}
                 >
@@ -72,11 +68,8 @@ export default function HeroSection() {
                 </span>
               </div>
 
-              {/* Dark circle that expands on hover */}
-              <div className="absolute right-[5px] top-[5px] sm:right-[6px] sm:top-[6px] md:right-[7px] md:top-[7px] lg:right-[7.5px] lg:top-[7.5px] bg-[#3A3A3A] rounded-full w-[50px] h-[50px] sm:w-[58px] sm:h-[58px] md:w-[62px] md:h-[62px] lg:w-[67px] lg:h-[67px] group-hover:w-full group-hover:h-full group-hover:right-0 group-hover:top-0 group-hover:rounded-[46px] transition-all duration-500 ease-out z-10"></div>
-
               {/* Circle with arrow */}
-              <div className="absolute right-[5px] top-[5px] sm:right-[6px] sm:top-[6px] md:right-[7px] md:top-[7px] lg:right-[7.5px] lg:top-[7.5px] z-20 bg-[#3A3A3A] text-white rounded-full flex items-center justify-center w-[50px] h-[50px] sm:w-[58px] sm:h-[58px] md:w-[62px] md:h-[62px] lg:w-[67px] lg:h-[67px]">
+              <div className="absolute right-[5px] top-[5px] sm:right-[6px] sm:top-[6px] md:right-[7px] md:top-[7px] lg:right-[7.5px] lg:top-[7.5px] z-40 bg-[#3A3A3A] text-white rounded-full flex items-center justify-center w-[50px] h-[50px] sm:w-[58px] sm:h-[58px] md:w-[62px] md:h-[62px] lg:w-[67px] lg:h-[67px]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 transition-transform duration-300 group-hover:translate-x-1"

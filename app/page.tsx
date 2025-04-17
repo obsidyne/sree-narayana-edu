@@ -8,6 +8,8 @@ import { Raleway } from "next/font/google";
 import OfficeSection from "./components/OfficeSection";
 import OfficeBearers from "./components/OfficeBearers";
 import InstitutionsSection from "./components/InstitutionSection";
+import NewsAndGallerySection from "./components/NewsAndGallerySection";
+import Footer from "./components/Footer";
 const raleway = Raleway({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -84,6 +86,12 @@ export default function Home() {
       <OfficeSection />
       <OfficeBearers />
       <InstitutionsSection />
+      <br />
+      <br />
+      <NewsAndGallerySection />
+      <br />
+      <br />
+      <Footer />
     </>
   );
 }
