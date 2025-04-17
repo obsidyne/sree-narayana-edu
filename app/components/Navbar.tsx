@@ -57,18 +57,18 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`w-full bg-white border-b border-gray-300 shadow-sm ${raleway.className} font-semibold`}
+      className={`w-full bg-white border-b border-gray-300 shadow-sm ${raleway.className} font-semibold md:h-[100px] md:flex md:items-center`}
     >
       <style jsx>{customStyles}</style>
       {/* Desktop Navigation */}
-      <div className="container mx-auto hidden md:flex items-center justify-between px-4 lg:px-16 py-2">
+      <div className="container mx-auto hidden md:flex items-center justify-between px-4 lg:px-16 h-full">
         <div className="flex items-center space-x-4 lg:space-x-8">
           <Link
             href="/"
             className="text-gray-800 hover:text-gray-600 transition duration-300 relative group"
           >
             Home
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#EEDC82] group-hover:w-full transition-all duration-300 ease-in-out"></span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
           </Link>
           <a
             href="#our-initiatives"
@@ -76,14 +76,14 @@ export default function Navbar() {
             className="text-gray-800 hover:text-gray-600 transition duration-300 relative group cursor-pointer"
           >
             About
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#EEDC82] group-hover:w-full transition-all duration-300 ease-in-out"></span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
           </a>
           <Link
             href="/founders"
             className="text-gray-800 hover:text-gray-600 transition duration-300 relative group"
           >
             Founders
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#EEDC82] group-hover:w-full transition-all duration-300 ease-in-out"></span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
           </Link>
         </div>
 
@@ -92,9 +92,9 @@ export default function Navbar() {
             <Image
               src="/logo.png"
               alt="Anayurveda Logo"
-              width={120}
-              height={50}
-              className="h-12 w-auto"
+              width={95}
+              height={89.28}
+              className="w-[95px] h-[89.28px]"
             />
           </Link>
         </div>
@@ -105,27 +105,27 @@ export default function Navbar() {
             className="text-gray-800 hover:text-gray-600 transition duration-300 relative group"
           >
             Execom
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#EEDC82] group-hover:w-full transition-all duration-300 ease-in-out"></span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
           </Link>
           <Link
             href="/news"
             className="text-gray-800 hover:text-gray-600 transition duration-300 relative group"
           >
             News
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#EEDC82] group-hover:w-full transition-all duration-300 ease-in-out"></span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
           </Link>
           <Link
             href="/gallery"
             className="text-gray-800 hover:text-gray-600 transition duration-300 relative group"
           >
             Gallery
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#EEDC82] group-hover:w-full transition-all duration-300 ease-in-out"></span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
           </Link>
         </div>
       </div>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden">
+      <div className="md:hidden w-full">
         <div className="flex items-center justify-between px-4 py-2">
           <button
             onClick={toggleMenu}
@@ -161,9 +161,9 @@ export default function Navbar() {
               <Image
                 src="/logo.png"
                 alt="Anayurveda Logo"
-                width={100}
-                height={40}
-                className="h-10 w-auto"
+                width={95}
+                height={89.28}
+                className="w-[95px] h-[89.28px]"
               />
             </Link>
           </div>
@@ -184,7 +184,7 @@ export default function Navbar() {
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
             >
               Home
-              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#EEDC82] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
+              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
             </Link>
             <a
               href="#our-initiatives"
@@ -192,35 +192,35 @@ export default function Navbar() {
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group cursor-pointer"
             >
               About
-              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#EEDC82] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
+              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
             </a>
             <Link
               href="/founders"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
             >
               Founders
-              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#EEDC82] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
+              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
             </Link>
             <Link
               href="/execom"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
             >
               Execom
-              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#EEDC82] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
+              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
             </Link>
             <Link
               href="/news"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
             >
               News
-              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#EEDC82] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
+              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
             </Link>
             <Link
               href="/gallery"
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
             >
               Gallery
-              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#EEDC82] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
+              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
             </Link>
           </div>
         </div>

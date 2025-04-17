@@ -44,23 +44,33 @@ export default function MissionSection() {
 
   return (
     <div
-      className={`w-full py-8 sm:py-12 md:py-16 bg-white ${poppins.className}`}
+      className={`w-full flex items-center bg-white ${poppins.className} border-t border-b border-gray-200`}
+      style={{
+        maxWidth: "100%",
+        width: "100%",
+        minHeight: "270px",
+        height: "auto",
+        boxShadow: "0 2px 4px rgba(0,0,0,0.05), 0 -2px 4px rgba(0,0,0,0.05)",
+      }}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 py-8 sm:py-0 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {missions.map((mission, index) => (
             <div
               key={index}
               className={`
-                relative overflow-hidden p-6 sm:p-8 transition-all duration-300 bg-white rounded-lg 
+                relative overflow-hidden p-4 sm:p-6 transition-all duration-300 bg-white rounded-lg 
                 ${hoveredIndex === index ? "" : ""}
               `}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={handleMouseLeave}
+              // Add touch support for mobile
+              onTouchStart={() => handleMouseEnter(index)}
+              onTouchEnd={handleMouseLeave}
             >
               {/* Left-to-right hover animation */}
               <div
-                className="absolute inset-0 bg-[#EEDC82] transition-transform duration-500 ease-out origin-left rounded-lg"
+                className="absolute inset-0 bg-[#FFE601] transition-transform duration-500 ease-out origin-left rounded-lg"
                 style={{
                   transform: hoveredIndex === index ? "scaleX(1)" : "scaleX(0)",
                   zIndex: 0,
@@ -68,10 +78,10 @@ export default function MissionSection() {
               />
 
               <div className="relative z-10">
-                <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
+                <h2 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">
                   {mission.title}
                 </h2>
-                <p className="text-sm sm:text-base text-gray-700">
+                <p className="text-xs sm:text-sm text-gray-700">
                   {mission.description}
                 </p>
               </div>

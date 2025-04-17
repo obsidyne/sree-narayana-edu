@@ -19,10 +19,14 @@ export default function Home() {
     <>
       <Navbar />
       <HeroSection />
+      <br />
+      <br />
       <MissionSection />
+      <br />
+      <br />
       <div
         id="our-initiatives"
-        className={`w-full py-8 sm:py-12 bg-[#EEDC82] ${raleway.className}`}
+        className={`w-full py-8 sm:py-12 bg-[#FFE601] ${raleway.className}`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">

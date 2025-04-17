@@ -1,18 +1,13 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Unbounded } from "next/font/google";
-//import localFont from "next/font/local";
+
 const unbounded = Unbounded({
   subsets: ["latin"],
   weight: ["400", "700", "900"],
   display: "swap",
 });
-
-//const bigwhale = localFont({
-// src: "/bigwhale.otf",
-// display: "swap",
-//});
 
 interface InstitutionCardProps {
   title: string;
@@ -35,28 +30,33 @@ const InstitutionCard: React.FC<InstitutionCardProps> = ({
   };
 
   return (
-    <div className="relative bg-white hover:bg-[#EEDC82] rounded-2xl w-full h-56 overflow-hidden shadow-md transition-all duration-300 ease-in-out group">
-      <div className="flex h-full">
-        {/* Image container with shrink effect on hover */}
-        <div className="relative min-w-[226px] h-full group-hover:min-w-[180px] transition-all duration-300">
-          <div className="absolute inset-0 overflow-hidden">
-            <Image
-              src={imageSrc}
-              alt={`${title} building`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 226px"
-              priority
-            />
-          </div>
+    <div className="relative bg-white hover:bg-[#FFE601] rounded-2xl w-full overflow-hidden shadow-md transition-all duration-300 ease-in-out group h-auto sm:h-56">
+      {/* For mobile, stack image on top of content */}
+      <div className="flex flex-col sm:flex-row h-full">
+        {/* Image container with original hover effect */}
+        <div
+          className="relative w-full h-48 transition-all duration-300 overflow-hidden"
+          style={{
+            width: "100%",
+            height: "100%",
+            minWidth: "226px",
+            minHeight: "224px",
+          }}
+        >
+          <Image
+            src={imageSrc}
+            alt={`${title} building`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 226px"
+            priority
+          />
         </div>
 
-        {/* Content container - adjusts to image width change */}
+        {/* Content container */}
         <div className="flex flex-col justify-center py-6 px-6 transition-all duration-300 flex-grow">
           <div>
-            <h3
-              className={`text-2xl font-medium text-gray-800 leading-tight tracking-tight mb-2 transition-all duration-300 group-hover:text-[#333] `}
-            >
+            <h3 className="text-xl sm:text-2xl font-medium text-gray-800 leading-tight tracking-tight mb-2 transition-all duration-300 group-hover:text-[#333]">
               {formatTitle(title)}
             </h3>
             <p className="text-sm text-gray-800 leading-tight transition-all duration-300 group-hover:text-[#333]">
@@ -68,10 +68,19 @@ const InstitutionCard: React.FC<InstitutionCardProps> = ({
 
       {/* Arrow button - always on the right side */}
       <div className="absolute right-6 bottom-6 z-10">
-        <div className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center shadow-md transition-all duration-300 group-hover:bg-[#EEDC82]">
+        <div className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center shadow-md transition-all duration-300 group-hover:bg-[#FFE601]">
           <span className="text-gray-800 text-xs">→</span>
         </div>
       </div>
+
+      {/* Inline style to ensure image shrinking works on hover */}
+      <style jsx>{`
+        @media (min-width: 640px) {
+          .group:hover .relative[style] {
+            min-width: 180px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
@@ -127,6 +136,30 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
     },
   ];
 
+  // Combine all institutions for mobile view
+  const allInstitutions = [...leftInstitutions, ...rightInstitutions];
+
+  // State to track screen width
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Effect to check screen size
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+
+      // Initial check
+      checkMobile();
+
+      // Add event listener
+      window.addEventListener("resize", checkMobile);
+
+      // Clean up
+      return () => window.removeEventListener("resize", checkMobile);
+    }
+  }, []);
+
   // Define constants for positioning
   const cardHeight = 224; // Height of each card: 56px * 4
   const cardSpacing = 85; // Space between cards
@@ -158,109 +191,148 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
   return (
     <div
       className={`relative w-full ${className}`}
-      style={{ backgroundColor: "#EEDC82", height: "1436px" }}
+      style={{
+        backgroundColor: "#FFE601",
+        minHeight: isMobile ? "auto" : "1436px",
+        height: isMobile ? "auto" : "1436px",
+      }}
     >
-      {/* Container for positioning */}
-      <div className="absolute w-full h-full left-0 top-0">
-        {/* Title */}
-        <div className="absolute w-full" style={{ top: "76px" }}>
+      {isMobile ? (
+        // Mobile Layout - Single Column
+        <div className="px-4 py-16">
+          {/* Title */}
           <h2
-            className={`text-6xl font-normal text-gray-800 text-center mx-auto ${unbounded.className}`}
-            style={{ letterSpacing: "-0.06em", width: "714px" }}
+            className={`text-4xl sm:text-6xl font-normal text-gray-800 text-center mx-auto mb-10 ${unbounded.className}`}
+            style={{ letterSpacing: "-0.06em" }}
           >
             OUR INSTITUTIONS
           </h2>
-        </div>
 
-        {/* Horizontal line under title */}
-        <div
-          className="absolute"
-          style={{
-            height: "5px",
-            width: "610px",
-            backgroundColor: "#3A3A3A",
-            left: "calc(50% - 610px/2)",
-            top: `${verticalLineTop}px`,
-          }}
-        ></div>
+          {/* Line under title */}
+          <div
+            className="mx-auto mb-12"
+            style={{
+              height: "5px",
+              maxWidth: "300px",
+              backgroundColor: "#3A3A3A",
+            }}
+          ></div>
 
-        {/* Vertical line - central spine */}
-        <div
-          className="absolute"
-          style={{
-            width: "5px",
-            height: `${verticalLineHeight}px`, // Exactly sized to reach the last connector
-            backgroundColor: "#3A3A3A",
-            left: "50%",
-            marginLeft: "-2.5px",
-            top: `${verticalLineTop}px`,
-          }}
-        >
-          {/* Left side connectors */}
-          {leftConnectors.map((connectorY, index) => (
-            <div
-              key={`left-connector-${index}`}
-              className="absolute h-[5px] bg-[#3A3A3A]"
-              style={{
-                right: "2.5px",
-                top: `${connectorY - verticalLineTop}px`,
-                width: "100px",
-              }}
-            ></div>
-          ))}
-
-          {/* Right side connectors */}
-          {rightConnectors.map((connectorY, index) => (
-            <div
-              key={`right-connector-${index}`}
-              className="absolute h-[5px] bg-[#3A3A3A]"
-              style={{
-                left: "2.5px",
-                top: `${connectorY - verticalLineTop}px`,
-                width: "100px",
-              }}
-            ></div>
-          ))}
-        </div>
-
-        {/* Left side institutions */}
-        <div
-          className="absolute"
-          style={{ left: "82px", top: `${leftStartY}px`, width: "500px" }}
-        >
-          <div className="space-y-[85px]">
-            {leftInstitutions.map((institution, index) => (
-              <div className="relative" key={`left-${index}`}>
-                <InstitutionCard
-                  title={institution.title}
-                  subtitle={institution.subtitle}
-                  isLeft={true}
-                  imageSrc={institution.imageSrc}
-                />
-              </div>
+          {/* Single column of institutions */}
+          <div className="space-y-6">
+            {allInstitutions.map((institution, index) => (
+              <InstitutionCard
+                key={`mobile-${index}`}
+                title={institution.title}
+                subtitle={institution.subtitle}
+                imageSrc={institution.imageSrc}
+              />
             ))}
           </div>
         </div>
+      ) : (
+        // Desktop Layout - Tree Structure
+        <div className="absolute w-full h-full left-0 top-0">
+          {/* Title */}
+          <div className="absolute w-full" style={{ top: "76px" }}>
+            <h2
+              className={`text-6xl font-normal text-gray-800 text-center mx-auto ${unbounded.className}`}
+              style={{ letterSpacing: "-0.06em", width: "714px" }}
+            >
+              OUR INSTITUTIONS
+            </h2>
+          </div>
 
-        {/* Right side institutions */}
-        <div
-          className="absolute"
-          style={{ right: "82px", top: `${rightStartY}px`, width: "500px" }}
-        >
-          <div className="space-y-[85px]">
-            {rightInstitutions.map((institution, index) => (
-              <div className="relative" key={`right-${index}`}>
-                <InstitutionCard
-                  title={institution.title}
-                  subtitle={institution.subtitle}
-                  isLeft={false}
-                  imageSrc={institution.imageSrc}
-                />
-              </div>
+          {/* Horizontal line under title */}
+          <div
+            className="absolute"
+            style={{
+              height: "5px",
+              width: "610px",
+              backgroundColor: "#3A3A3A",
+              left: "calc(50% - 610px/2)",
+              top: `${verticalLineTop}px`,
+            }}
+          ></div>
+
+          {/* Vertical line - central spine */}
+          <div
+            className="absolute"
+            style={{
+              width: "5px",
+              height: `${verticalLineHeight}px`,
+              backgroundColor: "#3A3A3A",
+              left: "50%",
+              marginLeft: "-2.5px",
+              top: `${verticalLineTop}px`,
+            }}
+          >
+            {/* Left side connectors */}
+            {leftConnectors.map((connectorY, index) => (
+              <div
+                key={`left-connector-${index}`}
+                className="absolute h-[5px] bg-[#3A3A3A]"
+                style={{
+                  right: "2.5px",
+                  top: `${connectorY - verticalLineTop}px`,
+                  width: "100px",
+                }}
+              ></div>
+            ))}
+
+            {/* Right side connectors */}
+            {rightConnectors.map((connectorY, index) => (
+              <div
+                key={`right-connector-${index}`}
+                className="absolute h-[5px] bg-[#3A3A3A]"
+                style={{
+                  left: "2.5px",
+                  top: `${connectorY - verticalLineTop}px`,
+                  width: "100px",
+                }}
+              ></div>
             ))}
           </div>
+
+          {/* Left side institutions */}
+          <div
+            className="absolute"
+            style={{ left: "82px", top: `${leftStartY}px`, width: "500px" }}
+          >
+            <div className="space-y-[85px]">
+              {leftInstitutions.map((institution, index) => (
+                <div className="relative" key={`left-${index}`}>
+                  <InstitutionCard
+                    title={institution.title}
+                    subtitle={institution.subtitle}
+                    isLeft={true}
+                    imageSrc={institution.imageSrc}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right side institutions */}
+          <div
+            className="absolute"
+            style={{ right: "82px", top: `${rightStartY}px`, width: "500px" }}
+          >
+            <div className="space-y-[85px]">
+              {rightInstitutions.map((institution, index) => (
+                <div className="relative" key={`right-${index}`}>
+                  <InstitutionCard
+                    title={institution.title}
+                    subtitle={institution.subtitle}
+                    isLeft={false}
+                    imageSrc={institution.imageSrc}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
