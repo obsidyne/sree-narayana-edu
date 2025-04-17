@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { Unbounded } from "next/font/google";
-import localFont from "next/font/local";
+//import localFont from "next/font/local";
 const unbounded = Unbounded({
   subsets: ["latin"],
   weight: ["400", "700", "900"],
