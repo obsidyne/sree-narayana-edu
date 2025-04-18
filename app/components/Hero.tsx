@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Raleway, Unbounded } from "next/font/google";
@@ -16,6 +17,28 @@ const raleway = Raleway({
 });
 
 export default function HeroSection() {
+  // Define background images array
+  const backgroundImages = [
+    "/slideshow/co.jpg",
+    "/slideshow/4snpsc.jpg",
+    "/slideshow/5snpsk.jpg",
+    "/slideshow/6kwk.jpg",
+    "/slideshow/8kik.jpg",
+    "/slideshow/snpsv.jpg",
+    "/slideshow/snct.jpg",
+    "/slideshow/snit.jpg",
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [backgroundImages.length]);
+
   return (
     <div className="relative w-full h-screen">
       {/* Centered container with spacing */}
@@ -23,14 +46,24 @@ export default function HeroSection() {
         {/* Background Image */}
         <div className="absolute inset-x-0 top-0 h-full mx-auto max-w-[1400px] px-5 sm:px-6 md:px-1">
           <div className="relative w-full h-full rounded-b-3xl overflow-hidden">
-            <Image
-              src="/bg.jpg"
-              alt="Background"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover brightness-75"
-            />
+            {/* Simple fade transition between images */}
+            {backgroundImages.map((image, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  index === currentIndex ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <Image
+                  src={image}
+                  alt={`Slide ${index + 1}`}
+                  fill
+                  priority={index === 0}
+                  sizes="100vw"
+                  className="object-cover brightness-75"
+                />
+              </div>
+            ))}
           </div>
         </div>
 

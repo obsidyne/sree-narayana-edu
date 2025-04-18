@@ -22,24 +22,24 @@ const FoundersSection: React.FC = () => {
   const founders = [
     {
       id: 1,
-      name: "Name Goes Here",
+      name: "M. L. Anidharan",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/anidharan.jpg",
     },
     {
       id: 2,
-      name: "Name Goes Here",
+      name: "Prof. K. Sasikumar",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/sasikumar.jpg",
     },
     {
       id: 3,
-      name: "Name Goes Here",
+      name: "Prof. Sivaprasad",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg", // Replace with your actual image path
+      imageUrl: "/sp.png", // Replace with your actual image path
     },
   ];
 
