@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Raleway, Unbounded } from "next/font/google";
 
 // Initialize the Unbounded font
@@ -38,6 +37,15 @@ export default function HeroSection() {
 
     return () => clearInterval(interval);
   }, [backgroundImages.length]);
+
+  // Function to handle smooth scrolling to institutions section
+  const scrollToInstitutions = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const institutionsSection = document.getElementById("institutions");
+    if (institutionsSection) {
+      institutionsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="relative w-full h-screen">
@@ -82,8 +90,8 @@ export default function HeroSection() {
 
           {/* Button - Made Responsive */}
           <div className="flex justify-center py-12 bg-transparent">
-            <Link
-              href="/institutions"
+            <button
+              onClick={scrollToInstitutions}
               className="group relative inline-flex items-center rounded-[46px] overflow-hidden bg-white shadow-lg w-[250px] h-[60px] sm:w-[300px] sm:h-[70px] md:w-[350px] md:h-[75px] lg:w-[417px] lg:h-[82px]"
             >
               {/* Yellow background that expands from left */}
@@ -118,7 +126,7 @@ export default function HeroSection() {
                   />
                 </svg>
               </div>
-            </Link>
+            </button>
           </div>
         </div>
       </div>

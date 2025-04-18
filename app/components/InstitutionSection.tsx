@@ -101,10 +101,12 @@ const InstitutionCard: React.FC<InstitutionCardProps> = ({
 
 interface InstitutionsSectionProps {
   className?: string;
+  id?: string; // Add id prop
 }
 
 const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
   className = "",
+  id, // Receive the id prop
 }) => {
   // Institution data
   const leftInstitutions = [
@@ -204,6 +206,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
 
   return (
     <div
+      id={id} // Apply the id prop here
       className={`relative w-full ${className}`}
       style={{
         backgroundColor: "#FFE601",

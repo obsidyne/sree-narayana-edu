@@ -2,7 +2,6 @@ import Image from "next/image";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/Hero";
 import MissionSection from "./components/MissionSection";
-//import Link from "next/link";
 import FoundersSection from "./components/FounderSection";
 import { Raleway } from "next/font/google";
 import OfficeSection from "./components/OfficeSection";
@@ -10,6 +9,7 @@ import OfficeBearers from "./components/OfficeBearers";
 import InstitutionsSection from "./components/InstitutionSection";
 import NewsAndGallerySection from "./components/NewsAndGallerySection";
 import Footer from "./components/Footer";
+
 const raleway = Raleway({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -85,7 +85,7 @@ export default function Home() {
       <FoundersSection />
       <OfficeSection />
       <OfficeBearers />
-      <InstitutionsSection />
+      <InstitutionsSection id="institutions" />
       <br />
       <br />
       <NewsAndGallerySection />

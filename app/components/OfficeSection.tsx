@@ -30,112 +30,112 @@ const OfficeSection: React.FC = () => {
   const founders: CommitteeMember[] = [
     {
       id: 1,
-      name: "Name Goes Here",
+      name: "Sr. Krishna Bhadran M.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/1.png",
     },
     {
       id: 2,
-      name: "Name Goes Here",
+      name: "Er. Ajay S.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/2.png",
     },
     {
       id: 3,
-      name: "Name Goes Here",
+      name: "Prof. G. Suresh",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/3.png", // Replace with your actual image path
     },
     {
       id: 4,
-      name: "Name Goes Here",
+      name: "Sri. Dathan T. D.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/4.png", // Replace with your actual image path
     },
     {
       id: 5,
-      name: "Name Goes Here",
+      name: "Sri. Rajkumar D.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/5.png", // Replace with your actual image path
     },
     {
       id: 6,
-      name: "Name Goes Here",
+      name: "Sri. Naresh Narayanan J.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/6.png", // Replace with your actual image path
     },
     {
       id: 7,
-      name: "Name Goes Here",
+      name: "Sri. Sunil Kumar A.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/7.png", // Replace with your actual image path
     },
     {
       id: 8,
-      name: "Name Goes Here",
+      name: "Er. Rafi Kambisseri",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/8.png",
     },
     {
       id: 9,
-      name: "Name Goes Here",
+      name: "Prof. K. Jayapalan",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/9.png",
     },
     {
       id: 10,
-      name: "Name Goes Here",
+      name: "Sri. Prasad D.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/10.png",
     },
     {
       id: 11,
-      name: "Name Goes Here",
+      name: "Sri. Shirish Kesavan",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/11.png",
     },
     {
       id: 12,
-      name: "Name Goes Here",
+      name: "Er. Yesodharan S. K.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/12.png",
     },
     {
       id: 13,
-      name: "Name Goes Here",
+      name: "Sri. Jayadevan S.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/13.png",
     },
     {
       id: 14,
-      name: "Name Goes Here",
+      name: "Sri. Rajeev V. B.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/14.png",
     },
     {
       id: 15,
-      name: "Name Goes Here",
+      name: "Er. Joy N. R.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/15.png",
     },
     {
       id: 16,
-      name: "Name Goes Here",
+      name: "Er. Ligin K. G.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/16.png",
@@ -143,49 +143,49 @@ const OfficeSection: React.FC = () => {
     // Adding 7 more cards to make a total of 23
     {
       id: 17,
-      name: "Name Goes Here",
+      name: "Dr. Raveendran G.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/17.png",
     },
     {
       id: 18,
-      name: "Name Goes Here",
+      name: "Sri. Gulnar Somarajan",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/18.png",
     },
     {
       id: 19,
-      name: "Name Goes Here",
+      name: "Sri. N. Sugatha Rao",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/19.png",
     },
     {
       id: 20,
-      name: "Name Goes Here",
+      name: "Dr. C. N. Somarajan",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/20.png",
     },
     {
       id: 21,
-      name: "Name Goes Here",
+      name: "Sri.Saseendran C.K",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/21.png",
     },
     {
       id: 22,
-      name: "Name Goes Here",
+      name: "Sri. Mohanan V.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/22.png",
     },
     {
       id: 23,
-      name: "Name Goes Here",
+      name: "Sri. Lalu D.",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/execom/23.png",
