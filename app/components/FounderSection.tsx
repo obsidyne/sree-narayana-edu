@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Unbounded, Raleway } from "next/font/google";
 
 // Load Unbounded font for headings
@@ -18,6 +19,8 @@ const raleway = Raleway({
 });
 
 const FoundersSection: React.FC = () => {
+  const router = useRouter();
+
   // Sample data - replace with your actual data
   const founders = [
     {
@@ -43,6 +46,11 @@ const FoundersSection: React.FC = () => {
     },
   ];
 
+  // Handle navigation to founders page
+  const handleFounderClick = () => {
+    router.push("/founders");
+  };
+
   return (
     <div
       className={`bg-white py-8 px-4 ${raleway.className}`}
@@ -65,8 +73,9 @@ const FoundersSection: React.FC = () => {
           {founders.map((founder) => (
             <div
               key={founder.id}
-              className="rounded-lg overflow-hidden"
+              className="rounded-lg overflow-hidden cursor-pointer"
               style={{ width: "307.84px" }}
+              onClick={handleFounderClick}
             >
               <div className="w-full h-[307.84px]">
                 <Image
@@ -89,7 +98,7 @@ const FoundersSection: React.FC = () => {
                   </div>
                   {/* Circle Arrow Button - positioned to the right of text */}
                   <div className="ml-2 mt-1 flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-[#333333] border border-white flex items-center justify-center text-white cursor-pointer">
+                    <div className="w-8 h-8 rounded-full bg-[#333333] border border-white flex items-center justify-center text-white">
                       <svg
                         width="14"
                         height="10"

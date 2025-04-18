@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Unbounded, Raleway } from "next/font/google";
 
 // Load Unbounded font for headings
@@ -18,12 +19,19 @@ const raleway = Raleway({
 });
 
 const OfficeSection: React.FC = () => {
+  const router = useRouter();
+
   // Define type for committee member
   type CommitteeMember = {
     id: number;
     name: string;
     description: string;
     imageUrl: string;
+  };
+
+  // Handle card click to navigate to /execom
+  const handleCardClick = () => {
+    router.push("/execom");
   };
 
   // Sample data - replace with your actual data
@@ -194,7 +202,11 @@ const OfficeSection: React.FC = () => {
 
   // The Card component to ensure consistent styling
   const Card = ({ member }: { member: CommitteeMember }) => (
-    <div className="rounded-lg overflow-hidden" style={{ width: "100%" }}>
+    <div
+      className="rounded-lg overflow-hidden cursor-pointer transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
+      style={{ width: "100%" }}
+      onClick={handleCardClick}
+    >
       <div className="w-full aspect-square">
         <Image
           src={member.imageUrl}
@@ -216,7 +228,7 @@ const OfficeSection: React.FC = () => {
           </div>
           {/* Circle Arrow Button - positioned to the right of text */}
           <div className="ml-1 mt-1 flex-shrink-0">
-            <div className="w-7 h-7 rounded-full bg-[#333333] border border-white flex items-center justify-center text-white cursor-pointer">
+            <div className="w-7 h-7 rounded-full bg-[#333333] border border-white flex items-center justify-center text-white">
               <svg
                 width="12"
                 height="8"

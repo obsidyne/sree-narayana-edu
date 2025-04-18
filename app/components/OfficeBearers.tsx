@@ -2,6 +2,7 @@
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Unbounded, Raleway } from "next/font/google";
+import { useRouter } from "next/navigation"; // Import useRouter hook
 
 // Load Unbounded font for headings
 const unbounded = Unbounded({
@@ -19,6 +20,13 @@ const raleway = Raleway({
 
 const OfficeBearers: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const router = useRouter(); // Initialize router
+
+  // Function to handle navigation when arrow is clicked
+  const handleNavigateToOffice = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent event bubbling
+    router.push("/office");
+  };
 
   // Add mouse drag functionality for desktop
   useEffect(() => {
@@ -191,9 +199,12 @@ const OfficeBearers: React.FC = () => {
                         {founder.description}
                       </p>
                     </div>
-                    {/* Circle Arrow Button */}
+                    {/* Circle Arrow Button with onClick handler */}
                     <div className="ml-1 mt-1 flex-shrink-0">
-                      <div className="w-7 h-7 rounded-full bg-[#333333] border border-white flex items-center justify-center text-white cursor-pointer">
+                      <div
+                        className="w-7 h-7 rounded-full bg-[#333333] border border-white flex items-center justify-center text-white cursor-pointer"
+                        onClick={handleNavigateToOffice}
+                      >
                         <svg
                           width="12"
                           height="8"
