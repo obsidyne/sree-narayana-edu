@@ -21,66 +21,80 @@ const InstitutionCard: React.FC<InstitutionCardProps> = ({
   subtitle,
   imageSrc,
 }) => {
-  // Function to format title with sentence case
-  const formatTitle = (text: string) => {
-    return text
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(" ");
+  // Separate the title for styling - handles "Sree Narayana" differently from the rest
+  const formatTitleParts = (text: string) => {
+    const parts = text.split(" ");
+    if (parts.length >= 3) {
+      return {
+        firstPart: `${parts[0]} ${parts[1]}`,
+        restPart: parts.slice(2).join(" "),
+      };
+    }
+    return { firstPart: text, restPart: "" };
   };
+
+  const { firstPart, restPart } = formatTitleParts(title);
 
   return (
     <div className="relative bg-white hover:bg-[#FFE601] rounded-2xl w-full overflow-hidden shadow-md transition-all duration-300 ease-in-out group h-auto sm:h-56">
       {/* For mobile, stack image on top of content */}
       <div className="flex flex-col sm:flex-row h-full">
-        {/* Image container with original hover effect */}
+        {/* Image container with hover effect */}
         <div
-          className="relative w-full h-48 transition-all duration-300 overflow-hidden"
+          className="relative transition-all duration-300 ease-in-out sm:w-2/5 group-hover:sm:w-1/5"
           style={{
-            width: "100%",
             height: "100%",
-            minWidth: "226px",
             minHeight: "224px",
           }}
         >
           <Image
             src={imageSrc}
-            alt={`${title} building`}
+            alt={`${title}`}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 226px"
+            sizes="(max-width: 768px) 100vw, 40vw"
             priority
           />
         </div>
 
         {/* Content container */}
-        <div className="flex flex-col justify-center py-6 px-6 transition-all duration-300 flex-grow">
+        <div className="flex flex-col justify-center py-6 px-6 pb-16 transition-all duration-300 sm:w-3/5 group-hover:sm:w-4/5">
           <div>
-            <h3 className="text-xl sm:text-2xl font-medium text-gray-800 leading-tight tracking-tight mb-2 transition-all duration-300 group-hover:text-[#333]">
-              {formatTitle(title)}
+            <h3 className="transition-all duration-300 group-hover:text-[#333]">
+              <span className="block text-xl sm:text-2xl font-normal capitalize leading-tight tracking-tight">
+                {firstPart}
+              </span>
+              {restPart && (
+                <span className="block text-xl sm:text-2xl font-normal uppercase leading-tight tracking-tight">
+                  {restPart}
+                </span>
+              )}
             </h3>
-            <p className="text-sm text-gray-800 leading-tight transition-all duration-300 group-hover:text-[#333]">
+            <p className="text-sm text-gray-800 leading-tight mt-2 transition-all duration-300 group-hover:text-[#333]">
               {subtitle}
             </p>
           </div>
         </div>
       </div>
 
-      {/* Arrow button - always on the right side */}
-      <div className="absolute right-6 bottom-6 z-10">
-        <div className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center shadow-md transition-all duration-300 group-hover:bg-[#FFE601]">
-          <span className="text-gray-800 text-xs">→</span>
+      {/* Arrow button - at bottom of content area */}
+      <div className="absolute left-auto right-6 bottom-6 z-10">
+        <div className="w-10 h-10 bg-white border border-gray-800 rounded-full flex items-center justify-center shadow-md transition-all duration-300 group-hover:bg-[#FFE601] group-hover:border-[#333]">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
         </div>
       </div>
-
-      {/* Inline style to ensure image shrinking works on hover */}
-      <style jsx>{`
-        @media (min-width: 640px) {
-          .group:hover .relative[style] {
-            min-width: 180px !important;
-          }
-        }
-      `}</style>
     </div>
   );
 };
