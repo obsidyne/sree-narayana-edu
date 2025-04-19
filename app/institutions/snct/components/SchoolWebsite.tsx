@@ -32,7 +32,7 @@ const SchoolWebsite: React.FC = () => {
       {/* Hero Banner Section with responsive height */}
       <div className="relative w-full h-[300px] sm:h-[350px] md:h-[420px] lg:h-[493px]">
         <Image
-          src="/slideshow/snit.jpg"
+          src="/slideshow/snct.jpg"
           alt="School Entrance"
           fill
           className="object-cover"
@@ -48,7 +48,7 @@ const SchoolWebsite: React.FC = () => {
           <h2
             className={`text-[28px] sm:text-[35px] md:text-[45px] lg:text-[55px] font-semibold tracking-wider leading-tight ${unbounded.className}`}
           >
-            INSTITUTE OF TECHNOLOGY
+            COLLEGE OF TECHNOLOGY
           </h2>
           {/* Responsive font size for location and affiliation */}
           <p
@@ -108,17 +108,20 @@ const SchoolWebsite: React.FC = () => {
           className={`max-w-4xl mx-auto border-l-4 sm:border-l-6 md:border-l-8 border-yellow-400 pl-3 sm:pl-4 md:pl-6 py-3 sm:py-4 md:py-4 shadow-md rounded-lg p-4 ${poppins.className}`}
         >
           <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-            Sree Narayana Institute of Technology{" "}
+            Sree Narayana College of Technology- Arts & Science College
           </h2>
 
           <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed font-light">
-            Sree Narayana Educational Society stepped into the field of
-            technical education with its premier institution- Sree Narayana
-            Institute of Technology(SNIT). Affiliated to the University of
-            Kerala, SNIT offers a two year MCA Course as per the directions of
-            AICTE(All India Council for Technical Education). Among limited
-            technical education centres offering MCA in Kerala, SNIT stands
-            unparalleled in its excellence.
+            SNCT is one of the premier higher educational institutions
+            established by Sree Narayana Educational Society, Kollam in 2003. It
+            has consistently contributed towards educational excellence,
+            dissemination of knowledge and social equity. The institution
+            strives to instill a spirit of selfless service, foster love of the
+            motherland and cultivate respect for all fellow beings as envisaged
+            by its founders. It offers four UG Programmes(BCom, BCA, BSc and
+            BA)and two PG Programmes (MSc and MCom). The College has always
+            maintained high academic standards and a good track record of
+            securing 71(seventy one) University ranks
           </p>
         </div>
       </div>

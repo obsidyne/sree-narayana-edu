@@ -3,8 +3,8 @@ import Image from "next/image";
 import { Raleway } from "next/font/google";
 
 const raleway = Raleway({
-  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -40,7 +40,7 @@ const ExecutiveCommittee: React.FC = () => {
   ];
 
   return (
-    <main className={raleway.className}>
+    <main className={`${raleway.className}`}>
       <div
         className="bg-yellow-300 min-h-screen p-4 md:p-8"
         style={{
@@ -51,7 +51,9 @@ const ExecutiveCommittee: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           {/* Heading with exact dimensions and proper spacing for mobile */}
           <div className="w-full max-w-[899px] h-[37px] mb-12 md:mb-8 mt-4">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800 uppercase pl-6">
+            <h1
+              className={`${raleway.className} text-3xl md:text-4xl font-bold text-gray-800 uppercase pl-6`}
+            >
               Executive Committee
             </h1>
           </div>

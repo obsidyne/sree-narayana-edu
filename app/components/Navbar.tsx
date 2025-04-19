@@ -44,14 +44,64 @@ export default function Navbar() {
     }
   };
 
+  const handleNewsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+
+    if (pathname === "/") {
+      const newsSection = document.getElementById("news-section");
+      if (newsSection) {
+        newsSection.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push("/#news-section");
+    }
+  };
+
+  const handleGalleryClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+
+    if (pathname === "/") {
+      const gallerySection = document.getElementById("gallery-section");
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push("/#gallery-section");
+    }
+  };
+
   useEffect(() => {
-    if (pathname === "/" && window.location.hash === "#our-initiatives") {
-      setTimeout(() => {
-        const initiativesSection = document.getElementById("our-initiatives");
-        if (initiativesSection) {
-          initiativesSection.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
+    if (pathname === "/") {
+      if (window.location.hash === "#our-initiatives") {
+        setTimeout(() => {
+          const initiativesSection = document.getElementById("our-initiatives");
+          if (initiativesSection) {
+            initiativesSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      } else if (window.location.hash === "#news-section") {
+        setTimeout(() => {
+          const newsSection = document.getElementById("news-section");
+          if (newsSection) {
+            newsSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      } else if (window.location.hash === "#gallery-section") {
+        setTimeout(() => {
+          const gallerySection = document.getElementById("gallery-section");
+          if (gallerySection) {
+            gallerySection.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      }
     }
   }, [pathname]);
 
@@ -107,20 +157,22 @@ export default function Navbar() {
             Execom
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
           </Link>
-          <Link
-            href="/news"
-            className="text-gray-800 hover:text-gray-600 transition duration-300 relative group"
+          <a
+            href="#news-section"
+            onClick={handleNewsClick}
+            className="text-gray-800 hover:text-gray-600 transition duration-300 relative group cursor-pointer"
           >
             News
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
-          </Link>
-          <Link
-            href="/gallery"
-            className="text-gray-800 hover:text-gray-600 transition duration-300 relative group"
+          </a>
+          <a
+            href="#gallery-section"
+            onClick={handleGalleryClick}
+            className="text-gray-800 hover:text-gray-600 transition duration-300 relative group cursor-pointer"
           >
             Gallery
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -208,20 +260,22 @@ export default function Navbar() {
               Execom
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
             </Link>
-            <Link
-              href="/news"
-              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
+            <a
+              href="#news-section"
+              onClick={handleNewsClick}
+              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group cursor-pointer"
             >
               News
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
-            </Link>
-            <Link
-              href="/gallery"
-              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
+            </a>
+            <a
+              href="#gallery-section"
+              onClick={handleGalleryClick}
+              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group cursor-pointer"
             >
               Gallery
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

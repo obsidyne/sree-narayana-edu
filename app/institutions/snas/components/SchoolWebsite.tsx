@@ -32,7 +32,7 @@ const SchoolWebsite: React.FC = () => {
       {/* Hero Banner Section with responsive height */}
       <div className="relative w-full h-[300px] sm:h-[350px] md:h-[420px] lg:h-[493px]">
         <Image
-          src="/slideshow/snit.jpg"
+          src="/ayur.jpg"
           alt="School Entrance"
           fill
           className="object-cover"
@@ -48,16 +48,18 @@ const SchoolWebsite: React.FC = () => {
           <h2
             className={`text-[28px] sm:text-[35px] md:text-[45px] lg:text-[55px] font-semibold tracking-wider leading-tight ${unbounded.className}`}
           >
-            INSTITUTE OF TECHNOLOGY
+            INSTITUTE OF AYURVEDA STUDIES
           </h2>
           {/* Responsive font size for location and affiliation */}
           <p
             className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] mt-1 ${unbounded.className} font-semibold`}
           >
-            (Affiliated to the University of Kerala)
+            Puthoor, Kottarakkara
             <span
               className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] ${unbounded.className} font-semibold`}
-            ></span>
+            >
+              (Affiliated to the Kerala University of Health Sciences)
+            </span>
           </p>
 
           {/* Custom button with responsive sizing */}
@@ -108,17 +110,37 @@ const SchoolWebsite: React.FC = () => {
           className={`max-w-4xl mx-auto border-l-4 sm:border-l-6 md:border-l-8 border-yellow-400 pl-3 sm:pl-4 md:pl-6 py-3 sm:py-4 md:py-4 shadow-md rounded-lg p-4 ${poppins.className}`}
         >
           <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-            Sree Narayana Institute of Technology{" "}
+            Sree Narayana Institute of Ayurveda Studies
           </h2>
 
           <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed font-light">
-            Sree Narayana Educational Society stepped into the field of
-            technical education with its premier institution- Sree Narayana
-            Institute of Technology(SNIT). Affiliated to the University of
-            Kerala, SNIT offers a two year MCA Course as per the directions of
-            AICTE(All India Council for Technical Education). Among limited
-            technical education centres offering MCA in Kerala, SNIT stands
-            unparalleled in its excellence.
+            It is an outstanding college of Ayurveda providing education at BAMS
+            and MD levels. It is situated in Puthoor, the birth place of Sri R
+            Sankar the former Chief Minister and founder of Sree Narayana Trust,
+            Kollam which ushured a revolution in the field of higher education
+            in Kerala.
+          </p>
+
+          <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
+            The organization selected Puthoor the birth place of Sri R Sankar,
+            as a tribute to his unique and historic effort to uplift the Society
+            through education imbibing the exhortation of Sree Narayana Guru to
+            liberate the Society through education.
+          </p>
+
+          <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
+            Sree Narayana Educational Society has contributed considerably to
+            the revival and quality enhancement of education in Kollam. At
+            present there are around 3000 students in this School from play
+            classes to Senior Secondary level. The infrastructure is of
+            International Standards with swimming pool, Indoor Stadium, Atal
+            Thinkering Lab, Digital class room and a Library of the state of art
+            facilities.
+          </p>
+
+          <p className="text-gray-700 text-xs sm:text-sm leading-relaxed">
+            Sree Narayana Educational Society is the organizing body of the Sree
+            Narayana Health Care Society which manages the institutions.
           </p>
         </div>
       </div>

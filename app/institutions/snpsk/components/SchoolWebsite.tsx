@@ -32,7 +32,7 @@ const SchoolWebsite: React.FC = () => {
       {/* Hero Banner Section with responsive height */}
       <div className="relative w-full h-[300px] sm:h-[350px] md:h-[420px] lg:h-[493px]">
         <Image
-          src="/slideshow/snit.jpg"
+          src="/slideshow/5snpsk.jpg"
           alt="School Entrance"
           fill
           className="object-cover"
@@ -48,16 +48,18 @@ const SchoolWebsite: React.FC = () => {
           <h2
             className={`text-[28px] sm:text-[35px] md:text-[45px] lg:text-[55px] font-semibold tracking-wider leading-tight ${unbounded.className}`}
           >
-            INSTITUTE OF TECHNOLOGY
+            PUBLIC SCHOOL
           </h2>
           {/* Responsive font size for location and affiliation */}
           <p
             className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] mt-1 ${unbounded.className} font-semibold`}
           >
-            (Affiliated to the University of Kerala)
+            Kizhavoor, Mukhathala
             <span
               className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] ${unbounded.className} font-semibold`}
-            ></span>
+            >
+              (AFFILIATED TO CBSE)
+            </span>
           </p>
 
           {/* Custom button with responsive sizing */}
@@ -108,17 +110,17 @@ const SchoolWebsite: React.FC = () => {
           className={`max-w-4xl mx-auto border-l-4 sm:border-l-6 md:border-l-8 border-yellow-400 pl-3 sm:pl-4 md:pl-6 py-3 sm:py-4 md:py-4 shadow-md rounded-lg p-4 ${poppins.className}`}
         >
           <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-            Sree Narayana Institute of Technology{" "}
+            Sree Narayana Public School, Kizhavoor, Mukhathala
           </h2>
 
           <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed font-light">
-            Sree Narayana Educational Society stepped into the field of
-            technical education with its premier institution- Sree Narayana
-            Institute of Technology(SNIT). Affiliated to the University of
-            Kerala, SNIT offers a two year MCA Course as per the directions of
-            AICTE(All India Council for Technical Education). Among limited
-            technical education centres offering MCA in Kerala, SNIT stands
-            unparalleled in its excellence.
+            This School was taken over by the Sree Narayana Educational Society
+            in the year 2007. It has been developed into a Senior Secondary
+            School that caters to the educational needs of the nearby village.
+            It has a student strength similar to the premier institution Sree
+            Narayana Public School, Vadakkevila. Sree Narayana Public School,
+            Kizhavoor also provides training for personality development and
+            motivational classes.
           </p>
         </div>
       </div>

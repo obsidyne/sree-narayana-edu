@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import { Unbounded, Raleway, Poppins } from "next/font/google";
+import { useRouter } from "next/navigation";
 
 const unbounded = Unbounded({
   subsets: ["latin"],
@@ -19,6 +20,7 @@ const poppins = Poppins({
 });
 
 const NewsAndGallerySection: React.FC = () => {
+  const router = useRouter();
   // Ref for scrolling news items
   const newsRef = useRef<HTMLDivElement>(null);
   // State to track if we can scroll left
@@ -84,6 +86,14 @@ const NewsAndGallerySection: React.FC = () => {
     image: "/gal.jpg", // Replace with your actual image path
     alt: "Gallery image",
   }));
+
+  // Handle navigation to news page
+  const handleCardClick = (newsId: number) => {
+    // You can pass the specific news ID as a query parameter if needed
+    router.push(`/news?id=${newsId}`);
+    // Alternative: if you want to use dynamic routes
+    // router.push(`/news/${newsId}`);
+  };
 
   // Handle scrolling of news section
   const scrollNewsRight = () => {
@@ -180,6 +190,7 @@ const NewsAndGallerySection: React.FC = () => {
           <div className="mx-auto relative px-4 sm:px-6 md:px-8 lg:px-12">
             {/* News & Updates Section */}
             <h2
+              id="news-section"
               className={`${unbounded.className} text-2xl sm:text-3xl md:text-4xl text-gray-800 mb-4 md:mb-6 lg:mb-8 font-semibold`}
             >
               NEWS & UPDATES
@@ -222,7 +233,8 @@ const NewsAndGallerySection: React.FC = () => {
                 {newsItems.map((item) => (
                   <div
                     key={item.id}
-                    className="news-card relative bg-white shadow-md flex-none w-[280px] h-[300px] sm:w-[300px] sm:h-[320px] md:w-[320px] md:h-[340px] lg:w-[342px] lg:h-[362px]"
+                    className="news-card relative bg-white shadow-md flex-none w-[280px] h-[300px] sm:w-[300px] sm:h-[320px] md:w-[320px] md:h-[340px] lg:w-[342px] lg:h-[362px] cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                    onClick={() => handleCardClick(item.id)}
                   >
                     <div className="absolute w-full h-40 sm:h-48 md:h-56 left-0 top-0 overflow-hidden bg-gray-400">
                       <img
@@ -283,6 +295,7 @@ const NewsAndGallerySection: React.FC = () => {
 
             {/* Gallery Section */}
             <h2
+              id="gallery-section"
               className={`${unbounded.className} text-2xl sm:text-3xl md:text-4xl text-gray-800 mb-4 md:mb-6 lg:mb-8 font-semibold`}
             >
               GALLERY

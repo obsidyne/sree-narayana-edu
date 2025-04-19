@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Unbounded } from "next/font/google";
+import { useRouter } from "next/navigation"; // Import the router
 
 const unbounded = Unbounded({
   subsets: ["latin"],
@@ -14,13 +15,17 @@ interface InstitutionCardProps {
   subtitle: string;
   isLeft?: boolean;
   imageSrc: string;
+  slug?: string; // Add a slug prop for routing
 }
 
 const InstitutionCard: React.FC<InstitutionCardProps> = ({
   title,
   subtitle,
   imageSrc,
+  slug = "shks", // Default to 'shks' if no slug is provided
 }) => {
+  const router = useRouter(); // Initialize the router
+
   // Separate the title for styling - handles "Sree Narayana" differently from the rest
   const formatTitleParts = (text: string) => {
     const parts = text.split(" ");
@@ -34,6 +39,11 @@ const InstitutionCard: React.FC<InstitutionCardProps> = ({
   };
 
   const { firstPart, restPart } = formatTitleParts(title);
+
+  // Handle the arrow click
+  const handleArrowClick = () => {
+    router.push(`/institutions/${slug}`);
+  };
 
   return (
     <div className="relative bg-white hover:bg-[#FFE601] rounded-2xl w-full overflow-hidden shadow-md transition-all duration-300 ease-in-out group h-auto sm:h-56">
@@ -79,7 +89,10 @@ const InstitutionCard: React.FC<InstitutionCardProps> = ({
 
       {/* Arrow button - at bottom of content area */}
       <div className="absolute left-auto right-6 bottom-6 z-10">
-        <div className="w-10 h-10 bg-white border border-gray-800 rounded-full flex items-center justify-center shadow-md transition-all duration-300 group-hover:bg-[#FFE601] group-hover:border-[#333]">
+        <div
+          className="w-10 h-10 bg-white border border-gray-800 rounded-full flex items-center justify-center shadow-md transition-all duration-300 group-hover:bg-[#FFE601] group-hover:border-[#333] cursor-pointer"
+          onClick={handleArrowClick}
+        >
           <svg
             width="16"
             height="16"
@@ -108,28 +121,32 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
   className = "",
   id, // Receive the id prop
 }) => {
-  // Institution data
+  // Institution data with slug added
   const leftInstitutions = [
     {
       title: "SREE NARAYANA PUBLIC SCHOOL",
       subtitle: "Vadakkevila, Kollam (Affiliated to CBSE)",
       imageSrc: "/school.jpg",
+      slug: "snps", // Add the slug
     },
     {
       title: "SREE NARAYANA INSTITUTE OF TECHNOLOGY",
       subtitle: "(Affiliated to the University of Kerala)",
       imageSrc: "/school.jpg",
+      slug: "snit", // Add the slug
     },
     {
       title: "SREE NARAYANA PUBLIC SCHOOL",
       subtitle: "Vilapuram, Chathannoor (Affiliated to CBSE)",
       imageSrc: "/school.jpg",
+      slug: "snpsc", // Add the slug
     },
     {
       title: "SREE NARAYANA KIDS' SCHOOLS",
       subtitle:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolo",
       imageSrc: "/school.jpg",
+      slug: "shks", // Add the slug
     },
   ];
 
@@ -138,17 +155,20 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
       title: "SREE NARAYANA COLLEGE OF TECHNOLOGY",
       subtitle: "(Affiliated to the University of Kerala)",
       imageSrc: "/school.jpg",
+      slug: "snct", // Add the slug
     },
     {
       title: "SREE NARAYANA PUBLIC SCHOOL",
       subtitle: "Kizhavoor, Mukhathala (Affiliated to CBSE)",
       imageSrc: "/school.jpg",
+      slug: "snpsk", // Add the slug
     },
     {
       title: "SREE NARAYANA INSTITUTE OF AYURVEDA STUDIES",
       subtitle:
         "Puthoor, Kottarakkara (Affiliated to the Kerala University of Health Sciences)",
       imageSrc: "/school.jpg",
+      slug: "snas", // Add the slug
     },
   ];
 
@@ -243,6 +263,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
                 title={institution.title}
                 subtitle={institution.subtitle}
                 imageSrc={institution.imageSrc}
+                slug={institution.slug}
               />
             ))}
           </div>
@@ -324,6 +345,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
                     subtitle={institution.subtitle}
                     isLeft={true}
                     imageSrc={institution.imageSrc}
+                    slug={institution.slug}
                   />
                 </div>
               ))}
@@ -343,6 +365,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
                     subtitle={institution.subtitle}
                     isLeft={false}
                     imageSrc={institution.imageSrc}
+                    slug={institution.slug}
                   />
                 </div>
               ))}

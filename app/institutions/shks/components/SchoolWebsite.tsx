@@ -32,7 +32,7 @@ const SchoolWebsite: React.FC = () => {
       {/* Hero Banner Section with responsive height */}
       <div className="relative w-full h-[300px] sm:h-[350px] md:h-[420px] lg:h-[493px]">
         <Image
-          src="/slideshow/snit.jpg"
+          src="/slideshow/8kik.jpg"
           alt="School Entrance"
           fill
           className="object-cover"
@@ -48,13 +48,12 @@ const SchoolWebsite: React.FC = () => {
           <h2
             className={`text-[28px] sm:text-[35px] md:text-[45px] lg:text-[55px] font-semibold tracking-wider leading-tight ${unbounded.className}`}
           >
-            INSTITUTE OF TECHNOLOGY
+            KID'S SCHOOL
           </h2>
           {/* Responsive font size for location and affiliation */}
           <p
             className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] mt-1 ${unbounded.className} font-semibold`}
           >
-            (Affiliated to the University of Kerala)
             <span
               className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] ${unbounded.className} font-semibold`}
             ></span>
@@ -108,17 +107,33 @@ const SchoolWebsite: React.FC = () => {
           className={`max-w-4xl mx-auto border-l-4 sm:border-l-6 md:border-l-8 border-yellow-400 pl-3 sm:pl-4 md:pl-6 py-3 sm:py-4 md:py-4 shadow-md rounded-lg p-4 ${poppins.className}`}
         >
           <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-            Sree Narayana Institute of Technology{" "}
+            Sree Narayana Kids’ School
           </h2>
 
           <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed font-light">
-            Sree Narayana Educational Society stepped into the field of
-            technical education with its premier institution- Sree Narayana
-            Institute of Technology(SNIT). Affiliated to the University of
-            Kerala, SNIT offers a two year MCA Course as per the directions of
-            AICTE(All India Council for Technical Education). Among limited
-            technical education centres offering MCA in Kerala, SNIT stands
-            unparalleled in its excellence.
+            Sree Narayana Kids’ Schools are premier educational institutions
+            envisioned and managed by Sree Narayana Educational Society devoted
+            to mould well-rounded individuals equipped for success in the
+            dynamic world today. Early childhood education, also known as
+            Pre-school education, is the first stage of organized education
+            imparted to children of 3 to 6 years age group. It provides a unique
+            approach in curricular and co-curricular aspects that set us apart
+            from any other institutions in this filed. It is an intuitive
+            initiation into the wide vistas of extensive education arena in the
+            long run.
+          </p>
+
+          <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
+            Sree Narayana Kids’ School helps to establish a foundation for their
+            social, emotional and physical well-being. It is during these
+            formative years that children develop fundamental skills such as
+            communicative skills, social skills, problem solving skills and team
+            work. The best Pre-school experience is the first step towards
+            nurturing the individual self of the child. Kids’ World,
+            Vadakkevila, Kids’ World, Kizhavoor, Kids’ World, Mayyanad, Kids’
+            World, Chathannoor and Kids’ International, Prathibha Junction,
+            Kadappakada are the prestigious Sree Narayana Kids’ Schools in
+            Kollam District.
           </p>
         </div>
       </div>

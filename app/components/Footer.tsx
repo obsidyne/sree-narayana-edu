@@ -1,11 +1,24 @@
 import React from "react";
 import Link from "next/link";
+import { Raleway, Unbounded } from "next/font/google";
 import {
   FaFacebookF,
   FaTwitter,
   FaLinkedinIn,
   FaInstagram,
 } from "react-icons/fa";
+
+const raleway = Raleway({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const unbounded = Unbounded({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
 
 const Footer: React.FC = () => {
   return (
@@ -20,8 +33,7 @@ const Footer: React.FC = () => {
       >
         {/* Organization name */}
         <h2
-          className="w-full text-center text-[28px] sm:text-[32px] md:text-[36px] font-semibold leading-tight tracking-[-0.01em] text-[#3A3A3A]"
-          style={{ fontFamily: "Unbounded, sans-serif" }}
+          className={`${unbounded.className} w-full text-center text-[28px] sm:text-[32px] md:text-[36px] font-semibold leading-tight tracking-[-0.01em] text-[#3A3A3A]`}
         >
           SREE NARAYANA
           <br />
@@ -35,43 +47,37 @@ const Footer: React.FC = () => {
         >
           <Link
             href="/"
-            className="text-[14px] leading-[16px] text-[#3A3A3A]"
-            style={{ fontFamily: "Raleway, sans-serif" }}
+            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A]`}
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="text-[14px] leading-[16px] text-[#3A3A3A]"
-            style={{ fontFamily: "Raleway, sans-serif" }}
+            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A]`}
           >
             About
           </Link>
           <Link
             href="/founders"
-            className="text-[14px] leading-[16px] text-[#3A3A3A]"
-            style={{ fontFamily: "Raleway, sans-serif" }}
+            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A]`}
           >
             Founders
           </Link>
           <Link
             href="/execom"
-            className="text-[14px] leading-[16px] text-[#3A3A3A]"
-            style={{ fontFamily: "Raleway, sans-serif" }}
+            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A]`}
           >
             Execom
           </Link>
           <Link
             href="/news"
-            className="text-[14px] leading-[16px] text-[#3A3A3A]"
-            style={{ fontFamily: "Raleway, sans-serif" }}
+            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A]`}
           >
             News
           </Link>
           <Link
             href="/gallery"
-            className="text-[14px] leading-[16px] text-[#3A3A3A]"
-            style={{ fontFamily: "Raleway, sans-serif" }}
+            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A]`}
           >
             Gallery
           </Link>
@@ -79,8 +85,7 @@ const Footer: React.FC = () => {
 
         {/* Placeholder text - hidden on mobile */}
         <p
-          className="w-full text-[14px] font-medium leading-[24px] text-center text-[#3A3A3A] hidden sm:block"
-          style={{ fontFamily: "Raleway, sans-serif" }}
+          className={`${raleway.className} w-full text-[14px] font-medium leading-[24px] text-center text-[#3A3A3A] hidden sm:block`}
         >
           Lörem ipsum od ohet dilogi. Bell trabel, samuligt, ohöbel utom diska.
           Jinesade bel när feras redorade i belogi. FAR paratyp i muvåning, och

@@ -32,7 +32,7 @@ const SchoolWebsite: React.FC = () => {
       {/* Hero Banner Section with responsive height */}
       <div className="relative w-full h-[300px] sm:h-[350px] md:h-[420px] lg:h-[493px]">
         <Image
-          src="/slideshow/snit.jpg"
+          src="/slideshow/snpsv.jpg"
           alt="School Entrance"
           fill
           className="object-cover"
@@ -48,16 +48,18 @@ const SchoolWebsite: React.FC = () => {
           <h2
             className={`text-[28px] sm:text-[35px] md:text-[45px] lg:text-[55px] font-semibold tracking-wider leading-tight ${unbounded.className}`}
           >
-            INSTITUTE OF TECHNOLOGY
+            PUBLIC SCHOOL
           </h2>
           {/* Responsive font size for location and affiliation */}
           <p
             className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] mt-1 ${unbounded.className} font-semibold`}
           >
-            (Affiliated to the University of Kerala)
+            VADAKKEVILA, KOLLAM{" "}
             <span
               className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] ${unbounded.className} font-semibold`}
-            ></span>
+            >
+              (AFFILIATED TO CBSE)
+            </span>
           </p>
 
           {/* Custom button with responsive sizing */}
@@ -108,17 +110,51 @@ const SchoolWebsite: React.FC = () => {
           className={`max-w-4xl mx-auto border-l-4 sm:border-l-6 md:border-l-8 border-yellow-400 pl-3 sm:pl-4 md:pl-6 py-3 sm:py-4 md:py-4 shadow-md rounded-lg p-4 ${poppins.className}`}
         >
           <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-            Sree Narayana Institute of Technology{" "}
+            Sree Narayana Public School
           </h2>
 
           <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed font-light">
-            Sree Narayana Educational Society stepped into the field of
-            technical education with its premier institution- Sree Narayana
-            Institute of Technology(SNIT). Affiliated to the University of
-            Kerala, SNIT offers a two year MCA Course as per the directions of
-            AICTE(All India Council for Technical Education). Among limited
-            technical education centres offering MCA in Kerala, SNIT stands
-            unparalleled in its excellence.
+            Sree Narayana Public School was opened in Mundakkal village of
+            Kollam Town with 21 students and 5 teachers in a rented building. Dr
+            M. Govindhanan was appointed as the Principal. Subsequently the
+            School was shifted to its own building at Vadakkevila and secured
+            the approval from the Government of Kerala and Central Board of
+            Secondary Education, Delhi. The School was formally opened by the
+            Minister of Education Sri K Chandrasekharan in 1987. The then
+            presided by Prof. N K Seshan(former Member of the Legislative
+            Assembly) is worth mentioning.
+          </p>
+
+          <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
+            The fund collection for the purchase of land, construction of
+            building and other infrastructural development was quite stupendous.
+            It was a saga and the premier role was played by the Secretary
+            assisted by the Treasurer. In due course, the School grew up as the
+            premier institution of "School Education in Kollam" and the students
+            who passed out from the School have brought laurels to the
+            institution. A large number of our alumni are in the Indian
+            Administrative service and allied services viz IAS/IPS/IES/IRS etc.
+            Besides, many are in the Scientific, Medical, Engineering and other
+            services on a global level. Some of them are distinguished
+            Professors in IITs and International Universities like MIT, KNGS
+            College etc. The School has grown as one of the top most Schools of
+            its kind in Kerala. Overall personality development of the students
+            is the motto of the School.
+          </p>
+
+          <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">
+            Sree Narayana Educational Society has contributed considerably to
+            the revival and quality enhancement of education in Kollam. At
+            present there are around 3000 students in this School from play
+            classes to Senior Secondary level. The infrastructure is of
+            International Standards with swimming pool, Indoor Stadium, Atal
+            Thinkering Lab, Digital class room and a Library of the state of art
+            facilities.
+          </p>
+
+          <p className="text-gray-700 text-xs sm:text-sm leading-relaxed">
+            The phenomenal success of the Sree Narayana Public School emboldened
+            the organizers to expand its educational activities.
           </p>
         </div>
       </div>
