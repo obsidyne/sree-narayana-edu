@@ -8,11 +8,8 @@ const raleway = Raleway({
   subsets: ["latin"],
   display: "swap",
 });
-interface ContactFormProps {
-  // Add any props you might need
-}
 
-const ContactForm: React.FC<ContactFormProps> = () => {
+const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
