@@ -9,7 +9,8 @@ const raleway = Raleway({
   display: "swap",
 });
 interface ContactFormProps {
-  // Add any props you might need
+  // TODO: Add actual props when needed
+  _dummy?: never;
 }
 
 const ContactForm: React.FC<ContactFormProps> = () => {

@@ -48,7 +48,7 @@ const SchoolWebsite: React.FC = () => {
           <h2
             className={`text-[28px] sm:text-[35px] md:text-[45px] lg:text-[55px] font-semibold tracking-wider leading-tight ${unbounded.className}`}
           >
-            KID'S SCHOOL
+            KID&apos;S SCHOOL
           </h2>
           {/* Responsive font size for location and affiliation */}
           <p

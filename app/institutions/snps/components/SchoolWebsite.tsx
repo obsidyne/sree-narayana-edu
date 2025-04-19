@@ -130,9 +130,9 @@ const SchoolWebsite: React.FC = () => {
             building and other infrastructural development was quite stupendous.
             It was a saga and the premier role was played by the Secretary
             assisted by the Treasurer. In due course, the School grew up as the
-            premier institution of "School Education in Kollam" and the students
-            who passed out from the School have brought laurels to the
-            institution. A large number of our alumni are in the Indian
+            premier institution of &quot;School Education in Kollam&quot; and
+            the students who passed out from the School have brought laurels to
+            the institution. A large number of our alumni are in the Indian
             Administrative service and allied services viz IAS/IPS/IES/IRS etc.
             Besides, many are in the Scientific, Medical, Engineering and other
             services on a global level. Some of them are distinguished
