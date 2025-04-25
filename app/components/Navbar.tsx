@@ -111,11 +111,11 @@ export default function Navbar() {
     >
       <style jsx>{customStyles}</style>
       {/* Desktop Navigation */}
-      <div className="container mx-auto hidden md:flex items-center justify-between px-4 lg:px-16 h-full">
-        <div className="flex items-center space-x-4 lg:space-x-8">
+      <div className="hidden md:flex items-center justify-center w-full h-full relative">
+        <div className="flex flex-row items-center gap-[129px] absolute left-[62px]">
           <Link
             href="/"
-            className="text-gray-800 hover:text-gray-600 transition duration-300 relative group"
+            className="text-[#3A3A3A] hover:text-gray-600 transition duration-300 relative group text-xl font-semibold w-[81px] h-[38px] flex items-center justify-center"
           >
             Home
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
@@ -123,21 +123,21 @@ export default function Navbar() {
           <a
             href="#our-initiatives"
             onClick={handleAboutClick}
-            className="text-gray-800 hover:text-gray-600 transition duration-300 relative group cursor-pointer"
+            className="text-[#3A3A3A] hover:text-gray-600 transition duration-300 relative group cursor-pointer text-xl font-semibold w-[81px] h-[38px] flex items-center justify-center"
           >
             About
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
           </a>
           <Link
             href="/founders"
-            className="text-gray-800 hover:text-gray-600 transition duration-300 relative group"
+            className="text-[#3A3A3A] hover:text-gray-600 transition duration-300 relative group text-xl font-semibold w-[95px] h-[38px] flex items-center justify-center"
           >
             Founders
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
           </Link>
         </div>
 
-        <div className="flex-shrink-0">
+        <div className="absolute left-1/2 transform -translate-x-1/2">
           <Link href="/">
             <Image
               src="/logo.png"
@@ -149,10 +149,10 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="flex items-center space-x-4 lg:space-x-8">
+        <div className="flex flex-row items-center gap-[129px] absolute right-[62px]">
           <Link
             href="/execom"
-            className="text-gray-800 hover:text-gray-600 transition duration-300 relative group"
+            className="text-[#3A3A3A] hover:text-gray-600 transition duration-300 relative group text-xl font-semibold w-[81px] h-[38px] flex items-center justify-center"
           >
             Execom
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
@@ -160,7 +160,7 @@ export default function Navbar() {
           <a
             href="#news-section"
             onClick={handleNewsClick}
-            className="text-gray-800 hover:text-gray-600 transition duration-300 relative group cursor-pointer"
+            className="text-[#3A3A3A] hover:text-gray-600 transition duration-300 relative group cursor-pointer text-xl font-semibold w-[81px] h-[38px] flex items-center justify-center"
           >
             News
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
@@ -168,7 +168,7 @@ export default function Navbar() {
           <a
             href="#gallery-section"
             onClick={handleGalleryClick}
-            className="text-gray-800 hover:text-gray-600 transition duration-300 relative group cursor-pointer"
+            className="text-[#3A3A3A] hover:text-gray-600 transition duration-300 relative group cursor-pointer text-xl font-semibold w-[81px] h-[38px] flex items-center justify-center"
           >
             Gallery
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
@@ -176,7 +176,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Unchanged */}
       <div className="md:hidden w-full">
         <div className="flex items-center justify-between px-4 py-2">
           <button

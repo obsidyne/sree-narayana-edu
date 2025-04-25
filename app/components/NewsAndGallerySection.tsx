@@ -161,7 +161,7 @@ const NewsAndGallerySection: React.FC = () => {
       <div className="hidden md:block w-0 sm:w-8 md:w-16 lg:w-28 bg-white"></div>
 
       {/* Main yellow content area with rounded left corners */}
-      <div className="flex-1 bg-yellow-300 relative overflow-hidden rounded-tl-none rounded-bl-none md:rounded-tl-lg md:rounded-bl-lg">
+      <div className="flex-1 bg-gradient-to-br from-[#FFBF01] to-[#FFEE00] relative overflow-hidden rounded-tl-none rounded-bl-none md:rounded-tl-lg md:rounded-bl-lg">
         {/* Flower patterns background */}
         <div className="absolute inset-0 z-0 opacity-10">
           <div className="flex flex-wrap">

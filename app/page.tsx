@@ -9,7 +9,7 @@ import OfficeBearers from "./components/OfficeBearers";
 import InstitutionsSection from "./components/InstitutionSection";
 import NewsAndGallerySection from "./components/NewsAndGallerySection";
 import Footer from "./components/Footer";
-
+import FoundingExecom from "./components/FoundingExecom";
 const raleway = Raleway({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -28,7 +28,7 @@ export default function Home() {
       <br />
       <div
         id="our-initiatives"
-        className={`w-full py-8 sm:py-12 bg-[#FFE601] ${raleway.className}`}
+        className={`w-full py-8 sm:py-12 bg-gradient-to-br from-[#FFBF01] to-[#FFEE00] ${raleway.className}`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
@@ -83,6 +83,7 @@ export default function Home() {
         </div>
       </div>
       <FoundersSection />
+      <FoundingExecom />
       <OfficeSection />
       <OfficeBearers />
       <InstitutionsSection id="institutions" />

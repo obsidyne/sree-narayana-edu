@@ -28,10 +28,10 @@ const Founder: React.FC<FounderProps> = ({
   imageUrl,
 }) => {
   return (
-    <div className="bg-yellow-300 w-full min-h-screen py-10 pr-0">
+    <div className="bg-gradient-to-br from-[#FFBF01] to-[#FFEE00] w-full min-h-screen py-10 pr-0">
       <div className="w-full px-4 md:px-0">
         <h1
-          className={`text-3xl md:text-4xl font-bold text-gray-800 mb-8 md:mb-12 pl-0 md:pl-[100px] ${unbounded.className}`}
+          className={`text-3xl md:text-4xl font-bold text-[#3A3A3A] mb-8 md:mb-12 pl-0 md:pl-[100px] ${unbounded.className}`}
         >
           OUR FOUNDERS
         </h1>

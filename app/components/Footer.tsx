@@ -1,5 +1,7 @@
+"use client";
 import React from "react";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import { Raleway, Unbounded } from "next/font/google";
 import {
   FaFacebookF,
@@ -21,10 +23,55 @@ const unbounded = Unbounded({
 });
 
 const Footer: React.FC = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleAboutClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (pathname === "/") {
+      const initiativesSection = document.getElementById("our-initiatives");
+      if (initiativesSection) {
+        initiativesSection.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push("/#our-initiatives");
+    }
+  };
+
+  const handleNewsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (pathname === "/") {
+      const newsSection = document.getElementById("news-section");
+      if (newsSection) {
+        newsSection.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push("/#news-section");
+    }
+  };
+
+  const handleGalleryClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (pathname === "/") {
+      const gallerySection = document.getElementById("gallery-section");
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push("/#gallery-section");
+    }
+  };
+
   return (
     <div
-      className="relative w-full bg-[#FFE601] shadow-[0px_-1px_38.1px_rgba(0,0,0,0.25)] overflow-hidden"
-      style={{ minHeight: "309px" }}
+      className="relative w-full shadow-[0px_-1px_38.1px_rgba(0,0,0,0.25)] overflow-hidden"
+      style={{
+        background: "radial-gradient(circle, #FFBF01, #FFEE00)",
+        minHeight: "309px",
+      }}
     >
       {/* Main content container */}
       <div
@@ -51,12 +98,13 @@ const Footer: React.FC = () => {
           >
             Home
           </Link>
-          <Link
-            href="/about"
-            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A]`}
+          <a
+            href="#our-initiatives"
+            onClick={handleAboutClick}
+            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A] cursor-pointer`}
           >
             About
-          </Link>
+          </a>
           <Link
             href="/founders"
             className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A]`}
@@ -69,18 +117,20 @@ const Footer: React.FC = () => {
           >
             Execom
           </Link>
-          <Link
-            href="/news"
-            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A]`}
+          <a
+            href="#news-section"
+            onClick={handleNewsClick}
+            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A] cursor-pointer`}
           >
             News
-          </Link>
-          <Link
-            href="/gallery"
-            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A]`}
+          </a>
+          <a
+            href="#gallery-section"
+            onClick={handleGalleryClick}
+            className={`${raleway.className} text-[14px] leading-[16px] text-[#3A3A3A] cursor-pointer`}
           >
             Gallery
-          </Link>
+          </a>
         </div>
 
         {/* Placeholder text - hidden on mobile */}

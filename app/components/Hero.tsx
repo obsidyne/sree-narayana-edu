@@ -49,10 +49,10 @@ export default function HeroSection() {
 
   return (
     <div className="relative w-full h-screen">
-      {/* Centered container with spacing */}
-      <div className="mx-auto max-w-[1400px] h-full px-5 sm:px-6 md:px-8">
+      {/* Centered container with spacing - increased max-width for larger screens */}
+      <div className="mx-auto max-w-[1400px] xl:max-w-[1800px] 2xl:max-w-[2100px] 3xl:max-w-full 3xl:w-[95%] h-full px-5 sm:px-6 md:px-8">
         {/* Background Image */}
-        <div className="absolute inset-x-0 top-0 h-full mx-auto max-w-[1400px] px-5 sm:px-6 md:px-1">
+        <div className="absolute inset-x-0 top-0 h-full mx-auto max-w-[1400px] xl:max-w-[1800px] 2xl:max-w-[2100px] 3xl:max-w-full 3xl:w-[95%] px-5 sm:px-6 md:px-8">
           <div className="relative w-full h-full rounded-b-3xl overflow-hidden">
             {/* Simple fade transition between images */}
             {backgroundImages.map((image, index) => (

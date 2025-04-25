@@ -8,12 +8,8 @@ const raleway = Raleway({
   subsets: ["latin"],
   display: "swap",
 });
-interface ContactFormProps {
-  // TODO: Add actual props when needed
-  _dummy?: never;
-}
 
-const ContactForm: React.FC<ContactFormProps> = () => {
+const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -35,7 +31,13 @@ const ContactForm: React.FC<ContactFormProps> = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-yellow-400 flex items-center justify-center p-4">
+    <div
+      className="w-full min-h-screen flex items-center justify-center p-4"
+      style={{
+        background:
+          "conic-gradient(from 90deg at 7.16% 0%, #FFD001 0deg, #C69500 360deg)",
+      }}
+    >
       {/* Responsive container with max width for large screens */}
       <div className="w-full max-w-[1445px] mx-auto lg:h-[624.04px]">
         <div className="flex flex-col lg:flex-row gap-8 h-full">

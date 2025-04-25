@@ -70,7 +70,7 @@ export default function MissionSection() {
             >
               {/* Left-to-right hover animation */}
               <div
-                className="absolute inset-0 bg-[#FFE601] transition-transform duration-500 ease-out origin-left rounded-lg"
+                className="absolute inset-0 bg-[#FFBF01] transition-transform duration-500 ease-out origin-left rounded-lg"
                 style={{
                   transform: hoveredIndex === index ? "scaleX(1)" : "scaleX(0)",
                   zIndex: 0,

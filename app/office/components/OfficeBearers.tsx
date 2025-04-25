@@ -70,16 +70,16 @@ const OfficeBearers: React.FC = () => {
   return (
     <main className={raleway.className}>
       <div
-        className="bg-yellow-300 min-h-screen p-4 md:p-8"
-        style={{
-          backgroundImage: "url(/pattern.png)",
-          backgroundRepeat: "repeat",
-        }}
+        className="bg-gradient-to-br from-[#FFBF01] to-[#FFEE00] min-h-screen p-4 md:p-8"
+        // style={{
+        //   backgroundImage: "url(/pattern.png)",
+        //   backgroundRepeat: "repeat",
+        // }}
       >
         <div className="max-w-7xl mx-auto">
           {/* Heading */}
           <div className="w-full mb-12 md:mb-8 mt-4">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800 uppercase pl-6">
+            <h1 className="text-3xl md:text-4xl font-bold text-[#3A3A3A] uppercase pl-6">
               Office Bearers
             </h1>
           </div>

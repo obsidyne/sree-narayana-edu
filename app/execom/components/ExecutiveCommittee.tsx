@@ -42,17 +42,17 @@ const ExecutiveCommittee: React.FC = () => {
   return (
     <main className={`${raleway.className}`}>
       <div
-        className="bg-yellow-300 min-h-screen p-4 md:p-8"
-        style={{
-          backgroundImage: "url(/pattern.png)",
-          backgroundRepeat: "repeat",
-        }}
+        className="bg-gradient-to-br from-[#FFBF01] to-[#FFEE00] min-h-screen p-4 md:p-8"
+        // style={{
+        //   backgroundImage: "url(/pattern.png)",
+        //   backgroundRepeat: "repeat",
+        // }}
       >
         <div className="max-w-6xl mx-auto">
           {/* Heading with exact dimensions and proper spacing for mobile */}
           <div className="w-full max-w-[899px] h-[37px] mb-12 md:mb-8 mt-4">
             <h1
-              className={`${raleway.className} text-3xl md:text-4xl font-bold text-gray-800 uppercase pl-6`}
+              className={`${raleway.className} text-3xl md:text-4xl font-bold text-[#3A3A3A] uppercase pl-6`}
             >
               Executive Committee
             </h1>

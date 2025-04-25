@@ -224,12 +224,14 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
     return rightStartY + index * (cardHeight + cardSpacing) + cardHeight / 2;
   });
 
+  // Reduced horizontal connector length for closer cards-to-trunk spacing
+  const connectorWidth = 50; // Reduced from 100px to 50px
+
   return (
     <div
       id={id} // Apply the id prop here
-      className={`relative w-full ${className}`}
+      className={`relative w-full bg-gradient-to-br from-[#FFBF01] to-[#FFEE00] ${className}`}
       style={{
-        backgroundColor: "#FFE601",
         minHeight: isMobile ? "auto" : "1436px",
         height: isMobile ? "auto" : "1436px",
       }}
@@ -313,7 +315,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
                 style={{
                   right: "2.5px",
                   top: `${connectorY - verticalLineTop}px`,
-                  width: "100px",
+                  width: `${connectorWidth}px`,
                 }}
               ></div>
             ))}
@@ -326,16 +328,20 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
                 style={{
                   left: "2.5px",
                   top: `${connectorY - verticalLineTop}px`,
-                  width: "100px",
+                  width: `${connectorWidth}px`,
                 }}
               ></div>
             ))}
           </div>
 
-          {/* Left side institutions */}
+          {/* Left side institutions - moved closer to center */}
           <div
             className="absolute"
-            style={{ left: "82px", top: `${leftStartY}px`, width: "500px" }}
+            style={{
+              left: `calc(50% - ${connectorWidth}px - 500px)`,
+              top: `${leftStartY}px`,
+              width: "500px",
+            }}
           >
             <div className="space-y-[85px]">
               {leftInstitutions.map((institution, index) => (
@@ -352,10 +358,14 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
             </div>
           </div>
 
-          {/* Right side institutions */}
+          {/* Right side institutions - moved closer to center */}
           <div
             className="absolute"
-            style={{ right: "82px", top: `${rightStartY}px`, width: "500px" }}
+            style={{
+              right: `calc(50% - ${connectorWidth}px - 500px)`,
+              top: `${rightStartY}px`,
+              width: "500px",
+            }}
           >
             <div className="space-y-[85px]">
               {rightInstitutions.map((institution, index) => (

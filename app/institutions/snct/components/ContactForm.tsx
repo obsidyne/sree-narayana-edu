@@ -31,7 +31,13 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-yellow-400 flex items-center justify-center p-4">
+    <div
+      className="w-full min-h-screen flex items-center justify-center p-4"
+      style={{
+        background:
+          "conic-gradient(from 90deg at 7.16% 0%, #FFD001 0deg, #C69500 360deg)",
+      }}
+    >
       {/* Responsive container with max width for large screens */}
       <div className="w-full max-w-[1445px] mx-auto lg:h-[624.04px]">
         <div className="flex flex-col lg:flex-row gap-8 h-full">
