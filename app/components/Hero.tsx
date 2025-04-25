@@ -48,7 +48,15 @@ export default function HeroSection() {
   };
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full" style={{ height: "700px" }}>
+      {/* Shadow Container that extends beyond the content area */}
+      <div className="absolute inset-0 w-full" style={{ height: "700px" }}>
+        <div className="absolute left-0 top-0 w-24 h-full bg-gradient-to-r from-black/30 to-transparent"></div>
+        <div className="absolute right-0 top-0 w-24 h-full bg-gradient-to-l from-black/30 to-transparent"></div>
+        {/* Gradient that fades from transparent to white starting from the middle */}
+        <div className="absolute left-0 bottom-0 w-full h-[350px] bg-gradient-to-t from-white to-transparent"></div>
+      </div>
+
       {/* Centered container with spacing - increased max-width for larger screens */}
       <div className="mx-auto max-w-[1400px] xl:max-w-[1800px] 2xl:max-w-[2100px] 3xl:max-w-full 3xl:w-[95%] h-full px-5 sm:px-6 md:px-8">
         {/* Background Image */}
