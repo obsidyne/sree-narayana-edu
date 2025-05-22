@@ -87,18 +87,29 @@ const FoundersSection: React.FC = () => {
                 />
               </div>
 
-              {/* Content Container */}
-              <div className="bg-[#333333] text-white p-5">
+              {/* Content Container with Golden Gradient */}
+              <div
+                className="text-white p-5"
+                style={{
+                  background:
+                    "linear-gradient(152.59deg, #EBD79B 49.55%, #FBF6F0 82.93%)",
+                }}
+              >
                 <div className="flex justify-between items-start">
                   <div className="flex-1 pr-4">
-                    <h3 className="text-xl font-medium mb-2">{founder.name}</h3>
-                    <p className="text-sm text-gray-300 leading-relaxed">
+                    <h3 className="text-xl font-medium mb-2 text-gray-800">
+                      {founder.name}
+                    </h3>
+                    <p className="text-sm text-gray-700 leading-relaxed">
                       {founder.description}
                     </p>
                   </div>
                   {/* Circle Arrow Button - positioned to the right of text */}
                   <div className="ml-2 mt-1 flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-[#333333] border border-white flex items-center justify-center text-white">
+                    <div
+                      className="w-8 h-8 rounded-full border border-gray-800 flex items-center justify-center text-gray-800"
+                      style={{ backgroundColor: "transparent" }}
+                    >
                       <svg
                         width="14"
                         height="10"
@@ -108,14 +119,14 @@ const FoundersSection: React.FC = () => {
                       >
                         <path
                           d="M8 1L13 5L8 9"
-                          stroke="white"
+                          stroke="#3A3A3A"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                         <path
                           d="M1 5H13"
-                          stroke="white"
+                          stroke="#3A3A3A"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
