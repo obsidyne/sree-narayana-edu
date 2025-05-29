@@ -32,10 +32,12 @@ const OfficeSection: React.FC = () => {
         {/* Responsive Heading with fixed margins */}
         <div className="pl-4 pr-4 sm:pl-8 sm:pr-8 md:pl-16 md:pr-12 lg:pl-24 lg:pr-16 xl:pl-32 xl:pr-20 2xl:pl-[151px] 2xl:pr-[59px]">
           <h2
-            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-6 sm:mb-8 md:mb-10 lg:mb-12 uppercase ${unbounded.className}`}
+            className={`${unbounded.className} font-semibold w-full text-2xl sm:text-3xl lg:text-[35px] leading-tight lg:leading-[1.2] tracking-tight lg:tracking-[-0.03em] text-gray-800 lg:min-h-[26px]`}
           >
             COMMITTEE MEMBERS
           </h2>
+          <br />
+          <br />
         </div>
 
         {/* Responsive Image Container with fixed margins */}

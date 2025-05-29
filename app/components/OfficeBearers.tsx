@@ -65,10 +65,12 @@ const OfficeBearers: React.FC = () => {
       <div className="w-full px-4 sm:px-6 lg:px-0 lg:ml-[151px] lg:mr-[59px] lg:max-w-none max-w-full">
         <div className="max-w-6xl lg:max-w-[1000px]">
           <h2
-            className={`text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 mb-6 sm:mb-8 uppercase ${unbounded.className}`}
+            className={`${unbounded.className} font-semibold w-full text-2xl sm:text-3xl lg:text-[35px] leading-tight lg:leading-[1.2] tracking-tight lg:tracking-[-0.03em] text-gray-800 lg:min-h-[26px]`}
           >
-            Our Founders
+            PRESENT OFFICE BEARERS
           </h2>
+          <br />
+          <br />
 
           {/* Founders Grid */}
           <div

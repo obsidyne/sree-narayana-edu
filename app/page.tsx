@@ -89,10 +89,14 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <br />
+      <br />
       <FoundersSection />
       <FoundingExecom />
-      <OfficeSection />
+      <br />
+      <br />
       <OfficeBearers />
+      <OfficeSection />
       <InstitutionsSection id="institutions" />
       <br />
       <br />

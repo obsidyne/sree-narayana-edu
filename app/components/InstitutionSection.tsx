@@ -4,6 +4,12 @@ import Image from "next/image";
 import { Unbounded } from "next/font/google";
 import { useRouter } from "next/navigation"; // Import the router
 
+import localFont from "next/font/local";
+const bigwhale = localFont({
+  src: "Bigwhale.otf",
+  display: "swap",
+});
+
 const unbounded = Unbounded({
   subsets: ["latin"],
   weight: ["400", "700", "900"],
@@ -70,12 +76,20 @@ const InstitutionCard: React.FC<InstitutionCardProps> = ({
         {/* Content container */}
         <div className="flex flex-col justify-center py-6 px-6 pb-16 transition-all duration-300 sm:w-3/5 group-hover:sm:w-4/5">
           <div>
-            <h3 className="transition-all duration-300 group-hover:text-[#333]">
-              <span className="block text-xl sm:text-2xl font-normal capitalize leading-tight tracking-tight">
+            <h3
+              className={`transition-all duration-300 group-hover:text-[#333] ${bigwhale.className}`}
+            >
+              <span
+                className="block font-normal capitalize leading-tight tracking-tight"
+                style={{ fontSize: "40px" }}
+              >
                 {firstPart}
               </span>
               {restPart && (
-                <span className="block text-xl sm:text-2xl font-normal uppercase leading-tight tracking-tight">
+                <span
+                  className="block font-normal uppercase leading-tight tracking-tight"
+                  style={{ fontSize: "40px" }}
+                >
                   {restPart}
                 </span>
               )}
@@ -126,26 +140,26 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
     {
       title: "SREE NARAYANA PUBLIC SCHOOL",
       subtitle: "Vadakkevila, Kollam (Affiliated to CBSE)",
-      imageSrc: "/school.jpg",
+      imageSrc: "/tree/1.png",
       slug: "snps", // Add the slug
     },
     {
       title: "SREE NARAYANA INSTITUTE OF TECHNOLOGY",
       subtitle: "(Affiliated to the University of Kerala)",
-      imageSrc: "/school.jpg",
+      imageSrc: "/tree/2.png",
       slug: "snit", // Add the slug
     },
     {
       title: "SREE NARAYANA PUBLIC SCHOOL",
       subtitle: "Vilapuram, Chathannoor (Affiliated to CBSE)",
-      imageSrc: "/school.jpg",
+      imageSrc: "/tree/3.png",
       slug: "snpsc", // Add the slug
     },
     {
       title: "SREE NARAYANA KIDS' SCHOOLS",
       subtitle:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolo",
-      imageSrc: "/school.jpg",
+      imageSrc: "/tree/4.png",
       slug: "shks", // Add the slug
     },
   ];
@@ -154,20 +168,20 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
     {
       title: "SREE NARAYANA COLLEGE OF TECHNOLOGY",
       subtitle: "(Affiliated to the University of Kerala)",
-      imageSrc: "/school.jpg",
+      imageSrc: "/tree/5.png",
       slug: "snct", // Add the slug
     },
     {
       title: "SREE NARAYANA PUBLIC SCHOOL",
       subtitle: "Kizhavoor, Mukhathala (Affiliated to CBSE)",
-      imageSrc: "/school.jpg",
+      imageSrc: "/tree/6.png",
       slug: "snpsk", // Add the slug
     },
     {
       title: "SREE NARAYANA INSTITUTE OF AYURVEDA STUDIES",
       subtitle:
         "Puthoor, Kottarakkara (Affiliated to the Kerala University of Health Sciences)",
-      imageSrc: "/school.jpg",
+      imageSrc: "/tree/7.png",
       slug: "snas", // Add the slug
     },
   ];
@@ -334,7 +348,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
             ))}
           </div>
 
-          {/* Left side institutions - moved closer to center */}
+          {/* Left side institutions */}
           <div
             className="absolute"
             style={{
@@ -358,7 +372,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
             </div>
           </div>
 
-          {/* Right side institutions - moved closer to center */}
+          {/* Right side institutions */}
           <div
             className="absolute"
             style={{

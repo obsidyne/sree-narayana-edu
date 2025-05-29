@@ -1,1 +1,9 @@
 @import "tailwindcss";
+@font-face {
+  font-family: "Bigwhale";
+  src: url("/app/components/Bigwhale.otf") format("opentype");
+}
+.test-font {
+  font-family: "Bigwhale", Arial, sans-serif;
+  font-size: 40px;
+}
