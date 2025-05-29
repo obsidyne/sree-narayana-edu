@@ -1,8 +1,8 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Unbounded, Raleway } from "next/font/google";
-import { useRouter } from "next/navigation"; // Import useRouter hook
 
 // Load Unbounded font for headings
 const unbounded = Unbounded({
@@ -18,138 +18,42 @@ const raleway = Raleway({
   weight: ["400", "500"],
 });
 
-const OfficeBearers: React.FC = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const router = useRouter(); // Initialize router
-
-  // Function to handle navigation when arrow is clicked
-  const handleNavigateToOffice = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent event bubbling
-    router.push("/office");
-  };
-
-  // Add mouse drag functionality for desktop
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-
-    let isMouseDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
-
-    const handleMouseDown = (e: MouseEvent) => {
-      isMouseDown = true;
-      scrollContainer.style.cursor = "grabbing";
-      startX = e.pageX - scrollContainer.offsetLeft;
-      scrollLeft = scrollContainer.scrollLeft;
-      e.preventDefault(); // Prevent text selection
-    };
-
-    const handleMouseUp = () => {
-      isMouseDown = false;
-      scrollContainer.style.cursor = "grab";
-    };
-
-    const handleMouseLeave = () => {
-      isMouseDown = false;
-      scrollContainer.style.cursor = "grab";
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isMouseDown) return;
-      const x = e.pageX - scrollContainer.offsetLeft;
-      const dist = x - startX;
-      scrollContainer.scrollLeft = scrollLeft - dist;
-    };
-
-    // Desktop events
-    scrollContainer.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
-    scrollContainer.addEventListener("mouseleave", handleMouseLeave);
-    scrollContainer.addEventListener("mousemove", handleMouseMove);
-
-    // Set initial cursor
-    scrollContainer.style.cursor = "grab";
-
-    return () => {
-      // Cleanup
-      scrollContainer.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mouseup", handleMouseUp);
-      scrollContainer.removeEventListener("mouseleave", handleMouseLeave);
-      scrollContainer.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+const FoundersSection: React.FC = () => {
+  const router = useRouter();
 
   // Sample data - replace with your actual data
   const founders = [
     {
       id: 1,
-      name: "Name Goes Here",
+      name: "Prof. K. Sasikumar",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg",
+      imageUrl: "/sasikumar.jpg",
     },
     {
       id: 2,
-      name: "Name Goes Here",
+      name: "M. L. Anidharan",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg",
+      imageUrl: "/anidharan.jpg",
     },
     {
       id: 3,
-      name: "Name Goes Here",
+      name: "Balanchandran K",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg",
-    },
-    {
-      id: 4,
-      name: "Name Goes Here",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg",
-    },
-    {
-      id: 5,
-      name: "Name Goes Here",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg",
-    },
-    {
-      id: 6,
-      name: "Name Goes Here",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg",
-    },
-    {
-      id: 7,
-      name: "Name Goes Here",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg",
-    },
-    {
-      id: 8,
-      name: "Name Goes Here",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg",
-    },
-    {
-      id: 9,
-      name: "Name Goes Here",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/pfp.jpg",
+      imageUrl: "/anidharan.jpg",
     },
   ];
 
+  // Handle navigation to founders page
+  const handleFounderClick = () => {
+    router.push("/founders");
+  };
+
   return (
     <div
-      className={`bg-white py-8 px-4 ${raleway.className}`}
+      className={`bg-white py-8 ${raleway.className}`}
       style={{
         backgroundImage: "url('/background-pattern.png')",
         backgroundSize: "cover",
@@ -157,71 +61,83 @@ const OfficeBearers: React.FC = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="max-w-7xl mx-auto">
-        <h2
-          className={`text-5xl font-bold text-gray-800 mb-8 uppercase ${unbounded.className}`}
-        >
-          OFFICE BEARERS{" "}
-        </h2>
+      {/* Container with custom margins - 151px left, 59px right on larger screens */}
+      <div
+        className="w-full px-4 sm:px-0"
+        style={{
+          marginLeft: "clamp(16px, 151px, 151px)",
+          marginRight: "clamp(16px, 59px, 59px)",
+          maxWidth: "calc(100vw - 32px)", // Fallback for very small screens
+        }}
+      >
+        <div className="max-w-6xl">
+          <h2
+            className={`text-5xl font-semibold text-gray-800 mb-8 uppercase ${unbounded.className}`}
+          >
+            PRESENT OFFICE BEARERS
+          </h2>
 
-        {/* Simple scrollable container with ref for desktop drag functionality */}
-        <div
-          ref={scrollRef}
-          className="overflow-x-auto scrollable-container"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          <div className="flex gap-4" style={{ width: "max-content" }}>
+          {/* Founders Grid */}
+          <div
+            className={`grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 justify-center ${raleway.className}`}
+          >
             {founders.map((founder) => (
               <div
                 key={founder.id}
-                className="rounded-lg overflow-hidden"
-                style={{ width: "280px" }}
+                className="rounded-lg overflow-hidden cursor-pointer"
+                style={{ width: "307.84px" }}
+                onClick={handleFounderClick}
               >
-                <div className="w-full h-[280px]">
+                <div className="w-full h-[307.84px]">
                   <Image
                     src={founder.imageUrl}
                     alt={founder.name}
-                    width={280}
-                    height={280}
+                    width={307.84}
+                    height={307.84}
                     className="w-full h-full object-cover"
-                    draggable="false" // Prevent image dragging from interfering
                   />
                 </div>
 
-                {/* Content Container */}
-                <div className="bg-[#333333] text-white p-4">
+                {/* Content Container with Golden Gradient */}
+                <div
+                  className="text-white p-5"
+                  style={{
+                    background:
+                      "linear-gradient(152.59deg, #EBD79B 49.55%, #FBF6F0 82.93%)",
+                  }}
+                >
                   <div className="flex justify-between items-start">
-                    <div className="flex-1 pr-2">
-                      <h3 className="text-lg font-medium mb-1">
+                    <div className="flex-1 pr-4">
+                      <h3 className="text-xl font-bold mb-2 text-gray-800">
                         {founder.name}
                       </h3>
-                      <p className="text-xs text-gray-300 leading-relaxed line-clamp-3">
+                      <p className="text-sm text-gray-700 font-semibold leading-relaxed">
                         {founder.description}
                       </p>
                     </div>
-                    {/* Circle Arrow Button with onClick handler */}
-                    <div className="ml-1 mt-1 flex-shrink-0">
+                    {/* Circle Arrow Button - positioned to the right of text */}
+                    <div className="ml-2 mt-1 flex-shrink-0">
                       <div
-                        className="w-7 h-7 rounded-full bg-[#333333] border border-white flex items-center justify-center text-white cursor-pointer"
-                        onClick={handleNavigateToOffice}
+                        className="w-8 h-8 rounded-full border border-gray-800 flex items-center justify-center text-gray-800"
+                        style={{ backgroundColor: "transparent" }}
                       >
                         <svg
-                          width="12"
-                          height="8"
+                          width="14"
+                          height="10"
                           viewBox="0 0 14 10"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
                             d="M8 1L13 5L8 9"
-                            stroke="white"
+                            stroke="#3A3A3A"
                             strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                           />
                           <path
                             d="M1 5H13"
-                            stroke="white"
+                            stroke="#3A3A3A"
                             strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -234,30 +150,22 @@ const OfficeBearers: React.FC = () => {
               </div>
             ))}
           </div>
+
+          {/* Description Paragraph */}
+          {/* <div className="mb-6 max-w-4xl mx-auto font-bold">
+            <p className="text-gray-800 text-lg">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+              ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+              aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua. Ut enim ad minim veniam.
+            </p>
+          </div> */}
         </div>
       </div>
-
-      {/* CSS to hide scrollbar and improve drag interaction */}
-      <style jsx global>{`
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .scrollable-container::-webkit-scrollbar {
-          display: none;
-        }
-
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .scrollable-container {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-          user-select: none; /* Prevent text selection during drag */
-        }
-
-        /* Disable text selection on cards */
-        .scrollable-container * {
-          user-select: none;
-        }
-      `}</style>
     </div>
   );
 };
 
-export default OfficeBearers;
+export default FoundersSection;

@@ -10,6 +10,7 @@ import InstitutionsSection from "./components/InstitutionSection";
 import NewsAndGallerySection from "./components/NewsAndGallerySection";
 import Footer from "./components/Footer";
 import FoundingExecom from "./components/FoundingExecom";
+
 const raleway = Raleway({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -28,10 +29,16 @@ export default function Home() {
       <br />
       <div
         id="our-initiatives"
-        className={`w-full py-8 sm:py-12 bg-gradient-to-br from-[#FFBF01] to-[#FFEE00] ${raleway.className}`}
+        className={`w-full py-8 sm:py-12 bg-radial-[at_25%_25%] from-[#FFBF01] to-[#FFDD78] ${raleway.className}`}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-5xl mx-auto">
+        <div
+          className="px-4 sm:px-6"
+          style={{
+            marginLeft: "clamp(16px, 10vw, 151px)",
+            marginRight: "clamp(16px, 4vw, 59px)",
+          }}
+        >
+          <div className="max-w-5xl">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
               Our Initiatives
             </h2>
