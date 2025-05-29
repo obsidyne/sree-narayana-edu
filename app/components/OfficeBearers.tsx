@@ -18,7 +18,7 @@ const raleway = Raleway({
   weight: ["400", "500"],
 });
 
-const FoundersSection: React.FC = () => {
+const OfficeBearers: React.FC = () => {
   const router = useRouter();
 
   // Sample data - replace with your actual data
@@ -61,34 +61,26 @@ const FoundersSection: React.FC = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Container with custom margins - 151px left, 59px right on larger screens */}
-      <div
-        className="w-full px-4 sm:px-0"
-        style={{
-          marginLeft: "clamp(16px, 151px, 151px)",
-          marginRight: "clamp(16px, 59px, 59px)",
-          maxWidth: "calc(100vw - 32px)", // Fallback for very small screens
-        }}
-      >
-        <div className="max-w-6xl">
+      {/* Container with responsive margins */}
+      <div className="w-full px-4 sm:px-6 lg:px-0 lg:ml-[151px] lg:mr-[59px] lg:max-w-none max-w-full">
+        <div className="max-w-6xl lg:max-w-[1000px]">
           <h2
-            className={`text-5xl font-semibold text-gray-800 mb-8 uppercase ${unbounded.className}`}
+            className={`text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 mb-6 sm:mb-8 uppercase ${unbounded.className}`}
           >
-            PRESENT OFFICE BEARERS
+            Our Founders
           </h2>
 
           {/* Founders Grid */}
           <div
-            className={`grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 justify-center ${raleway.className}`}
+            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 justify-items-center lg:justify-items-start ${raleway.className}`}
           >
             {founders.map((founder) => (
               <div
                 key={founder.id}
-                className="rounded-lg overflow-hidden cursor-pointer"
-                style={{ width: "307.84px" }}
+                className="rounded-lg overflow-hidden cursor-pointer w-full max-w-sm lg:w-[307.84px] lg:max-w-none"
                 onClick={handleFounderClick}
               >
-                <div className="w-full h-[307.84px]">
+                <div className="w-full aspect-square lg:h-[307.84px]">
                   <Image
                     src={founder.imageUrl}
                     alt={founder.name}
@@ -100,33 +92,34 @@ const FoundersSection: React.FC = () => {
 
                 {/* Content Container with Golden Gradient */}
                 <div
-                  className="text-white p-5"
+                  className="text-white p-4 sm:p-5"
                   style={{
                     background:
                       "linear-gradient(152.59deg, #EBD79B 49.55%, #FBF6F0 82.93%)",
                   }}
                 >
                   <div className="flex justify-between items-start">
-                    <div className="flex-1 pr-4">
-                      <h3 className="text-xl font-bold mb-2 text-gray-800">
+                    <div className="flex-1 pr-3 sm:pr-4">
+                      <h3 className="text-lg sm:text-xl font-bold mb-2 text-gray-800">
                         {founder.name}
                       </h3>
-                      <p className="text-sm text-gray-700 font-semibold leading-relaxed">
+                      <p className="text-xs sm:text-sm text-gray-700 font-semibold leading-relaxed">
                         {founder.description}
                       </p>
                     </div>
                     {/* Circle Arrow Button - positioned to the right of text */}
                     <div className="ml-2 mt-1 flex-shrink-0">
                       <div
-                        className="w-8 h-8 rounded-full border border-gray-800 flex items-center justify-center text-gray-800"
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gray-800 flex items-center justify-center text-gray-800"
                         style={{ backgroundColor: "transparent" }}
                       >
                         <svg
-                          width="14"
-                          height="10"
+                          width="12"
+                          height="8"
                           viewBox="0 0 14 10"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
+                          className="sm:w-[14px] sm:h-[10px]"
                         >
                           <path
                             d="M8 1L13 5L8 9"
@@ -168,4 +161,4 @@ const FoundersSection: React.FC = () => {
   );
 };
 
-export default FoundersSection;
+export default OfficeBearers;

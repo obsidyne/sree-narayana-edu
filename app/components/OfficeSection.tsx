@@ -20,7 +20,7 @@ const raleway = Raleway({
 const OfficeSection: React.FC = () => {
   return (
     <div
-      className={`bg-white py-8 px-4 md:pl-[151px] md:pr-[59px] ${raleway.className}`}
+      className={`bg-white py-8 sm:py-12 md:py-16 lg:py-20 ${raleway.className}`}
       style={{
         backgroundImage: "url('/background-pattern.png')",
         backgroundSize: "cover",
@@ -29,22 +29,28 @@ const OfficeSection: React.FC = () => {
       }}
     >
       <div className="w-full">
-        <h2
-          className={`text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-6 md:mb-8 uppercase ${unbounded.className}`}
-        >
-          EXECUTIVE COMMITTEE
-        </h2>
+        {/* Responsive Heading with fixed margins */}
+        <div className="pl-4 pr-4 sm:pl-8 sm:pr-8 md:pl-16 md:pr-12 lg:pl-24 lg:pr-16 xl:pl-32 xl:pr-20 2xl:pl-[151px] 2xl:pr-[59px]">
+          <h2
+            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-6 sm:mb-8 md:mb-10 lg:mb-12 uppercase ${unbounded.className}`}
+          >
+            COMMITTEE MEMBERS
+          </h2>
+        </div>
 
-        {/* Officers Image */}
-        <div className="flex justify-center">
-          <Image
-            src="/officers.png"
-            alt="Executive Committee Officers"
-            width={1200}
-            height={800}
-            className="w-full h-auto object-contain"
-            priority
-          />
+        {/* Responsive Image Container with fixed margins */}
+        <div className="pl-4 pr-4 sm:pl-8 sm:pr-8 md:pl-16 md:pr-12 lg:pl-24 lg:pr-16 xl:pl-32 xl:pr-20 2xl:pl-[151px] 2xl:pr-[423px]">
+          <div className="w-full flex justify-center lg:justify-start">
+            <Image
+              src="/officers.png"
+              alt="Executive Committee Officers"
+              width={866}
+              height={947}
+              className="w-full h-auto object-contain max-w-full lg:w-[866px] lg:h-[947px] lg:max-w-[866px]"
+              sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 768px) calc(100vw - 64px), (max-width: 1024px) 866px, 866px"
+              priority
+            />
+          </div>
         </div>
       </div>
     </div>
