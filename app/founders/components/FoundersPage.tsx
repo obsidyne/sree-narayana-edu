@@ -98,14 +98,14 @@ const FoundersPage: React.FC = () => {
       bio: placeholderText,
       education: placeholderText,
       career: placeholderText,
-      imageUrl: "/sasikumar.jpg", // Replace with your actual image path
+      imageUrl: "/founder2.png", // Replace with your actual image path
     },
     {
       name: "M. L. Anidharan",
       bio: placeholderText,
       education: placeholderText,
       career: placeholderText,
-      imageUrl: "/anidharan.jpg", // Replace with your actual image path
+      imageUrl: "/founder3.png", // Replace with your actual image path
     },
   ];
 
