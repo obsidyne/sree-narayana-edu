@@ -133,7 +133,7 @@ const Footer: React.FC = () => {
           </a>
         </div>
 
-        {/* Placeholder text - hidden on mobile */}
+        {/* Description text - hidden on mobile, visible on larger screens */}
         <p
           className={`${raleway.className} w-full text-[14px] font-medium leading-[24px] text-center text-[#3A3A3A] hidden sm:block`}
         >
@@ -148,6 +148,18 @@ const Footer: React.FC = () => {
             Designed and Developed By Obsidyne
           </a>
         </p>
+
+        {/* Mobile-only "Designed and Developed By Obsidyne" text */}
+        <div className="block sm:hidden">
+          <a
+            href="https://www.obsidyne.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${raleway.className} text-[14px] font-medium text-center text-gray-500 hover:text-gray-700`}
+          >
+            Designed and Developed By Obsidyne
+          </a>
+        </div>
       </div>
 
       {/* Black curved sections that appear correctly on mobile */}
