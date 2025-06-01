@@ -78,7 +78,7 @@ export default function Home() {
             <div className="flex mt-8 mb-8">
               <div className="relative w-[582px] h-[328px] rounded-xl overflow-hidden max-w-full">
                 <Image
-                  src="/students.jpg"
+                  src="/initiative.png"
                   alt="Students"
                   fill
                   className="object-cover"

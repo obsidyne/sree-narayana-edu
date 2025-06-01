@@ -107,11 +107,11 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`w-full bg-white border-b border-gray-300 shadow-sm ${raleway.className} font-semibold md:h-[100px] md:flex md:items-center`}
+      className={`w-full bg-white border-b border-gray-300 shadow-sm ${raleway.className} font-semibold xl:h-[100px] xl:flex xl:items-center`}
     >
       <style jsx>{customStyles}</style>
       {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center justify-center w-full h-full relative">
+      <div className="hidden xl:flex items-center justify-center w-full h-full relative">
         <div className="flex flex-row items-center gap-[129px] absolute left-[62px]">
           <Link
             href="/"
@@ -177,7 +177,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation - Unchanged */}
-      <div className="md:hidden w-full">
+      <div className="xl:hidden w-full">
         <div className="flex items-center justify-between px-4 py-2">
           <button
             onClick={toggleMenu}

@@ -32,14 +32,21 @@ const Founder: React.FC<FounderProps> = ({
       <div className="flex flex-col md:flex-row gap-6 md:gap-10">
         <div className="md:w-1/4 flex-shrink-0">
           <div className="w-full max-w-xs mx-auto md:mx-0">
-            <Image
-              src={imageUrl}
-              alt={name}
-              width={310}
-              height={480}
-              className="w-full max-w-[310px] h-auto rounded-2xl"
-              priority
-            />
+            {/* Fixed image container with proper aspect ratio */}
+            <div className="relative w-full aspect-[3/4] max-w-[280px] mx-auto">
+              <Image
+                src={imageUrl}
+                alt={name}
+                fill
+                className="object-cover rounded-2xl"
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                }}
+                priority
+                sizes="(max-width: 768px) 280px, (max-width: 1280px) 200px, 280px"
+              />
+            </div>
           </div>
         </div>
 
@@ -98,14 +105,14 @@ const FoundersPage: React.FC = () => {
       bio: placeholderText,
       education: placeholderText,
       career: placeholderText,
-      imageUrl: "/founder2.png", // Replace with your actual image path
+      imageUrl: "/founder2.png",
     },
     {
       name: "M. L. Anidharan",
       bio: placeholderText,
       education: placeholderText,
       career: placeholderText,
-      imageUrl: "/founder3.png", // Replace with your actual image path
+      imageUrl: "/founder3.png",
     },
   ];
 
