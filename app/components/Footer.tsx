@@ -138,8 +138,15 @@ const Footer: React.FC = () => {
           className={`${raleway.className} w-full text-[14px] font-medium leading-[24px] text-center text-[#3A3A3A] hidden sm:block`}
         >
           Lörem ipsum od ohet dilogi. Bell trabel, samuligt, ohöbel utom diska.
-          Jinesade bel när feras redorade i belogi. FAR Designed and Developed
-          By Obsidyne
+          Jinesade bel när feras redorade i belogi. FAR <br />
+          <a
+            href="https://www.obsidyne.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-500 hover:text-gray-700"
+          >
+            Designed and Developed By Obsidyne
+          </a>
         </p>
       </div>
 
