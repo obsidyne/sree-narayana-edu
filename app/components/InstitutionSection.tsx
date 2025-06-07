@@ -81,14 +81,14 @@ const InstitutionCard: React.FC<InstitutionCardProps> = ({
             >
               <span
                 className="block font-normal capitalize leading-tight tracking-tight"
-                style={{ fontSize: "40px" }}
+                style={{ fontSize: "36px" }}
               >
                 {firstPart}
               </span>
               {restPart && (
                 <span
                   className="block font-normal uppercase leading-tight tracking-tight"
-                  style={{ fontSize: "40px" }}
+                  style={{ fontSize: "36px" }}
                 >
                   {restPart}
                 </span>
