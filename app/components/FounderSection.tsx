@@ -62,8 +62,8 @@ const FoundersSection: React.FC = () => {
       }}
     >
       {/* Container with responsive margins */}
-      <div className="w-full px-4 sm:px-6 lg:px-0 lg:ml-[151px] lg:mr-[59px] lg:max-w-none max-w-full">
-        <div className="max-w-6xl lg:max-w-[1000px]">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-0 xl:ml-[151px] xl:mr-[59px] xl:max-w-none max-w-full">
+        <div className="max-w-6xl xl:max-w-[1000px]">
           <h2
             className={`text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 mb-6 sm:mb-8 uppercase ${unbounded.className}`}
           >
@@ -72,15 +72,15 @@ const FoundersSection: React.FC = () => {
 
           {/* Founders Grid */}
           <div
-            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 justify-items-center lg:justify-items-start ${raleway.className}`}
+            className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-6 xl:gap-8 mb-8 justify-items-center ${raleway.className}`}
           >
             {founders.map((founder) => (
               <div
                 key={founder.id}
-                className="rounded-lg overflow-hidden cursor-pointer w-full max-w-sm lg:w-[307.84px] lg:max-w-none"
+                className="rounded-lg overflow-hidden cursor-pointer w-full max-w-sm lg:max-w-[307.84px]"
                 onClick={handleFounderClick}
               >
-                <div className="w-full aspect-square lg:h-[307.84px]">
+                <div className="w-full aspect-square lg:aspect-square">
                   <Image
                     src={founder.imageUrl}
                     alt={founder.name}

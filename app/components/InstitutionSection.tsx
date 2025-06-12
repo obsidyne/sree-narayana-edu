@@ -192,11 +192,22 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
   // State to track screen width
   const [isMobile, setIsMobile] = useState(false);
 
-  // Effect to check screen size
+  // Effect to check screen size - Updated breakpoint logic
   useEffect(() => {
     if (typeof window !== "undefined") {
       const checkMobile = () => {
-        setIsMobile(window.innerWidth < 768);
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const aspectRatio = width / height;
+
+        // Calculate if cards would overflow
+        const cardWidth = 500; // Width of each card
+        const connectorWidth = 50; // Width of connector
+        const totalWidth = (cardWidth + connectorWidth) * 2; // Total width needed for both sides
+        const wouldOverflow = width < totalWidth + 100; // Add 100px buffer
+
+        // Use mobile view if width <= 967 or if cards would overflow
+        setIsMobile(width <= 967 || wouldOverflow || aspectRatio < 0.8);
       };
 
       // Initial check
@@ -251,7 +262,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
       }}
     >
       {isMobile ? (
-        // Mobile Layout - Single Column
+        // Mobile Layout - Single Column (now includes iPad Pro 9.7")
         <div className="px-4 py-16">
           {/* Title */}
           <h2
@@ -285,7 +296,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
           </div>
         </div>
       ) : (
-        // Desktop Layout - Tree Structure
+        // Desktop Layout - Tree Structure (for screens > 768px)
         <div className="absolute w-full h-full left-0 top-0">
           {/* Title */}
           <div className="absolute w-full" style={{ top: "76px" }}>
