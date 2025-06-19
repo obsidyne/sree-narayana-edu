@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { Unbounded } from "next/font/google";
-import { useRouter } from "next/navigation"; // Import the router
+import { useRouter } from "next/navigation";
 
 import localFont from "next/font/local";
 const bigwhale = localFont({
@@ -21,16 +21,21 @@ interface InstitutionCardProps {
   subtitle: string;
   isLeft?: boolean;
   imageSrc: string;
-  slug?: string; // Add a slug prop for routing
+  slug?: string;
+  index?: number;
+  isVisible?: boolean;
 }
 
 const InstitutionCard: React.FC<InstitutionCardProps> = ({
   title,
   subtitle,
   imageSrc,
-  slug = "shks", // Default to 'shks' if no slug is provided
+  slug = "shks",
+  index = 0,
+  isVisible = false,
 }) => {
-  const router = useRouter(); // Initialize the router
+  const router = useRouter();
+  const cardRef = useRef<HTMLDivElement>(null);
 
   // Separate the title for styling - handles "Sree Narayana" differently from the rest
   const formatTitleParts = (text: string) => {
@@ -52,7 +57,16 @@ const InstitutionCard: React.FC<InstitutionCardProps> = ({
   };
 
   return (
-    <div className="relative bg-white hover:bg-[#FFE601] rounded-2xl w-full overflow-hidden shadow-md transition-all duration-300 ease-in-out group h-auto sm:h-56">
+    <div
+      ref={cardRef}
+      className="relative bg-white hover:bg-[#FFE601] rounded-2xl w-full overflow-hidden shadow-md transition-all duration-300 ease-in-out group h-auto sm:h-56 opacity-0"
+      style={{
+        animation: isVisible
+          ? `slideInUp 0.8s ease-out ${index * 0.2}s forwards`
+          : "none",
+        transform: "translateY(8px)",
+      }}
+    >
       {/* For mobile, stack image on top of content */}
       <div className="flex flex-col sm:flex-row h-full">
         {/* Image container with hover effect */}
@@ -128,39 +142,49 @@ const InstitutionCard: React.FC<InstitutionCardProps> = ({
 
 interface InstitutionsSectionProps {
   className?: string;
-  id?: string; // Add id prop
+  id?: string;
 }
 
 const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
   className = "",
-  id, // Receive the id prop
+  id,
 }) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const treeRef = useRef<HTMLDivElement>(null);
+
+  const [isVisible, setIsVisible] = useState(false);
+  const [titleVisible, setTitleVisible] = useState(false);
+  const [lineVisible, setLineVisible] = useState(false);
+  const [treeVisible, setTreeVisible] = useState(false);
+
   // Institution data with slug added
   const leftInstitutions = [
     {
       title: "SREE NARAYANA PUBLIC SCHOOL",
       subtitle: "Vadakkevila, Kollam (Affiliated to CBSE)",
       imageSrc: "/tree/1.png",
-      slug: "snps", // Add the slug
+      slug: "snps",
     },
     {
       title: "SREE NARAYANA INSTITUTE OF TECHNOLOGY",
       subtitle: "(Affiliated to the University of Kerala)",
       imageSrc: "/tree/2.png",
-      slug: "snit", // Add the slug
+      slug: "snit",
     },
     {
       title: "SREE NARAYANA PUBLIC SCHOOL",
       subtitle: "Vilapuram, Chathannoor (Affiliated to CBSE)",
       imageSrc: "/tree/3.png",
-      slug: "snpsc", // Add the slug
+      slug: "snpsc",
     },
     {
       title: "SREE NARAYANA KIDS' SCHOOLS",
       subtitle:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolo",
       imageSrc: "/tree/4.png",
-      slug: "shks", // Add the slug
+      slug: "shks",
     },
   ];
 
@@ -169,20 +193,20 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
       title: "SREE NARAYANA COLLEGE OF TECHNOLOGY",
       subtitle: "(Affiliated to the University of Kerala)",
       imageSrc: "/tree/5.png",
-      slug: "snct", // Add the slug
+      slug: "snct",
     },
     {
       title: "SREE NARAYANA PUBLIC SCHOOL",
       subtitle: "Kizhavoor, Mukhathala (Affiliated to CBSE)",
       imageSrc: "/tree/6.png",
-      slug: "snpsk", // Add the slug
+      slug: "snpsk",
     },
     {
       title: "SREE NARAYANA INSTITUTE OF AYURVEDA STUDIES",
       subtitle:
         "Puthoor, Kottarakkara (Affiliated to the Kerala University of Health Sciences)",
       imageSrc: "/tree/7.png",
-      slug: "snas", // Add the slug
+      slug: "snas",
     },
   ];
 
@@ -191,6 +215,39 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
 
   // State to track screen width
   const [isMobile, setIsMobile] = useState(false);
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === titleRef.current && entry.isIntersecting) {
+            setTitleVisible(true);
+          }
+          if (entry.target === lineRef.current && entry.isIntersecting) {
+            setTimeout(() => setLineVisible(true), 300);
+          }
+          if (entry.target === treeRef.current && entry.isIntersecting) {
+            setTimeout(() => setTreeVisible(true), 600);
+          }
+          if (entry.target === sectionRef.current && entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "50px",
+      }
+    );
+
+    if (titleRef.current) observer.observe(titleRef.current);
+    if (lineRef.current) observer.observe(lineRef.current);
+    if (treeRef.current) observer.observe(treeRef.current);
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => observer.disconnect();
+  }, [isMobile]);
 
   // Effect to check screen size - Updated breakpoint logic
   useEffect(() => {
@@ -201,32 +258,26 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
         const aspectRatio = width / height;
 
         // Calculate if cards would overflow
-        const cardWidth = 500; // Width of each card
-        const connectorWidth = 50; // Width of connector
-        const totalWidth = (cardWidth + connectorWidth) * 2; // Total width needed for both sides
-        const wouldOverflow = width < totalWidth + 100; // Add 100px buffer
+        const cardWidth = 500;
+        const connectorWidth = 50;
+        const totalWidth = (cardWidth + connectorWidth) * 2;
+        const wouldOverflow = width < totalWidth + 100;
 
-        // Use mobile view if width <= 967 or if cards would overflow
         setIsMobile(width <= 967 || wouldOverflow || aspectRatio < 0.8);
       };
 
-      // Initial check
       checkMobile();
-
-      // Add event listener
       window.addEventListener("resize", checkMobile);
-
-      // Clean up
       return () => window.removeEventListener("resize", checkMobile);
     }
   }, []);
 
   // Define constants for positioning
-  const cardHeight = 224; // Height of each card: 56px * 4
-  const cardSpacing = 85; // Space between cards
-  const leftStartY = 249; // Y position of first left card
-  const rightStartY = 332; // Y position of first right card
-  const verticalLineTop = 170; // Y position where vertical line starts
+  const cardHeight = 224;
+  const cardSpacing = 85;
+  const leftStartY = 249;
+  const rightStartY = 332;
+  const verticalLineTop = 170;
 
   // Calculate exactly how far the vertical line should extend
   const lastLeftCardCenter =
@@ -238,7 +289,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
     (rightInstitutions.length - 1) * (cardHeight + cardSpacing) +
     cardHeight / 2;
   const lastConnectorY = Math.max(lastLeftCardCenter, lastRightCardCenter);
-  const verticalLineHeight = lastConnectorY - verticalLineTop + 5; // Add 5px for the line thickness
+  const verticalLineHeight = lastConnectorY - verticalLineTop + 5;
 
   // Generate connector positions for all cards
   const leftConnectors = leftInstitutions.map((_, index) => {
@@ -249,166 +300,245 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
     return rightStartY + index * (cardHeight + cardSpacing) + cardHeight / 2;
   });
 
-  // Reduced horizontal connector length for closer cards-to-trunk spacing
-  const connectorWidth = 50; // Reduced from 100px to 50px
+  const connectorWidth = 50;
 
   return (
-    <div
-      id={id} // Apply the id prop here
-      className={`relative w-full bg-gradient-to-br from-[#FFBF01] to-[#FFEE00] ${className}`}
-      style={{
-        minHeight: isMobile ? "auto" : "1436px",
-        height: isMobile ? "auto" : "1436px",
-      }}
-    >
-      {isMobile ? (
-        // Mobile Layout - Single Column (now includes iPad Pro 9.7")
-        <div className="px-4 py-16">
-          {/* Title */}
-          <h2
-            className={`text-4xl sm:text-6xl font-normal text-gray-800 text-center mx-auto mb-10 ${unbounded.className}`}
-            style={{ letterSpacing: "-0.06em" }}
-          >
-            OUR INSTITUTIONS
-          </h2>
+    <>
+      {/* CSS Animations */}
+      <style jsx>{`
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(-8px);
+          }
+        }
 
-          {/* Line under title */}
-          <div
-            className="mx-auto mb-12"
-            style={{
-              height: "5px",
-              maxWidth: "300px",
-              backgroundColor: "#3A3A3A",
-            }}
-          ></div>
+        @keyframes fadeInDown {
+          from {
+            opacity: 0;
+            transform: translateY(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
 
-          {/* Single column of institutions */}
-          <div className="space-y-6">
-            {allInstitutions.map((institution, index) => (
-              <InstitutionCard
-                key={`mobile-${index}`}
-                title={institution.title}
-                subtitle={institution.subtitle}
-                imageSrc={institution.imageSrc}
-                slug={institution.slug}
-              />
-            ))}
-          </div>
-        </div>
-      ) : (
-        // Desktop Layout - Tree Structure (for screens > 768px)
-        <div className="absolute w-full h-full left-0 top-0">
-          {/* Title */}
-          <div className="absolute w-full" style={{ top: "76px" }}>
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .animate-title {
+          animation: fadeInDown 1s ease-out forwards;
+        }
+
+        .animate-line {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .animate-tree-vertical {
+          animation: fadeIn 1.2s ease-out forwards;
+        }
+
+        .animate-connector {
+          animation: fadeIn 0.6s ease-out forwards;
+        }
+      `}</style>
+
+      <div
+        ref={sectionRef}
+        id={id}
+        className={`relative w-full bg-gradient-to-br from-[#FFBF01] to-[#FFEE00] ${className}`}
+        style={{
+          minHeight: isMobile ? "auto" : "1436px",
+          height: isMobile ? "auto" : "1436px",
+        }}
+      >
+        {isMobile ? (
+          // Mobile Layout - Single Column
+          <div className="px-4 py-16">
+            {/* Title */}
             <h2
-              className={`text-6xl font-normal text-gray-800 text-center mx-auto ${unbounded.className}`}
-              style={{ letterSpacing: "-0.06em", width: "714px" }}
+              ref={titleRef}
+              className={`text-4xl sm:text-6xl font-normal text-gray-800 text-center mx-auto mb-10 opacity-0 ${
+                unbounded.className
+              } ${titleVisible ? "animate-title" : ""}`}
+              style={{ letterSpacing: "-0.06em" }}
             >
               OUR INSTITUTIONS
             </h2>
-          </div>
 
-          {/* Horizontal line under title */}
-          <div
-            className="absolute"
-            style={{
-              height: "5px",
-              width: "610px",
-              backgroundColor: "#3A3A3A",
-              left: "calc(50% - 610px/2)",
-              top: `${verticalLineTop}px`,
-            }}
-          ></div>
+            {/* Line under title */}
+            <div
+              ref={lineRef}
+              className={`mx-auto mb-12 opacity-0 ${
+                lineVisible ? "animate-line" : ""
+              }`}
+              style={{
+                height: "5px",
+                maxWidth: "300px",
+                backgroundColor: "#3A3A3A",
+              }}
+            ></div>
 
-          {/* Vertical line - central spine */}
-          <div
-            className="absolute"
-            style={{
-              width: "5px",
-              height: `${verticalLineHeight}px`,
-              backgroundColor: "#3A3A3A",
-              left: "50%",
-              marginLeft: "-2.5px",
-              top: `${verticalLineTop}px`,
-            }}
-          >
-            {/* Left side connectors */}
-            {leftConnectors.map((connectorY, index) => (
-              <div
-                key={`left-connector-${index}`}
-                className="absolute h-[5px] bg-[#3A3A3A]"
-                style={{
-                  right: "2.5px",
-                  top: `${connectorY - verticalLineTop}px`,
-                  width: `${connectorWidth}px`,
-                }}
-              ></div>
-            ))}
-
-            {/* Right side connectors */}
-            {rightConnectors.map((connectorY, index) => (
-              <div
-                key={`right-connector-${index}`}
-                className="absolute h-[5px] bg-[#3A3A3A]"
-                style={{
-                  left: "2.5px",
-                  top: `${connectorY - verticalLineTop}px`,
-                  width: `${connectorWidth}px`,
-                }}
-              ></div>
-            ))}
-          </div>
-
-          {/* Left side institutions */}
-          <div
-            className="absolute"
-            style={{
-              left: `calc(50% - ${connectorWidth}px - 500px)`,
-              top: `${leftStartY}px`,
-              width: "500px",
-            }}
-          >
-            <div className="space-y-[85px]">
-              {leftInstitutions.map((institution, index) => (
-                <div className="relative" key={`left-${index}`}>
-                  <InstitutionCard
-                    title={institution.title}
-                    subtitle={institution.subtitle}
-                    isLeft={true}
-                    imageSrc={institution.imageSrc}
-                    slug={institution.slug}
-                  />
-                </div>
+            {/* Single column of institutions */}
+            <div className="space-y-6">
+              {allInstitutions.map((institution, index) => (
+                <InstitutionCard
+                  key={`mobile-${index}`}
+                  title={institution.title}
+                  subtitle={institution.subtitle}
+                  imageSrc={institution.imageSrc}
+                  slug={institution.slug}
+                  index={index}
+                  isVisible={isVisible}
+                />
               ))}
             </div>
           </div>
+        ) : (
+          // Desktop Layout - Tree Structure
+          <div className="absolute w-full h-full left-0 top-0">
+            {/* Title */}
+            <div className="absolute w-full" style={{ top: "76px" }}>
+              <h2
+                ref={titleRef}
+                className={`text-6xl font-normal text-gray-800 text-center mx-auto opacity-0 ${
+                  unbounded.className
+                } ${titleVisible ? "animate-title" : ""}`}
+                style={{ letterSpacing: "-0.06em", width: "714px" }}
+              >
+                OUR INSTITUTIONS
+              </h2>
+            </div>
 
-          {/* Right side institutions */}
-          <div
-            className="absolute"
-            style={{
-              right: `calc(50% - ${connectorWidth}px - 500px)`,
-              top: `${rightStartY}px`,
-              width: "500px",
-            }}
-          >
-            <div className="space-y-[85px]">
-              {rightInstitutions.map((institution, index) => (
-                <div className="relative" key={`right-${index}`}>
-                  <InstitutionCard
-                    title={institution.title}
-                    subtitle={institution.subtitle}
-                    isLeft={false}
-                    imageSrc={institution.imageSrc}
-                    slug={institution.slug}
-                  />
-                </div>
+            {/* Horizontal line under title */}
+            <div
+              ref={lineRef}
+              className={`absolute opacity-0 ${
+                lineVisible ? "animate-line" : ""
+              }`}
+              style={{
+                height: "5px",
+                width: "610px",
+                backgroundColor: "#3A3A3A",
+                left: "calc(50% - 610px/2)",
+                top: `${verticalLineTop}px`,
+              }}
+            ></div>
+
+            {/* Vertical line - central spine */}
+            <div
+              ref={treeRef}
+              className={`absolute opacity-0 ${
+                treeVisible ? "animate-tree-vertical" : ""
+              }`}
+              style={{
+                width: "5px",
+                height: `${verticalLineHeight}px`,
+                backgroundColor: "#3A3A3A",
+                left: "50%",
+                marginLeft: "-2.5px",
+                top: `${verticalLineTop}px`,
+              }}
+            >
+              {/* Left side connectors */}
+              {leftConnectors.map((connectorY, index) => (
+                <div
+                  key={`left-connector-${index}`}
+                  className={`absolute h-[5px] bg-[#3A3A3A] opacity-0 ${
+                    treeVisible ? "animate-connector" : ""
+                  }`}
+                  style={{
+                    right: "2.5px",
+                    top: `${connectorY - verticalLineTop}px`,
+                    width: `${connectorWidth}px`,
+                    animationDelay: `${0.8 + index * 0.1}s`,
+                  }}
+                ></div>
+              ))}
+
+              {/* Right side connectors */}
+              {rightConnectors.map((connectorY, index) => (
+                <div
+                  key={`right-connector-${index}`}
+                  className={`absolute h-[5px] bg-[#3A3A3A] opacity-0 ${
+                    treeVisible ? "animate-connector" : ""
+                  }`}
+                  style={{
+                    left: "2.5px",
+                    top: `${connectorY - verticalLineTop}px`,
+                    width: `${connectorWidth}px`,
+                    animationDelay: `${0.8 + index * 0.1}s`,
+                  }}
+                ></div>
               ))}
             </div>
+
+            {/* Left side institutions */}
+            <div
+              className="absolute"
+              style={{
+                left: `calc(50% - ${connectorWidth}px - 500px)`,
+                top: `${leftStartY}px`,
+                width: "500px",
+              }}
+            >
+              <div className="space-y-[85px]">
+                {leftInstitutions.map((institution, index) => (
+                  <div className="relative" key={`left-${index}`}>
+                    <InstitutionCard
+                      title={institution.title}
+                      subtitle={institution.subtitle}
+                      isLeft={true}
+                      imageSrc={institution.imageSrc}
+                      slug={institution.slug}
+                      index={index}
+                      isVisible={treeVisible}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right side institutions */}
+            <div
+              className="absolute"
+              style={{
+                right: `calc(50% - ${connectorWidth}px - 500px)`,
+                top: `${rightStartY}px`,
+                width: "500px",
+              }}
+            >
+              <div className="space-y-[85px]">
+                {rightInstitutions.map((institution, index) => (
+                  <div className="relative" key={`right-${index}`}>
+                    <InstitutionCard
+                      title={institution.title}
+                      subtitle={institution.subtitle}
+                      isLeft={false}
+                      imageSrc={institution.imageSrc}
+                      slug={institution.slug}
+                      index={index + leftInstitutions.length}
+                      isVisible={treeVisible}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 
