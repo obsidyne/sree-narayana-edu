@@ -25,24 +25,24 @@ const OfficeBearers: React.FC = () => {
   const founders = [
     {
       id: 1,
-      name: "Prof. K. Sasikumar",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/sasikumar.jpg",
-    },
-    {
-      id: 2,
       name: "M. L. Anidharan",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
       imageUrl: "/anidharan.jpg",
     },
     {
+      id: 2,
+      name: "Prof. K. Sasikumar",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+      imageUrl: "/sasikumar.jpg",
+    },
+    {
       id: 3,
       name: "Balanchandran K",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/anidharan.jpg",
+      imageUrl: "/balachandrank.jpg",
     },
   ];
 

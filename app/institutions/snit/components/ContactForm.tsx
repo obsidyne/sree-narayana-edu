@@ -16,6 +16,11 @@ const ContactForm: React.FC = () => {
     phone: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -24,10 +29,32 @@ const ContactForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      const response = await fetch("https://formspree.io/f/mdkzpnne", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", phone: "" }); // Reset form
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -56,6 +83,20 @@ const ContactForm: React.FC = () => {
               leo molestie vel, ornare non id blandit netus.
             </p>
 
+            {/* Status Messages */}
+            {submitStatus === "success" && (
+              <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                Thank you! Your message has been sent successfully.
+              </div>
+            )}
+
+            {submitStatus === "error" && (
+              <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                Sorry, there was an error sending your message. Please try
+                again.
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div>
                 <input
@@ -65,7 +106,8 @@ const ContactForm: React.FC = () => {
                   onChange={handleChange}
                   placeholder="Name *"
                   required
-                  className="w-full sm:w-[400px] lg:w-[464px] p-4 border border-gray-200 rounded"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-[400px] lg:w-[464px] p-4 border border-gray-200 rounded disabled:opacity-50"
                 />
               </div>
               <div>
@@ -75,7 +117,8 @@ const ContactForm: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Email"
-                  className="w-full sm:w-[400px] lg:w-[464px] p-4 border border-gray-200 rounded"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-[400px] lg:w-[464px] p-4 border border-gray-200 rounded disabled:opacity-50"
                 />
               </div>
               <div>
@@ -86,14 +129,16 @@ const ContactForm: React.FC = () => {
                   onChange={handleChange}
                   placeholder="Phone number *"
                   required
-                  className="w-full sm:w-[400px] lg:w-[464px] p-4 border border-gray-200 rounded"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-[400px] lg:w-[464px] p-4 border border-gray-200 rounded disabled:opacity-50"
                 />
               </div>
               <button
                 type="submit"
-                className={`w-full sm:w-[400px] lg:w-[464px] bg-white hover:bg-gray-100 text-black font-bold py-4 px-4 rounded transition duration-300 rounded-xl ${raleway.className}`}
+                disabled={isSubmitting}
+                className={`w-full sm:w-[400px] lg:w-[464px] bg-white hover:bg-gray-100 text-black font-bold py-4 px-4 rounded transition duration-300 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed ${raleway.className}`}
               >
-                SEND
+                {isSubmitting ? "SENDING..." : "SEND"}
               </button>
             </form>
 
@@ -184,7 +229,7 @@ const ContactForm: React.FC = () => {
               <div className="w-full h-full relative">
                 {/* Map image with responsive sizing */}
                 <Image
-                  src="/map.png"
+                  src="/snit.png"
                   alt="Location Map"
                   fill
                   style={{ objectFit: "cover" }}

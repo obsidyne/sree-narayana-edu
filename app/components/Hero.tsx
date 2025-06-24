@@ -78,6 +78,8 @@ export default function HeroSection() {
                   sizes="100vw"
                   className="object-cover brightness-75"
                 />
+                {/* Subtle dark overlay for better text readability */}
+                <div className="absolute inset-0 bg-black/35"></div>
               </div>
             ))}
           </div>

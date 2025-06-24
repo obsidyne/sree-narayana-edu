@@ -25,7 +25,7 @@ const FoundingExecom: React.FC = () => {
     "P. N. Bhasi",
     "V. Vijayankutty",
     "P. V. Sasidharan",
-    "R. D. Dathan",
+    "T. D. Dathan",
     "K. Amrithlal",
   ];
 

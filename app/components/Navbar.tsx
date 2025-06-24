@@ -60,7 +60,22 @@ export default function Navbar() {
       router.push("/#news-section");
     }
   };
+  const handleExecomClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
 
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+
+    if (pathname === "/") {
+      const execomSection = document.getElementById("execom");
+      if (execomSection) {
+        execomSection.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push("/#execom");
+    }
+  };
   const handleGalleryClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
 
@@ -99,6 +114,13 @@ export default function Navbar() {
           const gallerySection = document.getElementById("gallery-section");
           if (gallerySection) {
             gallerySection.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      } else if (window.location.hash === "#execom") {
+        setTimeout(() => {
+          const execomSection = document.getElementById("execom");
+          if (execomSection) {
+            execomSection.scrollIntoView({ behavior: "smooth" });
           }
         }, 100);
       }
@@ -150,13 +172,14 @@ export default function Navbar() {
         </div>
 
         <div className="flex flex-row items-center gap-8 xl:gap-16 2xl:gap-[129px]">
-          <Link
-            href="/execom"
+          <a
+            href="#execom"
+            onClick={handleExecomClick}
             className="text-[#3A3A3A] hover:text-gray-600 transition duration-300 relative group text-xl font-semibold min-w-[81px] h-[38px] flex items-center justify-center"
           >
             Execom
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
-          </Link>
+          </a>
           <a
             href="#news-section"
             onClick={handleNewsClick}
@@ -253,13 +276,14 @@ export default function Navbar() {
               Founders
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
             </Link>
-            <Link
-              href="/execom"
+            <a
+              href="#execom"
+              onClick={handleExecomClick}
               className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
             >
               Execom
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
-            </Link>
+            </a>
             <a
               href="#news-section"
               onClick={handleNewsClick}
