@@ -201,14 +201,14 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       <div className="xl:hidden w-full">
-        <div className="flex items-center justify-between px-4 sm:px-6 py-2">
+        <div className="flex items-center justify-between px-3 py-1.5 h-14">
           <button
             onClick={toggleMenu}
-            className="text-gray-700 focus:outline-none transform transition-transform duration-300 ease-in-out"
+            className="text-gray-700 focus:outline-none transform transition-transform duration-300 ease-in-out z-10"
             aria-label="Menu"
           >
             <svg
-              className="h-6 w-6 transition-all duration-300 ease-in-out"
+              className="h-5 w-5 transition-all duration-300 ease-in-out"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -236,14 +236,14 @@ export default function Navbar() {
               <Image
                 src="/logo.png"
                 alt="Anayurveda Logo"
-                width={95}
-                height={89.28}
-                className="w-[95px] h-[89.28px]"
+                width={60}
+                height={56.35}
+                className="w-[60px] h-[56.35px]"
               />
             </Link>
           </div>
 
-          <div className="w-6">{/* Empty div for balanced spacing */}</div>
+          <div className="w-5">{/* Empty div for balanced spacing */}</div>
         </div>
 
         {/* Mobile Menu with Animation */}
@@ -253,10 +253,10 @@ export default function Navbar() {
             ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}
           `}
         >
-          <div className="px-2 pt-2 pb-4 bg-white border-t border-gray-200">
+          <div className="px-2 pt-1 pb-3 bg-white border-t border-gray-200">
             <Link
               href="/"
-              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
+              className="block px-3 py-1.5 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
             >
               Home
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
@@ -264,14 +264,14 @@ export default function Navbar() {
             <a
               href="#our-initiatives"
               onClick={handleAboutClick}
-              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group cursor-pointer"
+              className="block px-3 py-1.5 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group cursor-pointer"
             >
               About
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
             </a>
             <Link
               href="/founders"
-              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
+              className="block px-3 py-1.5 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
             >
               Founders
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
@@ -279,7 +279,7 @@ export default function Navbar() {
             <a
               href="#execom"
               onClick={handleExecomClick}
-              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
+              className="block px-3 py-1.5 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
             >
               Execom
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
@@ -287,7 +287,7 @@ export default function Navbar() {
             <a
               href="#news-section"
               onClick={handleNewsClick}
-              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group cursor-pointer"
+              className="block px-3 py-1.5 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group cursor-pointer"
             >
               News
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
@@ -295,7 +295,7 @@ export default function Navbar() {
             <a
               href="#gallery-section"
               onClick={handleGalleryClick}
-              className="block px-3 py-2 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group cursor-pointer"
+              className="block px-3 py-1.5 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group cursor-pointer"
             >
               Gallery
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>

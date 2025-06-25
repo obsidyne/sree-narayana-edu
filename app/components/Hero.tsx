@@ -104,11 +104,11 @@ export default function HeroSection() {
               onClick={scrollToInstitutions}
               className="group relative inline-flex items-center rounded-[46px] overflow-hidden bg-white shadow-lg w-[250px] h-[60px] sm:w-[300px] sm:h-[70px] md:w-[350px] md:h-[75px] lg:w-[417px] lg:h-[82px]"
             >
-              {/* Yellow background that expands from left */}
+              {/* Yellow background that expands from left - full size */}
               <div className="absolute left-0 top-0 bg-[#FFE601] w-0 h-full group-hover:w-full transition-all duration-500 ease-out z-10"></div>
 
-              {/* Dark background that expands from circle */}
-              <div className="absolute right-[5px] top-[5px] sm:right-[6px] sm:top-[6px] md:right-[7px] md:top-[7px] lg:right-[7.5px] lg:top-[7.5px] bg-[#3A3A3A] rounded-full w-[50px] h-[50px] sm:w-[58px] sm:h-[58px] md:w-[62px] md:h-[62px] lg:w-[67px] lg:h-[67px] group-hover:w-[calc(100%+1px)] group-hover:h-[calc(100%+1px)] group-hover:right-0 group-hover:top-0 group-hover:rounded-[46px] transition-all duration-500 ease-out z-20"></div>
+              {/* Dark background that expands from circle - covers full button with extra overlap */}
+              <div className="absolute right-[5px] top-[5px] sm:right-[6px] sm:top-[6px] md:right-[7px] md:top-[7px] lg:right-[7.5px] lg:top-[7.5px] bg-[#3A3A3A] rounded-full w-[50px] h-[50px] sm:w-[58px] sm:h-[58px] md:w-[62px] md:h-[62px] lg:w-[67px] lg:h-[67px] group-hover:w-[calc(100%+6px)] group-hover:h-[calc(100%+6px)] group-hover:right-[-3px] group-hover:top-[-3px] group-hover:rounded-[49px] transition-all duration-500 ease-out z-20"></div>
 
               {/* Text container */}
               <div className="relative z-30 flex-1 flex justify-center pr-14 sm:pr-16 md:pr-16 lg:pr-20 md:justify-start md:pl-8">
