@@ -38,7 +38,7 @@ const SchoolWebsite: React.FC = () => {
           className="object-cover"
           priority
         />
-
+        <div className="absolute inset-0 bg-black/35"></div>
         <div className="relative z-20 flex flex-col justify-center h-full px-4 sm:px-6 md:px-8 text-white">
           <h1
             className={`text-[40px] sm:text-[50px] md:text-[65px] lg:text-[80px] font-semibold tracking-wider leading-none ${unbounded.className}`}
