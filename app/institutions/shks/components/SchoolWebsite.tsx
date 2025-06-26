@@ -43,6 +43,7 @@ const SchoolWebsite: React.FC = () => {
           <h1
             className={`text-[40px] sm:text-[50px] md:text-[65px] lg:text-[80px] font-semibold tracking-wider leading-none ${unbounded.className}`}
           >
+            " "
             
           </h1>
           <h2
