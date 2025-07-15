@@ -42,13 +42,14 @@ const SchoolWebsite: React.FC = () => {
           <h2
             className={`text-[28px] sm:text-[35px] md:text-[45px] lg:text-[55px] font-semibold tracking-wider leading-tight ${unbounded.className}`}
           >
-            KIDS' INTERNATIONAL
+            KIDS&apos; INTERNATIONAL
+
           </h2>
 
           <p
             className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] mt-1 ${unbounded.className} font-semibold`}
           >
-            New York, Affiliated to XYZ Board
+            Kadappakada Kollam, Affiliated to CBSE Board
           </p>
 
           {/* Custom button with responsive sizing */}
