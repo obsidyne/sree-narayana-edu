@@ -181,8 +181,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
     },
     {
       title: "SREE NARAYANA KIDS' SCHOOLS",
-      subtitle:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolo",
+      subtitle:"Kadappakada,Kollam(Affiliated to CBSE",
       imageSrc: "/tree/4.png",
       slug: "shks",
     },
