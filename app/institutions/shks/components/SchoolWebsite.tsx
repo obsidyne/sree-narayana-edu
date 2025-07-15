@@ -38,22 +38,24 @@ const SchoolWebsite: React.FC = () => {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/35"></div>
-        <div className="relative z-20 flex flex-col justify-center h-full px-4 sm:px-6 md:px-8 text-white">
-          
-          <h2
-            className={`text-[28px] sm:text-[35px] md:text-[45px] lg:text-[55px] font-semibold tracking-wider leading-tight ${unbounded.className}`}
-          >
-            KIDS' INTERNATIONAL 
-          </h2>
-          {/* Responsive font size for location and affiliation */}
-          <p
-            className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] mt-1 ${unbounded.className} font-semibold`}
-          >
-            <span
-              className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] ${unbounded.className} font-semibold`}
-            ></span>
-          </p>
+       <div className="absolute inset-0 bg-black/35"></div>
+<div className="relative z-20 flex flex-col justify-center h-full px-4 sm:px-6 md:px-8 text-white">
+
+  <h2
+    className={`text-[28px] sm:text-[35px] md:text-[45px] lg:text-[55px] font-semibold tracking-wider leading-tight ${unbounded.className}`}
+  >
+    KIDS' INTERNATIONAL 
+  </h2>
+
+  {/* Responsive font size for location and affiliation */}
+  <p
+    className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] mt-1 ${unbounded.className} font-semibold`}
+  >
+    {/* You can insert location or affiliation text here, e.g.: */}
+    New York, Affiliated to XYZ Board
+  </p>
+</div>
+
 
           {/* Custom button with responsive sizing */}
           <div className="mt-4">
