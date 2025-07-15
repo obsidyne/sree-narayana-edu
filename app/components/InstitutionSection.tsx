@@ -16,6 +16,13 @@ const unbounded = Unbounded({
   display: "swap",
 });
 
+// New interface for metrics
+interface MetricItem {
+  label: string;
+  value: string;
+  icon?: string;
+}
+
 interface InstitutionCardProps {
   title: string;
   subtitle: string;
@@ -140,6 +147,129 @@ const InstitutionCard: React.FC<InstitutionCardProps> = ({
   );
 };
 
+// New Metrics Component
+const MetricsSection: React.FC<{ 
+  isVisible: boolean; 
+  isMobile: boolean; 
+}> = ({ isVisible, isMobile }) => {
+  const [counters, setCounters] = useState({
+    students: 0,
+    faculty: 0,
+    routes: 0,
+    experience: 0,
+  });
+
+  const finalValues = {
+    students: 15000,
+    faculty: 850,
+    routes: 120,
+    experience: 25,
+  };
+
+  // Counter animation effect
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const duration = 2000; // 2 seconds
+    const steps = 50;
+    const stepDuration = duration / steps;
+
+    const countersInterval = setInterval(() => {
+      setCounters(prev => ({
+        students: Math.min(prev.students + finalValues.students / steps, finalValues.students),
+        faculty: Math.min(prev.faculty + finalValues.faculty / steps, finalValues.faculty),
+        routes: Math.min(prev.routes + finalValues.routes / steps, finalValues.routes),
+        experience: Math.min(prev.experience + finalValues.experience / steps, finalValues.experience),
+      }));
+    }, stepDuration);
+
+    const timeout = setTimeout(() => {
+      clearInterval(countersInterval);
+      setCounters(finalValues);
+    }, duration);
+
+    return () => {
+      clearInterval(countersInterval);
+      clearTimeout(timeout);
+    };
+  }, [isVisible]);
+
+  const metrics: MetricItem[] = [
+    {
+      label: "Total Students",
+      value: Math.floor(counters.students).toLocaleString() + "+",
+      icon: "👥",
+    },
+    {
+      label: "Faculty Members",
+      value: Math.floor(counters.faculty).toLocaleString() + "+",
+      icon: "👨‍🏫",
+    },
+    {
+      label: "Transport Routes",
+      value: Math.floor(counters.routes).toLocaleString() + "+",
+      icon: "🚌",
+    },
+    {
+      label: "Years of Excellence",
+      value: Math.floor(counters.experience).toLocaleString() + "+",
+      icon: "🏆",
+    },
+  ];
+
+  return (
+    <div
+      className={`w-full ${isMobile ? 'px-4 py-8' : 'px-20 py-16'} ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      } transition-all duration-1000 ease-out`}
+      style={{
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%)',
+        backdropFilter: 'blur(10px)',
+        borderRadius: '24px 24px 0 0',
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+        borderBottom: 'none',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+      }}
+    >
+      <div className={`grid ${isMobile ? 'grid-cols-2 gap-6' : 'grid-cols-4 gap-12'}`}>
+        {metrics.map((metric, index) => (
+          <div
+            key={metric.label}
+            className="text-center group"
+            style={{
+              animation: isVisible 
+                ? `fadeInUp 0.8s ease-out ${index * 0.2}s forwards`
+                : 'none',
+              opacity: 0,
+            }}
+          >
+            <div className="flex flex-col items-center space-y-3">
+              <div className="text-4xl mb-2 transform group-hover:scale-110 transition-transform duration-300">
+                {metric.icon}
+              </div>
+              <div
+                className={`text-3xl ${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-gray-800 ${unbounded.className}`}
+                style={{
+                  background: 'linear-gradient(135deg, #333 0%, #666 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                {metric.value}
+              </div>
+              <div className={`text-sm ${isMobile ? 'text-xs' : 'text-base'} text-gray-600 font-medium tracking-wide uppercase`}>
+                {metric.label}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 interface InstitutionsSectionProps {
   className?: string;
   id?: string;
@@ -153,11 +283,14 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
   const titleRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const treeRef = useRef<HTMLDivElement>(null);
+  const metricsRef = useRef<HTMLDivElement>(null);
+  const treeContainerRef = useRef<HTMLDivElement>(null);
 
   const [isVisible, setIsVisible] = useState(false);
   const [titleVisible, setTitleVisible] = useState(false);
   const [lineVisible, setLineVisible] = useState(false);
   const [treeVisible, setTreeVisible] = useState(false);
+  const [metricsVisible, setMetricsVisible] = useState(false);
 
   // Institution data with slug added
   const leftInstitutions = [
@@ -229,6 +362,9 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
           if (entry.target === treeRef.current && entry.isIntersecting) {
             setTimeout(() => setTreeVisible(true), 600);
           }
+          if (entry.target === metricsRef.current && entry.isIntersecting) {
+            setTimeout(() => setMetricsVisible(true), 200);
+          }
           if (entry.target === sectionRef.current && entry.isIntersecting) {
             setIsVisible(true);
           }
@@ -243,6 +379,7 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
     if (titleRef.current) observer.observe(titleRef.current);
     if (lineRef.current) observer.observe(lineRef.current);
     if (treeRef.current) observer.observe(treeRef.current);
+    if (metricsRef.current) observer.observe(metricsRef.current);
     if (sectionRef.current) observer.observe(sectionRef.current);
 
     return () => observer.disconnect();
@@ -274,9 +411,9 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
   // Define constants for positioning
   const cardHeight = 224;
   const cardSpacing = 85;
-  const leftStartY = 249;
-  const rightStartY = 332;
-  const verticalLineTop = 170;
+  const leftStartY = 80; // Reduced from 249
+  const rightStartY = 163; // Reduced from 332
+  const verticalLineTop = 0; // Reduced from 170
 
   // Calculate exactly how far the vertical line should extend
   const lastLeftCardCenter =
@@ -301,6 +438,9 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
 
   const connectorWidth = 50;
 
+  // Calculate tree container height
+  const treeContainerHeight = verticalLineHeight + 200; // Extra padding
+
   return (
     <>
       {/* CSS Animations */}
@@ -313,6 +453,17 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
           to {
             opacity: 1;
             transform: translateY(-8px);
+          }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
 
@@ -357,14 +508,15 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
         ref={sectionRef}
         id={id}
         className={`relative w-full bg-gradient-to-br from-[#FFBF01] to-[#FFEE00] ${className}`}
-        style={{
-          minHeight: isMobile ? "auto" : "1436px",
-          height: isMobile ? "auto" : "1436px",
-        }}
       >
         {isMobile ? (
           // Mobile Layout - Single Column
           <div className="px-4 py-16">
+            {/* Metrics Section */}
+            <div ref={metricsRef} className="mb-12">
+              <MetricsSection isVisible={metricsVisible} isMobile={isMobile} />
+            </div>
+
             {/* Title */}
             <h2
               ref={titleRef}
@@ -405,133 +557,145 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
             </div>
           </div>
         ) : (
-          // Desktop Layout - Tree Structure
-          <div className="absolute w-full h-full left-0 top-0">
+          // Desktop Layout - Flow Structure
+          <div className="flex flex-col">
+            {/* Metrics Section - Desktop */}
+            <div ref={metricsRef} className="w-full">
+              <MetricsSection isVisible={metricsVisible} isMobile={isMobile} />
+            </div>
+
             {/* Title */}
-            <div className="absolute w-full" style={{ top: "76px" }}>
+            <div className="w-full py-8">
               <h2
                 ref={titleRef}
                 className={`text-6xl font-normal text-gray-800 text-center mx-auto opacity-0 ${
                   unbounded.className
                 } ${titleVisible ? "animate-title" : ""}`}
-                style={{ letterSpacing: "-0.06em", width: "714px" }}
+                style={{ letterSpacing: "-0.06em" }}
               >
                 OUR INSTITUTIONS
               </h2>
             </div>
 
             {/* Horizontal line under title */}
-            <div
-              ref={lineRef}
-              className={`absolute opacity-0 ${
-                lineVisible ? "animate-line" : ""
-              }`}
-              style={{
-                height: "5px",
-                width: "610px",
-                backgroundColor: "#3A3A3A",
-                left: "calc(50% - 610px/2)",
-                top: `${verticalLineTop}px`,
-              }}
-            ></div>
-
-            {/* Vertical line - central spine */}
-            <div
-              ref={treeRef}
-              className={`absolute opacity-0 ${
-                treeVisible ? "animate-tree-vertical" : ""
-              }`}
-              style={{
-                width: "5px",
-                height: `${verticalLineHeight}px`,
-                backgroundColor: "#3A3A3A",
-                left: "50%",
-                marginLeft: "-2.5px",
-                top: `${verticalLineTop}px`,
-              }}
-            >
-              {/* Left side connectors */}
-              {leftConnectors.map((connectorY, index) => (
-                <div
-                  key={`left-connector-${index}`}
-                  className={`absolute h-[5px] bg-[#3A3A3A] opacity-0 ${
-                    treeVisible ? "animate-connector" : ""
-                  }`}
-                  style={{
-                    right: "2.5px",
-                    top: `${connectorY - verticalLineTop}px`,
-                    width: `${connectorWidth}px`,
-                    animationDelay: `${0.8 + index * 0.1}s`,
-                  }}
-                ></div>
-              ))}
-
-              {/* Right side connectors */}
-              {rightConnectors.map((connectorY, index) => (
-                <div
-                  key={`right-connector-${index}`}
-                  className={`absolute h-[5px] bg-[#3A3A3A] opacity-0 ${
-                    treeVisible ? "animate-connector" : ""
-                  }`}
-                  style={{
-                    left: "2.5px",
-                    top: `${connectorY - verticalLineTop}px`,
-                    width: `${connectorWidth}px`,
-                    animationDelay: `${0.8 + index * 0.1}s`,
-                  }}
-                ></div>
-              ))}
+            <div className="w-full flex justify-center pb-8">
+              <div
+                ref={lineRef}
+                className={`opacity-0 ${
+                  lineVisible ? "animate-line" : ""
+                }`}
+                style={{
+                  height: "5px",
+                  width: "610px",
+                  backgroundColor: "#3A3A3A",
+                }}
+              ></div>
             </div>
 
-            {/* Left side institutions */}
+            {/* Tree Container */}
             <div
-              className="absolute"
-              style={{
-                left: `calc(50% - ${connectorWidth}px - 500px)`,
-                top: `${leftStartY}px`,
-                width: "500px",
-              }}
+              ref={treeContainerRef}
+              className="relative w-full flex-1"
+              style={{ minHeight: `${treeContainerHeight}px` }}
             >
-              <div className="space-y-[85px]">
-                {leftInstitutions.map((institution, index) => (
-                  <div className="relative" key={`left-${index}`}>
-                    <InstitutionCard
-                      title={institution.title}
-                      subtitle={institution.subtitle}
-                      isLeft={true}
-                      imageSrc={institution.imageSrc}
-                      slug={institution.slug}
-                      index={index}
-                      isVisible={treeVisible}
-                    />
-                  </div>
+              {/* Vertical line - central spine */}
+              <div
+                ref={treeRef}
+                className={`absolute opacity-0 ${
+                  treeVisible ? "animate-tree-vertical" : ""
+                }`}
+                style={{
+                  width: "5px",
+                  height: `${verticalLineHeight}px`,
+                  backgroundColor: "#3A3A3A",
+                  left: "50%",
+                  marginLeft: "-2.5px",
+                  top: `${verticalLineTop}px`,
+                }}
+              >
+                {/* Left side connectors */}
+                {leftConnectors.map((connectorY, index) => (
+                  <div
+                    key={`left-connector-${index}`}
+                    className={`absolute h-[5px] bg-[#3A3A3A] opacity-0 ${
+                      treeVisible ? "animate-connector" : ""
+                    }`}
+                    style={{
+                      right: "2.5px",
+                      top: `${connectorY - verticalLineTop}px`,
+                      width: `${connectorWidth}px`,
+                      animationDelay: `${0.8 + index * 0.1}s`,
+                    }}
+                  ></div>
+                ))}
+
+                {/* Right side connectors */}
+                {rightConnectors.map((connectorY, index) => (
+                  <div
+                    key={`right-connector-${index}`}
+                    className={`absolute h-[5px] bg-[#3A3A3A] opacity-0 ${
+                      treeVisible ? "animate-connector" : ""
+                    }`}
+                    style={{
+                      left: "2.5px",
+                      top: `${connectorY - verticalLineTop}px`,
+                      width: `${connectorWidth}px`,
+                      animationDelay: `${0.8 + index * 0.1}s`,
+                    }}
+                  ></div>
                 ))}
               </div>
-            </div>
 
-            {/* Right side institutions */}
-            <div
-              className="absolute"
-              style={{
-                right: `calc(50% - ${connectorWidth}px - 500px)`,
-                top: `${rightStartY}px`,
-                width: "500px",
-              }}
-            >
-              <div className="space-y-[85px]">
-                {rightInstitutions.map((institution, index) => (
-                  <div className="relative" key={`right-${index}`}>
-                    <InstitutionCard
-                      title={institution.title}
-                      subtitle={institution.subtitle}
-                      isLeft={false}
-                      imageSrc={institution.imageSrc}
-                      slug={institution.slug}
-                      index={index + leftInstitutions.length}
-                      isVisible={treeVisible}
-                    />
-                  </div>
-                ))}
+              {/* Left side institutions */}
+              <div
+                className="absolute"
+                style={{
+                  left: `calc(50% - ${connectorWidth}px - 500px)`,
+                  top: `${leftStartY}px`,
+                  width: "500px",
+                }}
+              >
+                <div className="space-y-[85px]">
+                  {leftInstitutions.map((institution, index) => (
+                    <div className="relative" key={`left-${index}`}>
+                      <InstitutionCard
+                        title={institution.title}
+                        subtitle={institution.subtitle}
+                        isLeft={true}
+                        imageSrc={institution.imageSrc}
+                        slug={institution.slug}
+                        index={index}
+                        isVisible={treeVisible}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right side institutions */}
+              <div
+                className="absolute"
+                style={{
+                  right: `calc(50% - ${connectorWidth}px - 500px)`,
+                  top: `${rightStartY}px`,
+                  width: "500px",
+                }}
+              >
+                <div className="space-y-[85px]">
+                  {rightInstitutions.map((institution, index) => (
+                    <div className="relative" key={`right-${index}`}>
+                      <InstitutionCard
+                        title={institution.title}
+                        subtitle={institution.subtitle}
+                        isLeft={false}
+                        imageSrc={institution.imageSrc}
+                        slug={institution.slug}
+                        index={index + leftInstitutions.length}
+                        isVisible={treeVisible}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
