@@ -180,8 +180,8 @@ const InstitutionsSection: React.FC<InstitutionsSectionProps> = ({
       slug: "snpsc",
     },
     {
-      title: "SREE NARAYANA KIDS' SCHOOLS",
-      subtitle:"Kadappakada,Kollam(Affiliated to CBSE",
+      title: "KIDS' INTERNATIONAL",
+      subtitle:"Kadappakada,Kollam(Affiliated to CBSE)",
       imageSrc: "/tree/4.png",
       slug: "shks",
     },
