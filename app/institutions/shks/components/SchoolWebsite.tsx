@@ -22,7 +22,6 @@ const raleway = Raleway({
 });
 
 const SchoolWebsite: React.FC = () => {
-  // Function to handle button click - you can modify this as needed
   const visitWebsite = () => {
     window.open("https://www.example.com", "_blank");
   };
@@ -38,24 +37,19 @@ const SchoolWebsite: React.FC = () => {
           className="object-cover"
           priority
         />
-       <div className="absolute inset-0 bg-black/35"></div>
-<div className="relative z-20 flex flex-col justify-center h-full px-4 sm:px-6 md:px-8 text-white">
+        <div className="absolute inset-0 bg-black/35"></div>
+        <div className="relative z-20 flex flex-col justify-center h-full px-4 sm:px-6 md:px-8 text-white">
+          <h2
+            className={`text-[28px] sm:text-[35px] md:text-[45px] lg:text-[55px] font-semibold tracking-wider leading-tight ${unbounded.className}`}
+          >
+            KIDS' INTERNATIONAL
+          </h2>
 
-  <h2
-    className={`text-[28px] sm:text-[35px] md:text-[45px] lg:text-[55px] font-semibold tracking-wider leading-tight ${unbounded.className}`}
-  >
-    KIDS' INTERNATIONAL 
-  </h2>
-
-  {/* Responsive font size for location and affiliation */}
-  <p
-    className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] mt-1 ${unbounded.className} font-semibold`}
-  >
-    {/* You can insert location or affiliation text here, e.g.: */}
-    New York, Affiliated to XYZ Board
-  </p>
-</div>
-
+          <p
+            className={`text-[16px] sm:text-[20px] md:text-[25px] lg:text-[30px] mt-1 ${unbounded.className} font-semibold`}
+          >
+            New York, Affiliated to XYZ Board
+          </p>
 
           {/* Custom button with responsive sizing */}
           <div className="mt-4">
@@ -67,9 +61,7 @@ const SchoolWebsite: React.FC = () => {
               <div className="absolute right-[5px] top-[5px] bg-[#3A3A3A] rounded-full w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] md:w-[42px] md:h-[42px] lg:w-[45px] lg:h-[45px] group-hover:w-[calc(100%+1px)] group-hover:h-[calc(100%+1px)] group-hover:right-0 group-hover:top-0 group-hover:rounded-[46px] transition-all duration-500 ease-out z-20"></div>
 
               {/* Text container */}
-              <div
-                className={`relative z-30 flex-1 flex justify-center pr-8 sm:pr-10 md:pr-11 lg:pr-12`}
-              >
+              <div className="relative z-30 flex-1 flex justify-center pr-8 sm:pr-10 md:pr-11 lg:pr-12">
                 <span
                   className={`text-sm sm:text-base md:text-lg font-semibold leading-tight block transition-colors duration-500 text-[#3A3A3A] group-hover:text-white ${raleway.className}`}
                 >
@@ -116,7 +108,7 @@ const SchoolWebsite: React.FC = () => {
             Pre-school education, is the first stage of organized education
             imparted to children of 3 to 6 years age group. It provides a unique
             approach in curricular and co-curricular aspects that set us apart
-            from any other institutions in this filed. It is an intuitive
+            from any other institutions in this field. It is an intuitive
             initiation into the wide vistas of extensive education arena in the
             long run.
           </p>
@@ -140,3 +132,4 @@ const SchoolWebsite: React.FC = () => {
 };
 
 export default SchoolWebsite;
+
