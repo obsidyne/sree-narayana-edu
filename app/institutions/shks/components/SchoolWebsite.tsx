@@ -98,7 +98,8 @@ const SchoolWebsite: React.FC = () => {
           className={`max-w-4xl mx-auto border-l-4 sm:border-l-6 md:border-l-8 border-yellow-400 pl-3 sm:pl-4 md:pl-6 py-3 sm:py-4 md:py-4 shadow-md rounded-lg p-4 ${poppins.className}`}
         >
           <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-            Sree Narayana Kids’ School
+            KIDS&apos; INTERNATIONAL
+
           </h2>
 
           <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed font-light">
