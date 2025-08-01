@@ -60,6 +60,7 @@ export default function Navbar() {
       router.push("/#news-section");
     }
   };
+
   const handleExecomClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
 
@@ -76,6 +77,7 @@ export default function Navbar() {
       router.push("/#execom");
     }
   };
+
   const handleGalleryClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
 
@@ -90,6 +92,23 @@ export default function Navbar() {
       }
     } else {
       router.push("/#gallery-section");
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+
+    if (pathname === "/") {
+      const contactSection = document.getElementById("contact-section");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push("/#contact-section");
     }
   };
 
@@ -123,6 +142,13 @@ export default function Navbar() {
             execomSection.scrollIntoView({ behavior: "smooth" });
           }
         }, 100);
+      } else if (window.location.hash === "#contact-section") {
+        setTimeout(() => {
+          const contactSection = document.getElementById("contact-section");
+          if (contactSection) {
+            contactSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
       }
     }
   }, [pathname]);
@@ -134,7 +160,7 @@ export default function Navbar() {
       <style jsx>{customStyles}</style>
       {/* Desktop Navigation */}
       <div className="hidden xl:flex items-center justify-between w-full max-w-[1920px] mx-auto px-4 xl:px-8 relative">
-        <div className="flex flex-row items-center gap-8 xl:gap-16 2xl:gap-[129px]">
+        <div className="flex flex-row items-center gap-6 xl:gap-12 2xl:gap-16">
           <Link
             href="/"
             className="text-[#3A3A3A] hover:text-gray-600 transition duration-300 relative group text-xl font-semibold min-w-[81px] h-[38px] flex items-center justify-center"
@@ -157,6 +183,13 @@ export default function Navbar() {
             Founders
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
           </Link>
+          <Link
+            href="/alumni"
+            className="text-[#3A3A3A] hover:text-gray-600 transition duration-300 relative group text-xl font-semibold min-w-[81px] h-[38px] flex items-center justify-center"
+          >
+            Alumni
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
+          </Link>
         </div>
 
         <div className="absolute left-1/2 transform -translate-x-1/2">
@@ -171,7 +204,7 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="flex flex-row items-center gap-8 xl:gap-16 2xl:gap-[129px]">
+        <div className="flex flex-row items-center gap-6 xl:gap-12 2xl:gap-16">
           <a
             href="#execom"
             onClick={handleExecomClick}
@@ -194,6 +227,14 @@ export default function Navbar() {
             className="text-[#3A3A3A] hover:text-gray-600 transition duration-300 relative group cursor-pointer text-xl font-semibold min-w-[81px] h-[38px] flex items-center justify-center"
           >
             Gallery
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
+          </a>
+          <a
+            href="#contact-section"
+            onClick={handleContactClick}
+            className="text-[#3A3A3A] hover:text-gray-600 transition duration-300 relative group cursor-pointer text-xl font-semibold min-w-[81px] h-[38px] flex items-center justify-center"
+          >
+            Contact
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFE601] group-hover:w-full transition-all duration-300 ease-in-out"></span>
           </a>
         </div>
@@ -276,6 +317,13 @@ export default function Navbar() {
               Founders
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
             </Link>
+            <Link
+              href="/alumni"
+              className="block px-3 py-1.5 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group"
+            >
+              Alumni
+              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
+            </Link>
             <a
               href="#execom"
               onClick={handleExecomClick}
@@ -298,6 +346,14 @@ export default function Navbar() {
               className="block px-3 py-1.5 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group cursor-pointer"
             >
               Gallery
+              <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
+            </a>
+            <a
+              href="#contact-section"
+              onClick={handleContactClick}
+              className="block px-3 py-1.5 text-gray-800 hover:bg-gray-100 rounded transition-all duration-300 transform hover:translate-x-1 relative group cursor-pointer"
+            >
+              Contact
               <span className="absolute bottom-0 left-3 right-3 w-0 h-0.5 bg-[#FFE601] group-hover:w-calc-full transition-all duration-300 ease-in-out"></span>
             </a>
           </div>

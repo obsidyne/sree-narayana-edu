@@ -10,12 +10,15 @@ import InstitutionsSection from "./components/InstitutionSection";
 import NewsAndGallerySection from "./components/NewsAndGallerySection";
 import Footer from "./components/Footer";
 import FoundingExecom from "./components/FoundingExecom";
+import ContactSection from "./components/ContactSection";
+import InitiativesCarousel from "./components/InitiativesCarousel"; // Add this import
 
 const raleway = Raleway({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
+
 
 export default function Home() {
   return (
@@ -43,7 +46,7 @@ export default function Home() {
               Our Initiatives
             </h2>
 
-            <div className="space-y-4 font-light text-[#3A3A3A]">
+            <div className="space-y-4 font-light text-[#3A3A3A] mb-8 text-justify">
               <p className="text-sm sm:text-base">
                 Sree Narayana Educational Society, Kollam was established in the
                 year 1986. The founding fathers envisaged quality education to
@@ -74,18 +77,13 @@ export default function Home() {
                 affiliation to the Central Board of Secondary Education .
               </p>
             </div>
-
-            <div className="flex mt-8 mb-8">
-              <div className="relative w-[582px] h-[328px] rounded-xl overflow-hidden max-w-full">
-                <Image
-                  src="/initiative.png"
-                  alt="Students"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 582px"
-                />
-              </div>
-            </div>
+          </div>
+        </div>
+        
+        {/* Full-width carousel section */}
+        <div className="w-full px-4 sm:px-6 lg:px-8 mt-8 mb-8">
+          <div className="max-w-7xl mx-auto">
+            <InitiativesCarousel />
           </div>
         </div>
       </div>
@@ -103,7 +101,11 @@ export default function Home() {
       <NewsAndGallerySection />
       <br />
       <br />
+      {/* Add the Contact Section here - just before Footer */}
+      <ContactSection />
       <Footer />
+      
     </>
   );
+  
 }
