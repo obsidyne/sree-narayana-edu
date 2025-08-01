@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/Hero";
 import MissionSection from "./components/MissionSection";
@@ -18,7 +18,6 @@ const raleway = Raleway({
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
-
 
 export default function Home() {
   return (
@@ -56,7 +55,7 @@ export default function Home() {
               <p className="text-sm sm:text-base">
                 The idea was introduced by Prof. K Sasikumar and he was able to
                 bring like minded persons associated with the Sree Narayana
-                Samskariка Samithi, Kollam to the organization. A Charitable
+                Samskarika Samithi, Kollam to the organization. A Charitable
                 Society was registered under the Travancore, Cochin, Literary,
                 Scientific and Charitable Societies Registration Act 1955 with
                 Reg No.Q790/86.
@@ -71,15 +70,15 @@ export default function Home() {
                 <br /> Mr. M L Andharan as Treasurer. The Committee consisted of
                 21 members. Members were enrolled by membership fee collected in
                 the following denominations: Rs.1000, Rs.3000 and Rs.5000/-. The
-                Sree Narayana Samskariка Samithi, Kollam was enrolled as an
+                Sree Narayana Samskarika Samithi, Kollam was enrolled as an
                 institutional member with 5 membership in the Executive
                 Committee. The first venture was to establish a School with
-                affiliation to the Central Board of Secondary Education .
+                affiliation to the Central Board of Secondary Education.
               </p>
             </div>
           </div>
         </div>
-        
+
         {/* Full-width carousel section */}
         <div className="w-full px-4 sm:px-6 lg:px-8 mt-8 mb-8">
           <div className="max-w-7xl mx-auto">
@@ -101,11 +100,8 @@ export default function Home() {
       <NewsAndGallerySection />
       <br />
       <br />
-      {/* Add the Contact Section here - just before Footer */}
       <ContactSection />
       <Footer />
-      
     </>
   );
-  
 }
