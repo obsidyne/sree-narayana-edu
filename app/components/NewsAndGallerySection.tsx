@@ -19,6 +19,57 @@ const poppins = Poppins({
   display: "swap",
 });
 
+interface NewsPhoto {
+  id: number;
+  url: string;
+  alternativeText: string | null;
+  width: number;
+  height: number;
+  formats?: {
+    large?: { url: string };
+    medium?: { url: string };
+    small?: { url: string };
+    thumbnail?: { url: string };
+  };
+}
+
+interface NewsItem {
+  id: number;
+  heading: string;
+  description: string;
+  date: string;
+  main_photo: NewsPhoto;
+  photos: NewsPhoto[] | null;
+}
+
+interface NewsData {
+  id: number;
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  News: NewsItem[];
+}
+
+interface ApiResponse {
+  data: NewsData[];
+  meta: {
+    pagination: {
+      start: number;
+      limit: number;
+      total: number;
+    };
+  };
+}
+
+interface TransformedNewsItem {
+  id: number;
+  category: string;
+  date: string;
+  title: string;
+  image: string;
+}
+
 const NewsAndGallerySection: React.FC = () => {
   const router = useRouter();
   // Ref for scrolling news items
@@ -27,58 +78,10 @@ const NewsAndGallerySection: React.FC = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   // State to track if we can scroll right
   const [canScrollRight, setCanScrollRight] = useState(true);
-
-  // Sample news data - now with 6 items
-  const newsItems = [
-    {
-      id: 1,
-      category: "NEWS",
-      date: "5 April 2025",
-      title:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet.",
-      image: "/food.jpg", // Replace with your actual image path
-    },
-    {
-      id: 2,
-      category: "NEWS",
-      date: "5 April 2025",
-      title:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet.",
-      image: "/food.jpg", // Replace with your actual image path
-    },
-    {
-      id: 3,
-      category: "NEWS",
-      date: "5 April 2025",
-      title:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet.",
-      image: "/food.jpg", // Replace with your actual image path
-    },
-    {
-      id: 4,
-      category: "NEWS",
-      date: "5 April 2025",
-      title:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet.",
-      image: "/food.jpg", // Replace with your actual image path
-    },
-    {
-      id: 5,
-      category: "NEWS",
-      date: "5 April 2025",
-      title:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet.",
-      image: "/food.jpg", // Replace with your actual image path
-    },
-    {
-      id: 6,
-      category: "NEWS",
-      date: "5 April 2025",
-      title:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet.",
-      image: "/food.jpg", // Replace with your actual image path
-    },
-  ];
+  // API-related states
+  const [newsItems, setNewsItems] = useState<TransformedNewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Sample gallery data - create 10 items for the gallery grid (2 rows of 5)
   const galleryItems = Array.from({ length: 10 }, (_, i) => ({
@@ -86,6 +89,62 @@ const NewsAndGallerySection: React.FC = () => {
     image: "/gal.jpg", // Replace with your actual image path
     alt: "Gallery image",
   }));
+
+  // Fetch news data from API
+  useEffect(() => {
+    const fetchNewsData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "https://thankful-novelty-5d39f22046.strapiapp.com/api/newss?populate[News][populate][main_photo]=true&populate[News][populate][photos]=true&pagination[limit]=-1"
+        );
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data: ApiResponse = await response.json();
+        
+        // Transform API data to news format
+        const transformedNews: TransformedNewsItem[] = [];
+        
+        data.data.forEach((newsData) => {
+          newsData.News.forEach((newsItem) => {
+            transformedNews.push({
+              id: newsItem.id,
+              category: "NEWS",
+              date: formatDate(newsItem.date),
+              title: newsItem.heading,
+              image: newsItem.main_photo?.formats?.medium?.url || newsItem.main_photo?.url || "/food.jpg",
+            });
+          });
+        });
+        
+        setNewsItems(transformedNews);
+        setError(null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to fetch news data");
+        console.error("Error fetching news data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNewsData();
+  }, []);
+
+  // Format date for display
+  const formatDate = (dateString: string) => {
+    try {
+      return new Date(dateString).toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+    } catch {
+      return dateString;
+    }
+  };
 
   // Handle navigation to news page
   const handleCardClick = (newsId: number) => {
@@ -153,7 +212,7 @@ const NewsAndGallerySection: React.FC = () => {
         window.removeEventListener("resize", checkScrollPosition);
       };
     }
-  }, []);
+  }, [newsItems]); // Add newsItems dependency to recheck when data loads
 
   return (
     <div className="flex flex-col md:flex-row w-full bg-white">
@@ -196,102 +255,135 @@ const NewsAndGallerySection: React.FC = () => {
               NEWS & UPDATES
             </h2>
 
-            <div className="relative">
-              {/* Left navigation arrow - positioned to the side */}
-              {canScrollLeft && (
-                <button
-                  onClick={scrollNewsLeft}
-                  className="absolute bg-white rounded-full shadow-md w-8 h-8 md:w-10 md:h-10 flex items-center justify-center cursor-pointer hover:bg-gray-100 z-10"
-                  style={{
-                    left: "-12px",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="transform rotate-180"
-                  >
-                    <path d="M9 6l6 6-6 6" />
-                  </svg>
-                </button>
-              )}
-
-              <div
-                ref={newsRef}
-                className="flex gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12 md:mb-16 overflow-x-hidden scroll-smooth"
-                onScroll={checkScrollPosition}
-              >
-                {newsItems.map((item) => (
-                  <div
-                    key={item.id}
-                    className="news-card relative bg-white shadow-md flex-none w-[280px] h-[300px] sm:w-[300px] sm:h-[320px] md:w-[320px] md:h-[340px] lg:w-[342px] lg:h-[362px] cursor-pointer hover:shadow-lg transition-shadow duration-300"
-                    onClick={() => handleCardClick(item.id)}
-                  >
-                    <div className="absolute w-full h-40 sm:h-48 md:h-56 left-0 top-0 overflow-hidden bg-gray-400">
-                      <img
-                        src={item.image}
-                        alt="Food dish"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="absolute flex flex-row items-center gap-2 left-4 sm:left-6 top-44 sm:top-52 md:top-60">
-                      <span
-                        className={`${raleway.className} font-bold text-xs uppercase text-gray-800`}
-                      >
-                        {item.category}
-                      </span>
-                      <div className="h-4 border-l border-gray-400"></div>
-                      <span
-                        className={`${poppins.className} font-medium text-xs text-gray-500`}
-                      >
-                        {item.date}
-                      </span>
-                    </div>
-                    <p
-                      className={`${raleway.className} absolute w-60 sm:w-64 md:w-72 left-4 sm:left-6 top-48 sm:top-56 md:top-64 font-bold text-base sm:text-lg leading-5 sm:leading-6 text-gray-800`}
-                    >
-                      {item.title}
-                    </p>
-                  </div>
-                ))}
+            {/* Loading State */}
+            {loading && (
+              <div className="flex items-center justify-center h-64 mb-8 sm:mb-12 md:mb-16">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-800 mx-auto mb-2"></div>
+                  <p className="text-gray-800">Loading news...</p>
+                </div>
               </div>
+            )}
 
-              {/* Right navigation arrow - positioned to the side */}
-              {canScrollRight && (
-                <button
-                  onClick={scrollNewsRight}
-                  className="absolute bg-white rounded-full shadow-md w-8 h-8 md:w-10 md:h-10 flex items-center justify-center cursor-pointer hover:bg-gray-100 z-10"
-                  style={{
-                    right: "-12px",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+            {/* Error State */}
+            {error && (
+              <div className="flex items-center justify-center h-64 mb-8 sm:mb-12 md:mb-16">
+                <div className="text-center text-red-600">
+                  <p className="mb-2">Error loading news:</p>
+                  <p className="text-sm">{error}</p>
+                </div>
+              </div>
+            )}
+
+            {/* News Content */}
+            {!loading && !error && (
+              <div className="relative">
+                {/* Left navigation arrow - positioned to the side */}
+                {canScrollLeft && newsItems.length > 0 && (
+                  <button
+                    onClick={scrollNewsLeft}
+                    className="absolute bg-white rounded-full shadow-md w-8 h-8 md:w-10 md:h-10 flex items-center justify-center cursor-pointer hover:bg-gray-100 z-10"
+                    style={{
+                      left: "-12px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                    }}
                   >
-                    <path d="M9 6l6 6-6 6" />
-                  </svg>
-                </button>
-              )}
-            </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="transform rotate-180"
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </button>
+                )}
+
+                <div
+                  ref={newsRef}
+                  className="flex gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12 md:mb-16 overflow-x-hidden scroll-smooth"
+                  onScroll={checkScrollPosition}
+                >
+                  {newsItems.length > 0 ? (
+                    newsItems.map((item) => (
+                      <div
+                        key={item.id}
+                        className="news-card relative bg-white shadow-md flex-none w-[280px] h-[300px] sm:w-[300px] sm:h-[320px] md:w-[320px] md:h-[340px] lg:w-[342px] lg:h-[362px] cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                        onClick={() => handleCardClick(item.id)}
+                      >
+                        <div className="absolute w-full h-40 sm:h-48 md:h-56 left-0 top-0 overflow-hidden bg-gray-400">
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = "/food.jpg"; // Fallback image
+                            }}
+                          />
+                        </div>
+                        <div className="absolute flex flex-row items-center gap-2 left-4 sm:left-6 top-44 sm:top-52 md:top-60">
+                          <span
+                            className={`${raleway.className} font-bold text-xs uppercase text-gray-800`}
+                          >
+                            {item.category}
+                          </span>
+                          <div className="h-4 border-l border-gray-400"></div>
+                          <span
+                            className={`${poppins.className} font-medium text-xs text-gray-500`}
+                          >
+                            {item.date}
+                          </span>
+                        </div>
+                        <p
+                          className={`${raleway.className} absolute w-60 sm:w-64 md:w-72 left-4 sm:left-6 top-48 sm:top-56 md:top-64 font-bold text-base sm:text-lg leading-5 sm:leading-6 text-gray-800`}
+                        >
+                          {item.title}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="flex items-center justify-center w-full h-64">
+                      <p className="text-gray-800">No news items found.</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right navigation arrow - positioned to the side */}
+                {canScrollRight && newsItems.length > 0 && (
+                  <button
+                    onClick={scrollNewsRight}
+                    className="absolute bg-white rounded-full shadow-md w-8 h-8 md:w-10 md:h-10 flex items-center justify-center cursor-pointer hover:bg-gray-100 z-10"
+                    style={{
+                      right: "-12px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+            )}
 
             {/* Gallery Section */}
             <h2

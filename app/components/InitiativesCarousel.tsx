@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { Raleway } from "next/font/google";
 
 const raleway = Raleway({
@@ -9,78 +8,119 @@ const raleway = Raleway({
   display: "swap",
 });
 
+interface NewsPhoto {
+  id: number;
+  url: string;
+  alternativeText: string | null;
+  width: number;
+  height: number;
+  formats?: {
+    large?: { url: string };
+    medium?: { url: string };
+    small?: { url: string };
+    thumbnail?: { url: string };
+  };
+}
+
+interface NewsItem {
+  id: number;
+  heading: string;
+  description: string;
+  date: string;
+  main_photo: NewsPhoto;
+  photos: NewsPhoto[] | null;
+}
+
+interface NewsData {
+  id: number;
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  News: NewsItem[];
+}
+
+interface ApiResponse {
+  data: NewsData[];
+  meta: {
+    pagination: {
+      start: number;
+      limit: number;
+      total: number;
+    };
+  };
+}
+
 interface Initiative {
   id: number;
   title: string;
   description: string;
   image: string;
   category: string;
+  date: string;
 }
 
-const initiatives: Initiative[] = [
-  {
-    id: 1,
-    title: "Quality Education Programs",
-    description:
-      "Comprehensive educational programs from primary to higher education with CBSE affiliation. Our modern curriculum focuses on holistic development, combining academic excellence with moral values as envisioned by Sree Narayana Guru.",
-    image: "/initiative.png", // ✅ Use your custom image
-    category: "Education",
-  },
-  {
-    id: 2,
-    title: "Medical & Healthcare Training",
-    description:
-      "Advanced medical education and healthcare training programs including MBBS, nursing, and paramedical courses. We prepare competent healthcare professionals to serve communities with dedication and expertise.",
-    image: "/initiative.png",
-    category: "Healthcare",
-  },
-  {
-    id: 3,
-    title: "Community Welfare Programs",
-    description:
-      "Extensive community outreach initiatives including free health camps, educational scholarships for underprivileged students, and social service programs that embody the spirit of 'One Caste, One Religion, One God for Humanity'.",
-    image: "/initiative.png",
-    category: "Community",
-  },
-  {
-    id: 4,
-    title: "Research & Innovation Center",
-    description:
-      "State-of-the-art research facilities promoting scientific inquiry and innovation. Our research programs focus on traditional medicine, modern healthcare solutions, and educational methodologies for societal advancement.",
-    image: "/initiative.png",
-    category: "Research",
-  },
-  {
-    id: 5,
-    title: "Skill Development Institute",
-    description:
-      "Comprehensive skill development and vocational training programs designed to enhance employability. We offer courses in technology, healthcare, entrepreneurship, and traditional crafts to empower youth.",
-    image: "/initiative.png",
-    category: "Skills",
-  },
-  {
-    id: 6,
-    title: "Cultural Heritage Programs",
-    description:
-      "Preserving and promoting Kerala's rich cultural heritage through traditional arts, music, and dance programs. We celebrate diversity while fostering unity as taught by our founding principles.",
-    image: "/initiative.png",
-    category: "Culture",
-  },
-];
-
 export default function InitiativesCarousel() {
+  const [initiatives, setInitiatives] = useState<Initiative[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
+  // Fetch data from API
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "https://thankful-novelty-5d39f22046.strapiapp.com/api/newss?populate[News][populate][main_photo]=true&populate[News][populate][photos]=true&pagination[limit]=-1"
+        );
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data: ApiResponse = await response.json();
+        
+        // Transform API data to initiatives format
+        const transformedInitiatives: Initiative[] = [];
+        
+        data.data.forEach((newsData) => {
+          newsData.News.forEach((newsItem) => {
+            transformedInitiatives.push({
+              id: newsItem.id,
+              title: newsItem.heading,
+              description: newsItem.description,
+              image: newsItem.main_photo?.formats?.medium?.url || newsItem.main_photo?.url || "/initiative.png",
+              category: "News", // Default category, you can customize this
+              date: newsItem.date,
+            });
+          });
+        });
+        
+        setInitiatives(transformedInitiatives);
+        setError(null);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to fetch data");
+        console.error("Error fetching data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying || initiatives.length === 0) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) =>
         prev === initiatives.length - 1 ? 0 : prev + 1
       );
     }, 5000);
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, initiatives.length]);
 
   const goToSlide = (index: number) => setCurrentIndex(index);
   const goToPrevious = () =>
@@ -94,6 +134,61 @@ export default function InitiativesCarousel() {
 
   const handleMouseEnter = () => setIsAutoPlaying(false);
   const handleMouseLeave = () => setIsAutoPlaying(true);
+
+  // Format date for display
+  const formatDate = (dateString: string) => {
+    try {
+      return new Date(dateString).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    } catch {
+      return dateString;
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className={`relative w-full ${raleway.className}`}>
+        <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white w-full min-h-[420px] flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3A3A3A] mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading initiatives...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={`relative w-full ${raleway.className}`}>
+        <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white w-full min-h-[420px] flex items-center justify-center">
+          <div className="text-center text-red-600">
+            <p className="mb-2">Error loading initiatives:</p>
+            <p className="text-sm">{error}</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="mt-4 px-4 py-2 bg-red-100 hover:bg-red-200 rounded-lg transition-colors"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (initiatives.length === 0) {
+    return (
+      <div className={`relative w-full ${raleway.className}`}>
+        <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white w-full min-h-[420px] flex items-center justify-center">
+          <p className="text-gray-600">No initiatives found.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -114,20 +209,25 @@ export default function InitiativesCarousel() {
               <div className="grid lg:grid-cols-5 h-full">
                 {/* Image Section */}
                 <div className="relative order-2 lg:order-1 lg:col-span-2 h-full flex items-center justify-center bg-white">
-                  <Image
+                  <img
                     src={initiative.image}
                     alt={initiative.title}
-                    width={600}
-                    height={400}
                     className="w-full h-full object-cover rounded-bl-2xl rounded-tl-2xl lg:rounded-bl-2xl lg:rounded-tr-none"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/initiative.png"; // Fallback image
+                    }}
                   />
                 </div>
 
                 {/* Content Section */}
                 <div className="p-6 lg:p-10 xl:p-12 flex flex-col justify-center order-1 lg:order-2 lg:col-span-3 h-full bg-gradient-to-br from-white to-gray-50">
-                  <div className="mb-4">
+                  <div className="mb-4 flex items-center gap-3">
                     <span className="inline-block px-4 py-2 bg-gradient-to-r from-[#FFE601] to-yellow-400 text-[#3A3A3A] text-xs font-bold rounded-full shadow-md">
                       {initiative.category}
+                    </span>
+                    <span className="text-sm text-gray-500 font-medium">
+                      {formatDate(initiative.date)}
                     </span>
                   </div>
                   <h3 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-[#3A3A3A] mb-4 leading-snug">
