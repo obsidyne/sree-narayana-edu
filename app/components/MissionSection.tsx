@@ -28,18 +28,16 @@ export default function MissionSection() {
     {
       title: "Mission",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulamco laboris nisi ut aliquip ex ea commodo consequat.",
-    },
+"To be a beacon of inclusive and transformative education that empowers individuals with knowledge, values, and wisdom, inspired by the teachings of Sree Narayana Guru — fostering equality, unity, and social progress for a harmonious society  "  },
+    // {
+    //   title: "Mission",
+    //   description:
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulamco laboris nisi ut aliquip ex ea commodo consequat.",
+    // },
     {
-      title: "Mission",
+      title: "Vision",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulamco laboris nisi ut aliquip ex ea commodo consequat.",
-    },
-    {
-      title: "Mission",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulamco laboris nisi ut aliquip ex ea commodo consequat.",
-    },
+"To provide value-based, equitable, and holistic education that nurtures wisdom, unity, and social progress in the spirit of Sree Narayana Guru. "   },
   ];
 
   return (
