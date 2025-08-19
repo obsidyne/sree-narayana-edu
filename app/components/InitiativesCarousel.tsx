@@ -237,9 +237,9 @@ export default function InitiativesCarousel() {
                     {initiative.description}
                   </p>
                   <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-auto">
-                    <button className="bg-gradient-to-r from-[#3A3A3A] to-gray-700 hover:from-gray-700 hover:to-[#3A3A3A] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                      Learn More
-                    </button>
+                    {/* <button className="bg-gradient-to-r from-[#3A3A3A] to-gray-700 hover:from-gray-700 hover:to-[#3A3A3A] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                      
+                    </button> */}
                     <div className="flex items-center text-[#3A3A3A] bg-white/50 px-4 py-2 rounded-full">
                       <span className="text-base font-bold mr-2">
                         {String(currentIndex + 1).padStart(2, "0")}
@@ -257,7 +257,7 @@ export default function InitiativesCarousel() {
         </div>
 
         {/* Arrows */}
-        <button
+        {/* <button
           onClick={goToPrevious}
           className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/95 hover:bg-white backdrop-blur-md rounded-full shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-30 border border-gray-200"
           aria-label="Previous slide"
@@ -294,7 +294,7 @@ export default function InitiativesCarousel() {
               d="M9 5l7 7-7 7"
             />
           </svg>
-        </button>
+        </button> */}
       </div>
 
       {/* Dots */}
