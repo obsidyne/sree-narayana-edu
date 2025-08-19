@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Unbounded, Raleway, Poppins } from "next/font/google";
 
@@ -19,6 +19,7 @@ const poppins = Poppins({
   display: "swap",
 });
 
+// ... your existing interfaces remain the same ...
 interface NewsPhoto {
   id: number;
   url: string;
@@ -76,7 +77,8 @@ interface NewsSectionProps {
   backgroundImage?: string;
 }
 
-const NewsSection: React.FC<NewsSectionProps> = ({
+// Extract the component that uses useSearchParams
+const NewsContent: React.FC<NewsSectionProps> = ({
   news,
   backgroundImage = "/news.jpg",
 }) => {
@@ -199,6 +201,7 @@ const NewsSection: React.FC<NewsSectionProps> = ({
 
   return (
     <div className="w-full">
+      {/* Your existing JSX content remains exactly the same */}
       {/* Top background banner with centered 16:9 image and glassmorphism sides */}
       <div className="relative w-full h-96 z-0 overflow-hidden">
         {/* Blurred background for glassmorphism effect */}
@@ -338,6 +341,25 @@ const NewsSection: React.FC<NewsSectionProps> = ({
         <div className="w-full pb-16"></div>
       </div>
     </div>
+  );
+};
+
+// Loading component
+const NewsLoading = () => (
+  <div className="w-full h-96 flex items-center justify-center">
+    <div className="text-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto mb-4"></div>
+      <p className="text-gray-600">Loading news...</p>
+    </div>
+  </div>
+);
+
+// Main component with Suspense boundary
+const NewsSection: React.FC<NewsSectionProps> = (props) => {
+  return (
+    <Suspense fallback={<NewsLoading />}>
+      <NewsContent {...props} />
+    </Suspense>
   );
 };
 

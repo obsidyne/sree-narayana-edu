@@ -18,13 +18,15 @@ const raleway = Raleway({
 export default function HeroSection() {
   // Define background images array
   const backgroundImages = [
+        "/slideshow/co.jpg",
+
     "/slideshow/snpsv.jpg",
     "/slideshow/co.jpg",
-    "/slideshow/snct.jpg",
-    "/slideshow/4snpsc.jpg",
-    "/slideshow/5snpsk.jpg",
+    // "/slideshow/snct.jpg",
+    // "/slideshow/4snpsc.jpg",
+    // "/slideshow/5snpsk.jpg",
     // "/slideshow/6kwk.jpg",
-    // "/slideshow/8kik.jpg",
+    "/slideshow/8kik.jpg",
     
     
     "/slideshow/snit.jpg",
@@ -50,7 +52,7 @@ export default function HeroSection() {
   };
 
   return (
-    <div className="relative w-full" style={{ height: "550px" }}> {/* Reduced from 700px to 500px */}
+    <div className="relative w-full" style={{ height: "580px" }}> {/* Reduced from 700px to 500px */}
       {/* Shadow Container */}
       <div className="absolute inset-0 w-full" style={{ height: "500px" }}>
         <div className="absolute left-0 top-0 w-24 h-full bg-gradient-to-r from-black/30 to-transparent"></div>
