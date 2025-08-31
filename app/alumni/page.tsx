@@ -1,6 +1,7 @@
 "use client";
 // app/alumni/page.tsx
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Raleway } from "next/font/google";
@@ -142,12 +143,7 @@ export default function AlumniPage() {
         className="w-full py-16 sm:py-24 bg-radial-[at_25%_25%] from-[#FFBF01] to-[#FFDD78]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="max-w-5xl"
-            style={{
-              marginLeft: "clamp(0px, 10vw, 151px)",
-            }}
-          >
+          <div className="max-w-5xl mx-auto">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-[#3A3A3A]">
               Our Alumni
             </h1>
@@ -169,12 +165,7 @@ export default function AlumniPage() {
       {/* Alumni Stats */}
       <div className="w-full py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="max-w-5xl"
-            style={{
-              marginLeft: "clamp(0px, 10vw, 151px)",
-            }}
-          >
+          <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {alumniStats.map((stat, index) => (
                 <div key={index} className="text-center">
@@ -194,12 +185,7 @@ export default function AlumniPage() {
       {/* Featured Alumni */}
       <div className="w-full py-12 sm:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="max-w-5xl"
-            style={{
-              marginLeft: "clamp(0px, 10vw, 151px)",
-            }}
-          >
+          <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-[#3A3A3A]">
               Featured Alumni
             </h2>
@@ -232,12 +218,14 @@ export default function AlumniPage() {
                     <div key={alumni.id} className="bg-white rounded-xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
                       <div className="flex items-start space-x-4 sm:space-x-6">
                         <div className="flex-shrink-0">
-                          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden relative">
                             {alumni.photo ? (
-                              <img
+                              <Image
                                 src={alumni.photo.formats?.medium?.url || alumni.photo.formats?.small?.url || alumni.photo.url}
                                 alt={alumni.photo.alternativeText || alumni.Name}
-                                className="w-full h-full object-cover rounded-full"
+                                fill
+                                sizes="(max-width: 640px) 64px, 80px"
+                                className="object-cover rounded-full"
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
                                   target.style.display = 'none';
@@ -289,12 +277,7 @@ export default function AlumniPage() {
         className="w-full py-12 sm:py-16 bg-radial-[at_25%_25%] from-[#FFBF01] to-[#FFDD78]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="max-w-5xl"
-            style={{
-              marginLeft: "clamp(0px, 10vw, 151px)",
-            }}
-          >
+          <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-[#3A3A3A]">
               Alumni Network
             </h2>
@@ -349,12 +332,7 @@ export default function AlumniPage() {
       {/* Contact CTA */}
       <div className="w-full py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="max-w-5xl"
-            style={{
-              marginLeft: "clamp(0px, 10vw, 151px)",
-            }}
-          >
+          <div className="max-w-5xl mx-auto">
             <div className="text-center bg-gray-50 rounded-xl p-8 sm:p-12">
               <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-[#3A3A3A]">
                 Share Your Success Story
@@ -497,7 +475,7 @@ export default function AlumniPage() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-[#3A3A3A]"
+                    className="text-[#3A3A3A"
                   >
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                     <circle cx="12" cy="10" r="3"/>
