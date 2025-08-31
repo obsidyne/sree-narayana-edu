@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 import { Unbounded, Raleway, Poppins } from "next/font/google";
 import { useRouter } from "next/navigation";
 
@@ -70,6 +71,40 @@ interface TransformedNewsItem {
   image: string;
 }
 
+// Gallery interfaces - Updated to match actual API response
+interface GalleryPhoto {
+  id: number;
+  documentId?: string;
+  name: string;
+  alternativeText?: string | null;
+  caption?: string | null;
+  width?: number;
+  height?: number;
+  formats?: {
+    large?: { url: string };
+    medium?: { url: string };
+    small?: { url: string };
+    thumbnail?: { url: string };
+  };
+  url: string;
+  mime?: string;
+  size?: number;
+}
+
+interface GalleryData {
+  id: number;
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  photos?: GalleryPhoto[];
+}
+
+interface GalleryApiResponse {
+  data: GalleryData;
+  meta: Record<string, unknown>;
+}
+
 const NewsAndGallerySection: React.FC = () => {
   const router = useRouter();
   // Ref for scrolling news items
@@ -78,17 +113,19 @@ const NewsAndGallerySection: React.FC = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   // State to track if we can scroll right
   const [canScrollRight, setCanScrollRight] = useState(true);
-  // API-related states
+  // API-related states for news
   const [newsItems, setNewsItems] = useState<TransformedNewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Sample gallery data - create 10 items for the gallery grid (2 rows of 5)
-  const galleryItems = Array.from({ length: 10 }, (_, i) => ({
-    id: i + 1,
-    image: "/gal.jpg", // Replace with your actual image path
-    alt: "Gallery image",
-  }));
+  // Gallery-related states
+  const [galleryItems, setGalleryItems] = useState<GalleryPhoto[]>([]);
+  const [galleryLoading, setGalleryLoading] = useState(true);
+  const [galleryError, setGalleryError] = useState<string | null>(null);
+  
+  // Popup states
+  const [selectedImage, setSelectedImage] = useState<GalleryPhoto | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   // Fetch news data from API
   useEffect(() => {
@@ -133,6 +170,45 @@ const NewsAndGallerySection: React.FC = () => {
     fetchNewsData();
   }, []);
 
+  // Fetch gallery data from API
+  useEffect(() => {
+    const fetchGalleryData = async () => {
+      try {
+        setGalleryLoading(true);
+        setGalleryError(null);
+        
+        const response = await fetch(
+          "https://thankful-novelty-5d39f22046.strapiapp.com/api/gallery?populate=photos"
+        );
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data: GalleryApiResponse = await response.json();
+        
+        console.log("Gallery API Response:", data); // Debug log
+        
+        // Set gallery photos - handle both possible structures
+        const photos = data.data?.photos || [];
+        setGalleryItems(photos);
+        
+        if (photos.length === 0) {
+          console.warn("No photos found in gallery data");
+        }
+        
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : "Failed to fetch gallery data";
+        setGalleryError(errorMessage);
+        console.error("Error fetching gallery data:", err);
+      } finally {
+        setGalleryLoading(false);
+      }
+    };
+
+    fetchGalleryData();
+  }, []);
+
   // Format date for display
   const formatDate = (dateString: string) => {
     try {
@@ -152,6 +228,18 @@ const NewsAndGallerySection: React.FC = () => {
     router.push(`/news?id=${newsId}`);
     // Alternative: if you want to use dynamic routes
     // router.push(`/news/${newsId}`);
+  };
+
+  // Handle gallery image click
+  const handleGalleryImageClick = (image: GalleryPhoto) => {
+    setSelectedImage(image);
+    setIsPopupOpen(true);
+  };
+
+  // Close popup
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedImage(null);
   };
 
   // Handle scrolling of news section
@@ -319,10 +407,12 @@ const NewsAndGallerySection: React.FC = () => {
                         onClick={() => handleCardClick(item.id)}
                       >
                         <div className="absolute w-full h-40 sm:h-48 md:h-56 left-0 top-0 overflow-hidden bg-gray-400">
-                          <img
+                          <Image
                             src={item.image}
                             alt={item.title}
-                            className="w-full h-full object-cover"
+                            fill
+                            sizes="(max-width: 640px) 280px, (max-width: 768px) 300px, (max-width: 1024px) 320px, 342px"
+                            className="object-cover"
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
                               target.src = "/food.jpg"; // Fallback image
@@ -393,24 +483,121 @@ const NewsAndGallerySection: React.FC = () => {
               GALLERY
             </h2>
 
-            {/* Gallery grid - responsive */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-              {galleryItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="overflow-hidden rounded-lg sm:rounded-xl shadow-md w-full h-40 sm:h-44 md:h-48 lg:h-52"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    className="w-full h-full object-cover"
-                  />
+            {/* Gallery Loading State */}
+            {galleryLoading && (
+              <div className="flex items-center justify-center h-64">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-800 mx-auto mb-2"></div>
+                  <p className="text-gray-800">Loading gallery...</p>
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
+
+            {/* Gallery Error State */}
+            {galleryError && (
+              <div className="flex items-center justify-center h-64">
+                <div className="text-center text-red-600">
+                  <p className="mb-2">Error loading gallery:</p>
+                  <p className="text-sm">{galleryError}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Gallery grid - responsive */}
+            {!galleryLoading && !galleryError && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+                {galleryItems.length > 0 ? (
+                  galleryItems.map((item) => (
+                    <div
+                      key={item.id}
+                      className="overflow-hidden rounded-lg sm:rounded-xl shadow-md w-full h-40 sm:h-44 md:h-48 lg:h-52 cursor-pointer hover:shadow-lg transition-shadow duration-300 relative"
+                      onClick={() => handleGalleryImageClick(item)}
+                    >
+                      <Image
+                        src={item.formats?.medium?.url || item.formats?.small?.url || item.url}
+                        alt={item.alternativeText || item.name || "Gallery image"}
+                        fill
+                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                        className="object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = "/gal.jpg"; // Fallback image
+                        }}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-span-full flex items-center justify-center h-64">
+                    <p className="text-gray-800">No gallery images found.</p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Image Popup Modal */}
+      {isPopupOpen && selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+          onClick={closePopup}
+        >
+          <div 
+            className="relative max-w-4xl max-h-full bg-white rounded-lg overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={closePopup}
+              className="absolute top-4 right-4 z-10 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 6L6 18" />
+                <path d="M6 6l12 12" />
+              </svg>
+            </button>
+            
+            {/* Image */}
+            <div className="max-h-[70vh] overflow-hidden relative w-full h-96">
+              <Image
+                src={selectedImage.formats?.large?.url || selectedImage.url}
+                alt={selectedImage.alternativeText || selectedImage.name || "Gallery image"}
+                fill
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="object-contain"
+              />
+            </div>
+            
+            {/* Image name/caption */}
+            <div className="p-4 bg-white">
+              <h3 className={`${raleway.className} text-lg font-bold text-gray-800 mb-2`}>
+                {selectedImage.name || "Gallery Image"}
+              </h3>
+              {selectedImage.alternativeText && (
+                <p className={`${poppins.className} text-gray-600 text-sm`}>
+                  {selectedImage.alternativeText}
+                </p>
+              )}
+              {selectedImage.caption && (
+                <p className={`${poppins.className} text-gray-600 text-sm mt-1`}>
+                  {selectedImage.caption}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

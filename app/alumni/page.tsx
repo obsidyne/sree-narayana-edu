@@ -1,6 +1,6 @@
 "use client";
 // app/alumni/page.tsx
-// import Image from "next/image";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Raleway } from "next/font/google";
@@ -11,41 +11,104 @@ const raleway = Raleway({
   display: "swap",
 });
 
+// Alumni interfaces
+interface AlumniPhoto {
+  id: number;
+  documentId: string;
+  name: string;
+  alternativeText?: string | null;
+  caption?: string | null;
+  width: number;
+  height: number;
+  formats?: {
+    large?: { url: string };
+    medium?: { url: string };
+    small?: { url: string };
+    thumbnail?: { url: string };
+  };
+  url: string;
+  mime: string;
+  size: number;
+}
+
+interface AlumniData {
+  id: number;
+  Name: string;
+  batch: string;
+  title: string;
+  company: string;
+  description: string;
+  photo?: AlumniPhoto;
+}
+
+interface AlumniItem {
+  id: number;
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  alumni: AlumniData;
+}
+
+interface AlumniApiResponse {
+  data: AlumniItem[];
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+}
+
 export default function AlumniPage() {
-  const featuredAlumni = [
-    {
-      name: "Dr. Rajesh Kumar",
-      batch: "1995",
-      position: "Chief Medical Officer",
-      company: "Apollo Hospitals",
-      image: "/alumni-1.jpg", // Add actual images
-      achievement: "Leading healthcare innovations in Kerala"
-    },
-    {
-      name: "Prof. Meera Nair",
-      batch: "1998",
-      position: "Professor & Researcher",
-      company: "IIT Madras",
-      image: "/alumni-2.jpg",
-      achievement: "Published 50+ research papers in biotechnology"
-    },
-    {
-      name: "Arjun Menon",
-      batch: "2005",
-      position: "Senior Software Engineer",
-      company: "Google",
-      image: "/alumni-3.jpg",
-      achievement: "Contributing to AI/ML projects globally"
-    },
-    {
-      name: "Dr. Priya Nandakumar",
-      batch: "2002",
-      position: "Ayurvedic Physician",
-      company: "Kerala Govt. Health Dept.",
-      image: "/alumni-4.jpg",
-      achievement: "Promoting traditional medicine in rural areas"
-    }
-  ];
+  // State for API data
+  const [alumniData, setAlumniData] = useState<AlumniData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  
+  // Contact popup state
+  const [showContactPopup, setShowContactPopup] = useState(false);
+
+  // Fetch alumni data from API
+  useEffect(() => {
+    const fetchAlumniData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const response = await fetch(
+          "https://thankful-novelty-5d39f22046.strapiapp.com/api/alumnis?populate[alumni][populate]=*"
+        );
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data: AlumniApiResponse = await response.json();
+        
+        console.log("Alumni API Response:", data); // Debug log
+        
+        // Transform the nested data structure
+        const transformedAlumni = data.data.map(item => item.alumni);
+        setAlumniData(transformedAlumni);
+        
+        if (transformedAlumni.length === 0) {
+          console.warn("No alumni data found");
+        }
+        
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : "Failed to fetch alumni data";
+        setError(errorMessage);
+        console.error("Error fetching alumni data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAlumniData();
+  }, []);
 
   const alumniStats = [
     { number: "500+", label: "Total Alumni" },
@@ -53,6 +116,22 @@ export default function AlumniPage() {
     { number: "50+", label: "Countries Worldwide" },
     { number: "100+", label: "Success Stories" }
   ];
+
+  // Helper function to get initials
+  const getInitials = (name: string) => {
+    return name.split(' ').map(n => n[0]).join('').toUpperCase();
+  };
+
+  // Handle contact popup
+  const openContactPopup = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setShowContactPopup(true);
+  };
+
+  const closeContactPopup = () => {
+    setShowContactPopup(false);
+  };
 
   return (
     <>
@@ -125,37 +204,82 @@ export default function AlumniPage() {
               Featured Alumni
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-8 sm:gap-12">
-              {featuredAlumni.map((alumni, index) => (
-                <div key={index} className="bg-white rounded-xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <div className="flex items-start space-x-4 sm:space-x-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-200 rounded-full flex items-center justify-center">
-                        {/* Placeholder for alumni photo */}
-                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#FFE601] rounded-full flex items-center justify-center">
-                          <span className="text-[#3A3A3A] font-bold text-lg sm:text-xl">
-                            {alumni.name.split(' ').map(n => n[0]).join('')}
-                          </span>
+            {/* Loading State */}
+            {loading && (
+              <div className="flex items-center justify-center h-64">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-800 mx-auto mb-2"></div>
+                  <p className="text-gray-800">Loading alumni...</p>
+                </div>
+              </div>
+            )}
+
+            {/* Error State */}
+            {error && (
+              <div className="flex items-center justify-center h-64">
+                <div className="text-center text-red-600">
+                  <p className="mb-2">Error loading alumni:</p>
+                  <p className="text-sm">{error}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Alumni Grid */}
+            {!loading && !error && (
+              <div className="grid md:grid-cols-2 gap-8 sm:gap-12">
+                {alumniData.length > 0 ? (
+                  alumniData.map((alumni) => (
+                    <div key={alumni.id} className="bg-white rounded-xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                      <div className="flex items-start space-x-4 sm:space-x-6">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                            {alumni.photo ? (
+                              <img
+                                src={alumni.photo.formats?.medium?.url || alumni.photo.formats?.small?.url || alumni.photo.url}
+                                alt={alumni.photo.alternativeText || alumni.Name}
+                                className="w-full h-full object-cover rounded-full"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = 'none';
+                                  // Show initials fallback
+                                  const parent = target.parentElement;
+                                  if (parent) {
+                                    parent.innerHTML = `<div class="w-12 h-12 sm:w-16 sm:h-16 bg-[#FFE601] rounded-full flex items-center justify-center"><span class="text-[#3A3A3A] font-bold text-lg sm:text-xl">${getInitials(alumni.Name)}</span></div>`;
+                                  }
+                                }}
+                              />
+                            ) : (
+                              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#FFE601] rounded-full flex items-center justify-center">
+                                <span className="text-[#3A3A3A] font-bold text-lg sm:text-xl">
+                                  {getInitials(alumni.Name)}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-lg sm:text-xl font-semibold text-[#3A3A3A] mb-1">
+                            {alumni.Name}
+                          </h3>
+                          <p className="text-sm text-gray-600 mb-2">Batch of {alumni.batch}</p>
+                          <p className="text-sm sm:text-base font-medium text-[#3A3A3A] mb-1">
+                            {alumni.title}
+                          </p>
+                          <p className="text-sm text-gray-600 mb-3">{alumni.company}</p>
+                          <p className="text-sm text-gray-700 font-light leading-relaxed">
+                            {alumni.description}
+                          </p>
                         </div>
                       </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-xl font-semibold text-[#3A3A3A] mb-1">
-                        {alumni.name}
-                      </h3>
-                      <p className="text-sm text-gray-600 mb-2">Batch of {alumni.batch}</p>
-                      <p className="text-sm sm:text-base font-medium text-[#3A3A3A] mb-1">
-                        {alumni.position}
-                      </p>
-                      <p className="text-sm text-gray-600 mb-3">{alumni.company}</p>
-                      <p className="text-sm text-gray-700 font-light leading-relaxed">
-                        {alumni.achievement}
-                      </p>
-                    </div>
+                  ))
+                ) : (
+                  <div className="col-span-full flex items-center justify-center h-64">
+                    <p className="text-gray-800">No alumni data found.</p>
                   </div>
-                </div>
-              ))}
-            </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -240,12 +364,13 @@ export default function AlumniPage() {
                 current students and fellow alumni.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="/contact"
-                  className="inline-flex items-center justify-center px-6 py-3 bg-[#FFE601] hover:bg-yellow-500 text-[#3A3A3A] font-semibold rounded-lg transition duration-300 transform hover:scale-105"
+                <button
+                  type="button"
+                  onClick={(e) => openContactPopup(e)}
+                  className="inline-flex items-center justify-center px-6 py-3 bg-[#FFE601] hover:bg-yellow-500 text-[#3A3A3A] font-semibold rounded-lg transition duration-300 transform hover:scale-105 cursor-pointer"
                 >
                   Get in Touch
-                </a>
+                </button>
                 <a
                   href="mailto:alumni@organization.org"
                   className="inline-flex items-center justify-center px-6 py-3 border-2 border-[#3A3A3A] text-[#3A3A3A] font-semibold rounded-lg hover:bg-[#3A3A3A] hover:text-white transition duration-300"
@@ -258,6 +383,177 @@ export default function AlumniPage() {
         </div>
       </div>
       </div>
+      
+      {/* Contact Popup Modal */}
+      {showContactPopup && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={closeContactPopup}
+        >
+          <div 
+            className="relative max-w-md w-full bg-white rounded-lg shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={closeContactPopup}
+              className="absolute top-4 right-4 z-10 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-all duration-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-gray-600"
+              >
+                <path d="M18 6L6 18" />
+                <path d="M6 6l12 12" />
+              </svg>
+            </button>
+            
+            {/* Header */}
+            <div className="bg-[#FFE601] px-6 py-4 rounded-t-lg">
+              <h3 className="text-xl font-bold text-[#3A3A3A]">
+                Contact Alumni Office
+              </h3>
+            </div>
+            
+            {/* Content */}
+            <div className="p-6 space-y-4">
+              {/* Email */}
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0 mt-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-[#3A3A3A]"
+                  >
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-[#3A3A3A] mb-1">Email</h4>
+                  <a 
+                    href="mailto:alumni@organization.org"
+                    className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                  >
+                    alumni@organization.org
+                  </a>
+                </div>
+              </div>
+              
+              {/* Phone */}
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0 mt-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-[#3A3A3A]"
+                  >
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-[#3A3A3A] mb-1">Phone</h4>
+                  <a 
+                    href="tel:+919876543210"
+                    className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                  >
+                    +91 98765 43210
+                  </a>
+                </div>
+              </div>
+              
+              {/* Address */}
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0 mt-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-[#3A3A3A]"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-[#3A3A3A] mb-1">Address</h4>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    Alumni Office<br />
+                    Main Building, Ground Floor<br />
+                    Your Institution Name<br />
+                    Kanayannur, Kerala, India - 682312
+                  </p>
+                </div>
+              </div>
+              
+              {/* Office Hours */}
+              <div className="flex items-start space-x-3">
+                <div className="flex-shrink-0 mt-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-[#3A3A3A]"
+                  >
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12,6 12,12 16,14"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-[#3A3A3A] mb-1">Office Hours</h4>
+                  <p className="text-gray-700 text-sm">
+                    Monday - Friday: 9:00 AM - 5:00 PM<br />
+                    Saturday: 9:00 AM - 1:00 PM<br />
+                    Sunday: Closed
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Footer */}
+            <div className="bg-gray-50 px-6 py-4 rounded-b-lg">
+              <p className="text-sm text-gray-600 text-center">
+                We look forward to hearing from you!
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+      
       <Footer />
     </>
   );

@@ -102,7 +102,7 @@ export default function InitiativesCarousel({
 
   // Sanitize HTML content for security
   const sanitizeDescription = useCallback((description: string) => {
-    return description.replace(/<[^>]*>/g, '').substring(0, 300);
+    return description.replace(/<[^>]*>/g, '').substring(0, 200); // Reduced from 300 to 200
   }, []);
 
   // Transform API data
@@ -282,7 +282,7 @@ export default function InitiativesCarousel({
   if (loading) {
     return (
       <div className={`relative w-full ${raleway.className} ${className}`}>
-        <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white w-full min-h-[420px] flex items-center justify-center">
+        <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white w-full min-h-[300px] flex items-center justify-center"> {/* Reduced from 420px to 300px */}
           <div className="text-center" role="status" aria-label="Loading initiatives">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3A3A3A] mx-auto mb-4" />
             <p className="text-gray-600">
@@ -303,7 +303,7 @@ export default function InitiativesCarousel({
   if (error) {
     return (
       <div className={`relative w-full ${raleway.className} ${className}`}>
-        <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white w-full min-h-[420px] flex items-center justify-center">
+        <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white w-full min-h-[300px] flex items-center justify-center"> {/* Reduced from 420px to 300px */}
           <div className="text-center text-red-600" role="alert">
             <div className="mb-4">
               <svg className="w-12 h-12 mx-auto mb-2 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -329,7 +329,7 @@ export default function InitiativesCarousel({
   if (initiatives.length === 0) {
     return (
       <div className={`relative w-full ${raleway.className} ${className}`}>
-        <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white w-full min-h-[420px] flex items-center justify-center">
+        <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white w-full min-h-[300px] flex items-center justify-center"> {/* Reduced from 420px to 300px */}
           <div className="text-center text-gray-500">
             <svg className="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -358,7 +358,7 @@ export default function InitiativesCarousel({
           {initiatives.map((initiative, index) => (
             <div
               key={initiative.id}
-              className="w-full flex-shrink-0 min-h-[420px]"
+              className="w-full flex-shrink-0 min-h-[300px]" // Reduced from 420px to 300px
               aria-hidden={index !== currentIndex}
             >
               <div className="grid lg:grid-cols-5 h-full">
@@ -375,9 +375,9 @@ export default function InitiativesCarousel({
                 </div>
 
                 {/* Content Section */}
-                <div className="p-6 lg:p-10 xl:p-12 flex flex-col justify-center order-1 lg:order-2 lg:col-span-3 h-full bg-gradient-to-br from-white to-gray-50">
-                  <div className="mb-4 flex items-center gap-3">
-                    <span className="inline-block px-4 py-2 bg-gradient-to-r from-[#FFE601] to-yellow-400 text-[#3A3A3A] text-xs font-bold rounded-full shadow-md">
+                <div className="p-4 lg:p-6 xl:p-8 flex flex-col justify-center order-1 lg:order-2 lg:col-span-3 h-full bg-gradient-to-br from-white to-gray-50"> {/* Reduced padding from p-6 lg:p-10 xl:p-12 to p-4 lg:p-6 xl:p-8 */}
+                  <div className="mb-3 flex items-center gap-3"> {/* Reduced margin from mb-4 to mb-3 */}
+                    <span className="inline-block px-3 py-1 bg-gradient-to-r from-[#FFE601] to-yellow-400 text-[#3A3A3A] text-xs font-bold rounded-full shadow-md"> {/* Reduced padding from px-4 py-2 to px-3 py-1 */}
                       {initiative.category}
                     </span>
                     <time 
@@ -387,19 +387,19 @@ export default function InitiativesCarousel({
                       {formatDate(initiative.date)}
                     </time>
                   </div>
-                  <h3 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-[#3A3A3A] mb-4 leading-snug">
+                  <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-[#3A3A3A] mb-3 leading-snug"> {/* Reduced font sizes and margin from mb-4 to mb-3 */}
                     {initiative.title}
                   </h3>
-                  <p className="text-gray-700 text-base lg:text-lg leading-relaxed mb-6 font-light max-w-2xl line-clamp-4">
+                  <p className="text-gray-700 text-sm lg:text-base leading-relaxed mb-4 font-light max-w-2xl line-clamp-3"> {/* Reduced font sizes, margin from mb-6 to mb-4, and line-clamp from 4 to 3 */}
                     {initiative.description}
                   </p>
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-auto">
-                    <div className="flex items-center text-[#3A3A3A] bg-white/50 px-4 py-2 rounded-full">
-                      <span className="text-base font-bold mr-2">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-auto"> {/* Reduced gap from 4 to 3 */}
+                    <div className="flex items-center text-[#3A3A3A] bg-white/50 px-3 py-1.5 rounded-full"> {/* Reduced padding from px-4 py-2 to px-3 py-1.5 */}
+                      <span className="text-sm font-bold mr-2"> {/* Reduced font size from text-base to text-sm */}
                         {String(currentIndex + 1).padStart(2, "0")}
                       </span>
                       <span className="text-gray-500 mx-2">/</span>
-                      <span className="text-base font-bold">
+                      <span className="text-sm font-bold"> {/* Reduced font size from text-base to text-sm */}
                         {String(initiatives.length).padStart(2, "0")}
                       </span>
                     </div>
@@ -412,12 +412,12 @@ export default function InitiativesCarousel({
       </div>
 
       {/* Navigation Dots */}
-      <div className="flex justify-center space-x-4 mt-6" role="tablist" aria-label="Carousel navigation">
+      <div className="flex justify-center space-x-3 mt-4" role="tablist" aria-label="Carousel navigation"> {/* Reduced spacing and margin */}
         {initiatives.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3.5 h-3.5 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#3A3A3A] focus:ring-offset-2 ${
+            className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#3A3A3A] focus:ring-offset-2 ${ // Reduced size from w-3.5 h-3.5 to w-3 h-3
               index === currentIndex
                 ? "bg-[#3A3A3A] scale-125 shadow-lg"
                 : "bg-gray-300 hover:bg-gray-400 hover:scale-110"
@@ -431,7 +431,7 @@ export default function InitiativesCarousel({
       </div>
 
       {/* Progress Bar */}
-      <div className="mt-5 bg-gray-200 rounded-full h-1.5 overflow-hidden shadow-inner">
+      <div className="mt-3 bg-gray-200 rounded-full h-1 overflow-hidden shadow-inner"> {/* Reduced margin from mt-5 to mt-3 and height from h-1.5 to h-1 */}
         <div
           className="h-full bg-gradient-to-r from-[#FFE601] to-yellow-400 transition-all duration-700 ease-out shadow-sm"
           style={{
