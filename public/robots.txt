@@ -1,0 +1,46 @@
+# robots.txt for www.sneskollam.org
+# Sree Narayana Educational Society, Kollam
+
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Allow specific search engines with full access
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Block access to admin/private areas (if any)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Block access to system files
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /sitemap.xml
+
+# Allow sitemap access for search engines
+Allow: /sitemap.xml
+
+# Crawl delay (optional - be conservative for educational sites)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://www.sneskollam.org/sitemap.xml
+
+# Additional institutional sitemaps (if you create them)
+Sitemap: https://www.sneskollam.org/institutions-sitemap.xml
+Sitemap: https://www.sneskollam.org/news-sitemap.xml
+
+# Host directive (helps with canonicalization)
+Host: www.sneskollam.org
