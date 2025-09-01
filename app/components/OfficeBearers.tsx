@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { Unbounded, Raleway } from "next/font/google";
 
 // Load Unbounded font for headings
@@ -19,7 +18,6 @@ const raleway = Raleway({
 });
 
 const OfficeBearers: React.FC = () => {
-  const router = useRouter();
 
   // Sample data - replace with your actual data
   const founders = [
@@ -27,29 +25,27 @@ const OfficeBearers: React.FC = () => {
       id: 1,
       name: "M. L. Anidharan",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-      imageUrl: "/anidharan.jpg",
+        "",
+      imageUrl: "/anidharan.jpg"
     },
     {
       id: 2,
       name: "Prof. K. Sasikumar",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+        "",
       imageUrl: "/sasikumar.jpg",
     },
     {
       id: 3,
       name: "Balanchandran K",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+        "",
       imageUrl: "/balachandrank.jpg",
     },
   ];
 
   // Handle navigation to founders page
-  const handleFounderClick = () => {
-    router.push("/founders");
-  };
+
 
   return (
     <div
@@ -80,7 +76,7 @@ const OfficeBearers: React.FC = () => {
               <div
                 key={founder.id}
                 className="rounded-lg overflow-hidden cursor-pointer w-full max-w-sm lg:max-w-[307.84px]"
-                onClick={handleFounderClick}
+                // onClick={handleFounderClick}
               >
                 <div className="w-full aspect-square lg:aspect-square">
                   <Image
@@ -110,7 +106,7 @@ const OfficeBearers: React.FC = () => {
                       </p>
                     </div>
                     {/* Circle Arrow Button - positioned to the right of text */}
-                    <div className="ml-2 mt-1 flex-shrink-0">
+                    {/* <div className="ml-2 mt-1 flex-shrink-0">
                       <div
                         className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gray-800 flex items-center justify-center text-gray-800"
                         style={{ backgroundColor: "transparent" }}
@@ -139,7 +135,7 @@ const OfficeBearers: React.FC = () => {
                           />
                         </svg>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

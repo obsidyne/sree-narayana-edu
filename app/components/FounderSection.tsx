@@ -21,32 +21,30 @@ const raleway = Raleway({
 const FoundersSection: React.FC = () => {
   const router = useRouter();
 
-  // Sample data - replace with your actual data
   const founders = [
     {
       id: 1,
-      name: "Prof. Sivaprasad",
+      name: "Prof. S. Sivaprasad",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+        "A known academician of the State, Prof. S. Sivaprasad is deeply involved in cultural activities of Kollam and is admired by his students and the public alike. He was the first President of the Kollam District Unit of Sree Narayana Samskarika Samithy and the Founder Director of the erstwhile Sree Narayana Open University—a non-governmental institute of Higher Education.",
       imageUrl: "/sp.png",
     },
     {
       id: 2,
       name: "Prof. K. Sasikumar",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+        "He was a member of the teaching faculty of Sree Narayana College, Kollam at the time of the formation of the Sree Narayana Educational Society. He was the Secretary of the Sree Narayana Samskarika Samithy, Kollam and was instrumental in organizing the coaching classes for Competitive Examinations under the aegis of Sree Narayana Open University. He also organized the Students forum at Kollam—a motivational forum for Competitive Examination, from which several persons got selected to IAS. His overseas experience has gone a long way in organizing the Sree Narayana Educational Society.",
       imageUrl: "/sasikumar.jpg",
     },
     {
       id: 3,
-      name: "M. L. Anidharan",
+      name: "Sri. M.L. Anidharan",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+        "Sri. M.L. Anidharan is a well-known officer of the Kerala State Electricity Board, a good organizer and an amiable personality and an ardent devotee of Sree Narayana Guru. He was the Managing Director of the United Electrical Industries Limited (Metre Company) at Kollam and worked as the Secretary of the Sree Narayana Samskarika Samithy, Kollam. He was an Executive Engineer of the Kerala State Electricity Board at the time of the formation of the Sree Narayana Educational Society.",
       imageUrl: "/anidharan.jpg",
     },
   ];
 
-  // Handle navigation to founders page
   const handleFounderClick = () => {
     router.push("/founders");
   };
@@ -61,7 +59,6 @@ const FoundersSection: React.FC = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Container with responsive margins */}
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-0 xl:ml-[151px] xl:mr-[59px] xl:max-w-none max-w-full">
         <div className="max-w-6xl xl:max-w-[1000px]">
           <h2
@@ -70,7 +67,6 @@ const FoundersSection: React.FC = () => {
             Our Founders
           </h2>
 
-          {/* Founders Grid */}
           <div
             className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-6 xl:gap-8 mb-8 justify-items-center ${raleway.className}`}
           >
@@ -90,16 +86,15 @@ const FoundersSection: React.FC = () => {
                   />
                 </div>
 
-                {/* Content Container with Golden Gradient */}
                 <div
-                  className="text-white p-4 sm:p-5"
+                  className="p-4 sm:p-5"
                   style={{
                     background:
                       "linear-gradient(152.59deg, #EBD79B 49.55%, #FBF6F0 82.93%)",
                   }}
                 >
                   <div className="flex justify-between items-start">
-                    <div className="flex-1 pr-3 sm:pr-4">
+                    <div className="flex-1 pr-3 sm:pr-4 h-[120px] sm:h-[150px] overflow-hidden">
                       <h3 className="text-lg sm:text-xl font-bold mb-2 text-gray-800">
                         {founder.name}
                       </h3>
@@ -107,7 +102,6 @@ const FoundersSection: React.FC = () => {
                         {founder.description}
                       </p>
                     </div>
-                    {/* Circle Arrow Button - positioned to the right of text */}
                     <div className="ml-2 mt-1 flex-shrink-0">
                       <div
                         className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gray-800 flex items-center justify-center text-gray-800"
@@ -139,22 +133,15 @@ const FoundersSection: React.FC = () => {
                       </div>
                     </div>
                   </div>
+                  <div className="mt-4">
+                    <span className="text-xs sm:text-sm font-semibold text-gray-400">
+                      Click to read more
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-
-          {/* Description Paragraph */}
-          {/* <div className="mb-6 max-w-4xl mx-auto font-bold">
-            <p className="text-gray-800 text-lg">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-              ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam.
-            </p>
-          </div> */}
         </div>
       </div>
     </div>

@@ -15,7 +15,7 @@ const raleway = Raleway({
 interface FounderProps {
   name: string;
   bio: string;
-  education: string;
+  education?: string;
   career: string;
   imageUrl: string;
 }
@@ -61,17 +61,20 @@ const Founder: React.FC<FounderProps> = ({
           >
             {bio}
           </p>
-
-          <h3
-            className={`text-xl md:text-2xl font-semibold text-gray-800 mb-3 ${raleway.className}`}
-          >
-            Education
-          </h3>
-          <p
-            className={`text-gray-700 mb-8 leading-relaxed ${raleway.className}`}
-          >
-            {education}
-          </p>
+          {education && (
+            <>
+              <h3
+                className={`text-xl md:text-2xl font-semibold text-gray-800 mb-3 ${raleway.className}`}
+              >
+                Education
+              </h3>
+              <p
+                className={`text-gray-700 mb-8 leading-relaxed ${raleway.className}`}
+              >
+                {education}
+              </p>
+            </>
+          )}
 
           <h3
             className={`text-xl md:text-2xl font-semibold text-gray-800 mb-3 ${raleway.className}`}
@@ -87,31 +90,31 @@ const Founder: React.FC<FounderProps> = ({
   );
 };
 
-// Example usage
 const FoundersPage: React.FC = () => {
-  const placeholderText =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do";
-
   const founders = [
     {
-      name: "Prof. Sivaprasad",
-      bio: placeholderText,
-      education: placeholderText,
-      career: placeholderText,
+      name: "Prof. S. Sivaprasad",
+      bio: "A known academician of the State, Prof. S. Sivaprasad is deeply involved in cultural activities in Kollam and is admired by his students and the public alike. He was the first President of the Kollam District Unit of Sree Narayana Samskarika Samithy and the Founder Director of the erstwhile Sree Narayana Open University—a non-governmental institute of Higher Education.",
+      education:
+        "He had been a member of the syndicate of Calicut University and a member of several educational bodies in different universities.",
+      career:
+        "Prof. S. Sivaprasad is the retired Principal of Sree Narayana College, Kollam.",
       imageUrl: "/sp.png",
     },
     {
       name: "Prof. K. Sasikumar",
-      bio: placeholderText,
-      education: placeholderText,
-      career: placeholderText,
+      bio: "Prof. K. Sasikumar was a member of the teaching faculty at Sree Narayana College, Kollam, at the time of the formation of the Sree Narayana Educational Society. He was the Secretary of the Sree Narayana Samskarika Samithy, Kollam, and was instrumental in organizing coaching classes for Competitive Examinations under the Sree Narayana Open University. He also organized the Students forum at Kollam, a motivational forum for competitive examinations from which several persons were selected for the I A S. His overseas experience has been instrumental in organizing the Sree Narayana Educational Society.",
+      education:
+        "He has served as a member of several educational bodies, including the Curriculum Committee of the Government of Kerala, as a peer team leader for NAAC, a member of the Senate of the University of Kerala, and a member of the Board of Governors of the APJ Abdul Kalam Technological University of Kerala. He was also the President of the Kerala Self Financing Engineering Colleges Association.",
+      career:
+        "He served as a teacher in Nigeria for five years, from 1975 to 1980, and then continued his teaching assignment at Sree Narayana College, Kollam. By 1992, he was appointed Principal of Sree Narayana College and served in that capacity in different colleges until his retirement in 2003 as the Principal of Sree Narayana College, Kollam.",
       imageUrl: "/founder2.png",
     },
     {
-      name: "M. L. Anidharan",
-      bio: placeholderText,
-      education: placeholderText,
-      career: placeholderText,
+      name: "Sri. M.L. Anidharan",
+      bio: "Sri. M.L. Anidharan is a well-known officer of the Kerala State Electricity Board, a good organizer, an amiable personality, and an ardent devotee of Sree Narayana Guru. He was the Managing Director of the United Electrical Industries Limited (Metre Company) at Kollam and worked as the Secretary of the Sree Narayana Samskarika Samithy, Kollam.",
+      career:
+        "He was an Executive Engineer of the Kerala State Electricity Board at the time of the formation of the Sree Narayana Educational Society. He retired as the Chief Engineer (Distribution) of the Kerala State Electricity Board. He was also associated with the Brahmapuram plant at Cochin.",
       imageUrl: "/founder3.png",
     },
   ];
