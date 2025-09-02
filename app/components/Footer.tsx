@@ -137,8 +137,7 @@ const Footer: React.FC = () => {
         <p
           className={`${raleway.className} w-full text-[14px] font-medium leading-[24px] text-center text-[#3A3A3A] hidden sm:block`}
         >
-          Lörem ipsum od ohet dilogi. Bell trabel, samuligt, ohöbel utom diska.
-          Jinesade bel när feras redorade i belogi. FAR <br />
+          "Be enlightened through education, become strong through organization, and achieve prosperity through industry" <br />
           <a
             href="https://www.obsidyne.com"
             target="_blank"
