@@ -24,7 +24,7 @@ const raleway = Raleway({
 const SchoolWebsite: React.FC = () => {
   // Function to handle button click - you can modify this as needed
   const visitWebsite = () => {
-    window.open("https://www.example.com", "_blank");
+    window.open("https://snpskollam.org/", "_blank");
   };
 
   return (

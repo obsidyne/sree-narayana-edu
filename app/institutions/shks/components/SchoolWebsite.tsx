@@ -23,7 +23,7 @@ const raleway = Raleway({
 
 const SchoolWebsite: React.FC = () => {
   const visitWebsite = () => {
-    window.open("https://www.example.com", "_blank");
+    window.open("https://kidsinternationalsnps.com/", "_blank");
   };
 
   return (
