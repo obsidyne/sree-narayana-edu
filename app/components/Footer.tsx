@@ -137,7 +137,7 @@ const Footer: React.FC = () => {
         <p
           className={`${raleway.className} w-full text-[14px] font-medium leading-[24px] text-center text-[#3A3A3A] hidden sm:block`}
         >
-          "Be enlightened through education, become strong through organization, and achieve prosperity through industry" <br />
+          &quot;Be enlightened through education, become strong through organization, and achieve prosperity through industry&quot; <br />
           <a
             href="https://www.obsidyne.com"
             target="_blank"
