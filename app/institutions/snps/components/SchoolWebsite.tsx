@@ -116,13 +116,13 @@ const SchoolWebsite: React.FC = () => {
 
           <p className="text-gray-700 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed font-light">
             Sree Narayana Public School was opened in Mundakkal village of
-            Kollam Town with 21 students and 5 teachers in a rented building. Dr
-            M. Govindhanan was appointed as the Principal. Subsequently the
+            Kollam Town with 21 students and 5 teachers in a rented building.
+             Sri MK Sasidharan was appointed as the Principal. Subsequently the
             School was shifted to its own building at Vadakkevila and secured
             the approval from the Government of Kerala and Central Board of
             Secondary Education, Delhi. The School was formally opened by the
             Minister of Education Sri K Chandrasekharan in 1987. The then
-            presided by Prof. N K Seshan(former Member of the Legislative
+            presided by Prof. MK Sanoo(former Member of the Legislative
             Assembly) is worth mentioning.
           </p>
 
